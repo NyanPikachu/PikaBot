@@ -23,9 +23,9 @@ devs = [
     279974491071709194
 ]
 
-@bot.command(hidden=True, name='eval')
+@bot.command(pass_context=True)
 @commands.is_owner()
-async def _eval(ctx, *, body: str):
+async def eval(ctx, *, body: str):
         """Evaluates a code"""
 
         env = {
