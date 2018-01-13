@@ -80,7 +80,11 @@ async def on_ready():
 @bot.command()
 async def ping(ctx):
     await ctx.send(f"Pong!{bot.ws.latency* 1000:.4f} ms")
-    
+
+@bot.command()
+async def pong(ctx):
+    embed = discord.Embed(title="Ping!",description=f"{bot.ws.latency* 1000:.4f} ms")
+    await ctx.send(embed=embed)
     
 @bot.command()
 async def say(ctx, msg: str):
