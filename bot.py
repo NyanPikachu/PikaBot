@@ -23,7 +23,7 @@ async def say(ctx, msg: str):
     await ctx.send(msg)
     
 @bot.command(pass_context=True)
-async def coinflip(ctx, msg: str):
+async def coinflip(ctx):
     flip = random.choice(["Heads", "Tails"])
     await ctx.send(flip)
     
