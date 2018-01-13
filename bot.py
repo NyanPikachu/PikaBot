@@ -94,7 +94,7 @@ async def coinflip(ctx):
     
 @bot.command()
 async def info(ctx, user: discord.Member):
-    if not user = None
+    if not user = discord.Member=None
         user = ctx.author
     embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=0x00ff00)
     embed.add_field(name="Name", value=user.name, inline=True)
