@@ -77,13 +77,11 @@ async def eval(ctx, *, body: str):
 async def on_ready():
     print("Bot is online!")
     
-@bot.command()
-async def ping(ctx):
-    await ctx.send(f"Pong!{bot.ws.latency* 1000:.4f} ms")
+
 
 @bot.command()
-async def pong(ctx):
-    embed = discord.Embed(title="Ping!",description=f"{bot.ws.latency* 1000:.4f} ms")
+async def ping(ctx):
+    embed = discord.Embed(title="Pong!", description=f"{bot.ws.latency* 1000:.4f} ms", color=0x00ff00)
     await ctx.send(embed=embed)
     
 @bot.command()
