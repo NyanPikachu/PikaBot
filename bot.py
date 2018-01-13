@@ -93,15 +93,15 @@ async def coinflip(ctx):
     await ctx.send(flip)
     
 @bot.command()
-async def info(ctx, user: discord.Member):
-    if not user = discord.Member = None
+async def info(ctx, user: discord.Member=None):
+    if not user:
         user = ctx.author
     embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=0x00ff00)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
     embed.add_field(name="Status", value=user.status, inline=True)
     embed.add_field(name="Highest role", value=user.top_role)
-    if not top_role = ""
+    if top_role = ""
         top_role = user.roles[:1]
     embed.add_field(name="Joined", value=user.joined_at)
     embed.set_thumbnail(url=user.avatar_url)
