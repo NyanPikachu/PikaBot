@@ -3,6 +3,7 @@ from discord.ext import commands
 import asyncio
 import pickle
 import random
+import io
 import os
 import sys
 import traceback
