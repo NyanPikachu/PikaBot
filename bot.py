@@ -24,7 +24,7 @@ devs = [
     279974491071709194
 ]
 
-@bot.command(pass_context=True)
+@bot.command()
 @commands.is_owner()
 async def eval(ctx, *, body: str):
         """Evaluates a code"""
@@ -77,34 +77,37 @@ async def eval(ctx, *, body: str):
 async def on_ready():
     print("Bot is online!")
     
-@bot.command(pass_context=True)
+@bot.command()
 async def ping(ctx):
     await ctx.send(f"Pong!{bot.ws.latency* 1000:.4f} ms")
     
     
-@bot.command(pass_context=True)
+@bot.command()
 async def say(ctx, msg: str):
     await ctx.message.delete()
     await ctx.send(msg)
     
-@bot.command(pass_context=True)
+@bot.command()
 async def coinflip(ctx):
     flip = random.choice(["Heads", "Tails"])
     await ctx.send(flip)
     
-@bot.command(pass_context=True)
+@bot.command()
 async def info(ctx, user: discord.Member):
+    if not user:
+        user = ctx.author
     embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=0x00ff00)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
     embed.add_field(name="Status", value=user.status, inline=True)
     embed.add_field(name="Highest role", value=user.top_role)
-    return user.top_role or user.roles[:1]
+    if not top_role:
+        top_role = user.roles[:1]
     embed.add_field(name="Joined", value=user.joined_at)
     embed.set_thumbnail(url=user.avatar_url)
     await ctx.send(embed=embed)
     
-@bot.command(pass_context=True)
+@bot.command()
 async def serverinfo(ctx): 
     embed = discord.Embed(name="{}'s info".format(ctx.message.guild.name), description="Here's what I could find.", color=0x00ff00)
     embed.set_author(name="Pika Bot")
