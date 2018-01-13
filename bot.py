@@ -12,7 +12,7 @@ async def on_ready():
     
 @bot.command(pass_context=True)
 async def ping(ctx):
-    await ctx.send("Pong!"{bot.ws.latency* 1000:.4f} ms)
+    await ctx.send(f"Pong!{bot.ws.latency* 1000:.4f} ms")
     
     
 @bot.command(pass_context=True)
