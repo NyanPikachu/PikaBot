@@ -26,7 +26,7 @@ async def info(ctx, user: discord.Member):
     embed.add_field(name="ID", value=user.id, inline=True)
     embed.add_field(name="Status", value=user.status, inline=True)
     embed.add_field(name="Highest role", value=user.top_role)
-    return [i for i in [user.top_role.name] if i]
+    return author.roles[-2] or author.top_role
     embed.add_field(name="Joined", value=user.joined_at)
     embed.set_thumbnail(url=user.avatar_url)
     await ctx.send(embed=embed)
