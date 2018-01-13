@@ -34,13 +34,13 @@ async def info(ctx, user: discord.Member):
     
 @bot.command(pass_context=True)
 async def serverinfo(ctx): 
-    embed = discord.Embed(name="{}'s info".format(ctx.message.server.name), description="Here's what I could find.", color=0x00ff00)
+    embed = discord.Embed(name="{}'s info".format(ctx.message.guild.name), description="Here's what I could find.", color=0x00ff00)
     embed.set_author(name="Pika Bot")
-    embed.add_field(name="Name", value=ctx.message.server.name, inline=True)
-    embed.add_field(name="ID", value=ctx.message.server.id, inline=True)
-    embed.add_field(name="Roles", value=len(ctx.message.server.roles), inline=True)
-    embed.add_field(name="Members", value=len(ctx.message.server.members))
-    embed.set_thumbnail(url=ctx.message.server.icon_url)
+    embed.add_field(name="Name", value=ctx.message.guild.name, inline=True)
+    embed.add_field(name="ID", value=ctx.message.guild.id, inline=True)
+    embed.add_field(name="Roles", value=len(ctx.message.guild.roles), inline=True)
+    embed.add_field(name="Members", value=len(ctx.message.guild.members))
+    embed.set_thumbnail(url=ctx.message.guild.icon_url)
     await ctx.send(embed=embed)
     
 bot.run(os.environ.get("TOKEN"))
