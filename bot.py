@@ -17,12 +17,12 @@ async def ping(ctx):
     await ctx.send(f"Pong! {bot.ws.latency* 1000:.4f} ms")
     
 @bot.command(pass_context=True)
-async def say(ctx, *, msg: str):
+async def say(ctx, msg: str):
     await ctx.message.delete()
     await ctx.send(msg)
     
 @bot.command(pass_context=True)
-async def info(ctx, *, user: discord.Member):
+async def info(ctx, user: discord.Member):
     embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=0x00ff00)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
@@ -35,7 +35,7 @@ async def info(ctx, *, user: discord.Member):
 @bot.command(pass_context=True)
 async def serverinfo(ctx): 
     embed = discord.Embed(name="{}'s info".format(ctx.message.server.name), description="Here's what I could find.", color=0x00ff00)
-    embed.set_author(name="Will Ryan of DAGames")
+    embed.set_author(name="Pika Bot")
     embed.add_field(name="Name", value=ctx.message.server.name, inline=True)
     embed.add_field(name="ID", value=ctx.message.server.id, inline=True)
     embed.add_field(name="Roles", value=len(ctx.message.server.roles), inline=True)
