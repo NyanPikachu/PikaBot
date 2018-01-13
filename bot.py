@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 import asyncio
+import pickle
+import random
 import os
 import sys
 
@@ -21,13 +23,17 @@ async def say(ctx, msg: str):
     await ctx.send(msg)
     
 @bot.command(pass_context=True)
+async def coinflip(ctx, msg: str):
+    flip = random.choice(["Heads", "Tails"])
+    await ctx.send(flip)
+    
+@bot.command(pass_context=True)
 async def info(ctx, user: discord.Member):
     embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=0x00ff00)
     embed.add_field(name="Name", value=user.name, inline=True)
     embed.add_field(name="ID", value=user.id, inline=True)
     embed.add_field(name="Status", value=user.status, inline=True)
     embed.add_field(name="Highest role", value=user.top_role)
-    return user.roles[-2] or user.top_role
     embed.add_field(name="Joined", value=user.joined_at)
     embed.set_thumbnail(url=user.avatar_url)
     await ctx.send(embed=embed)
