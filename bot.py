@@ -12,7 +12,8 @@ async def on_ready():
     
 @bot.command(pass_context=True)
 async def ping(ctx):
-    await ctx.send(f"Pong! {bot.ws.latency* 1000:.4f} ms")
+    embed = discord.Embed(title="Pinged!",description="Pong! {bot.ws.latency* 1000:.4f} ms", color=0xff0000)
+    await ctx.send(embed=embed)
     
 @bot.command(pass_context=True)
 async def say(ctx, msg: str):
