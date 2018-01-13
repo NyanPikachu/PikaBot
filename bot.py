@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands import Bot
 import asyncio
 import shalk
 import os
@@ -30,7 +29,7 @@ async def info(ctx, user: discord.Member):
     embed.add_field(name="Highest role", value=user.top_role)
     embed.add_field(name="Joined", value=user.joined_at)
     embed.set_thumbnail(url=user.avatar_url)
-    await bot.say(embed=embed)
+    await ctx.send(embed=embed)
     
 @bot.command(pass_context=True)
 async def serverinfo(ctx): 
@@ -41,6 +40,6 @@ async def serverinfo(ctx):
     embed.add_field(name="Roles", value=len(ctx.message.server.roles), inline=True)
     embed.add_field(name="Members", value=len(ctx.message.server.members))
     embed.set_thumbnail(url=ctx.message.server.icon_url)
-    await bot.say(embed=embed)
+    await ctx.send(embed=embed)
     
 bot.run(os.environ.get("TOKEN"))
