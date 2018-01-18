@@ -27,4 +27,5 @@ async def serverinfo(ctx):
     embed.set_thumbnail(url=ctx.message.guild.icon_url)
     await ctx.send(embed=embed)
     
-bot.unload_extention()
+def setup(bot):
+    bot.add_cog(info(bot))
