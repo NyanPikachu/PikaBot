@@ -15,7 +15,7 @@ class ClassName:
     def __init__(self, bot):
         self.bot = bot
 
-bot.load_extentions("cogs.info")
+
 
 #eval!!!
 def cleanup_code(content):
