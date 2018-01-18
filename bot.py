@@ -95,6 +95,14 @@ async def coinflip(ctx):
     await ctx.send(flip)
     
 @bot.command()
+async def hug(ctx, user: discord.Member=None):
+   if not user:
+      await ctx.send(f"Please mention someone for this command to work {ctx.author.mention}" )
+   embed = discord.Embed(title="Hug!".format(user.name), description= f"{ctx.author} has sent {user} a hug !", color=0xffb6c1)
+   embed.set_thumbnail(url=user.avatar_url)
+   await ctx.send(embed=embed)
+         
+@bot.command()
 async def info(ctx, user: discord.Member=None):
     if not user:
         user = ctx.author
