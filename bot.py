@@ -99,7 +99,7 @@ async def coinflip(ctx):
     
 @bot.command()
 async def hug(ctx, user: discord.Member=None):
-    """hugs a user"""
+   """hugs a user"""
    if not user:
       await ctx.send(f"Please mention someone for this command to work {ctx.author.mention}" )
    embed = discord.Embed(title="Hug!".format(user.name), description= f"{ctx.author} has sent {user} a hug !", color=0xffb6c1)
