@@ -28,4 +28,4 @@ async def serverinfo(ctx):
     await ctx.send(embed=embed)
     
 def setup(bot):
-    bot.add_cog(info(bot))
+    bot.add_cog(ClassName(bot))
