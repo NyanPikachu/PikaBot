@@ -81,21 +81,25 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
+    """Latency check"""
     embed = discord.Embed(title="Pong!", description=f"{bot.ws.latency* 1000:.4f} ms", color=0x00ff00)
     await ctx.send(embed=embed)
     
 @bot.command()
 async def say(ctx, msg: str):
+    """owner only command- print a message"""
     await ctx.message.delete()
     await ctx.send(msg)
     
 @bot.command()
 async def coinflip(ctx):
+    """Flips a coin!"""
     flip = random.choice(["Heads", "Tails"])
     await ctx.send(flip)
     
 @bot.command()
 async def hug(ctx, user: discord.Member=None):
+    """hugs a user"""
    if not user:
       await ctx.send(f"Please mention someone for this command to work {ctx.author.mention}" )
    embed = discord.Embed(title="Hug!".format(user.name), description= f"{ctx.author} has sent {user} a hug !", color=0xffb6c1)
@@ -104,6 +108,7 @@ async def hug(ctx, user: discord.Member=None):
          
 @bot.command()
 async def info(ctx, user: discord.Member=None):
+    """user info"""
     if not user:
         user = ctx.author
     embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=0x00ff00)
@@ -117,6 +122,7 @@ async def info(ctx, user: discord.Member=None):
     
 @bot.command()
 async def serverinfo(ctx): 
+    """server info"""
     embed = discord.Embed(name="{}'s info".format(ctx.message.guild.name), description="Here's what I could find.", color=0x00ff00)
     embed.set_author(name="Pika Bot")
     embed.add_field(name="Name", value=ctx.message.guild.name, inline=True)
