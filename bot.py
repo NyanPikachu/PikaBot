@@ -10,6 +10,9 @@ import traceback
 import textwrap
 from contextlib import redirect_stdout
 
+
+bot.load_extentions("cogs.info")
+
 #eval!!!
 def cleanup_code(content):
     """Automatically removes code blocks from the code."""
