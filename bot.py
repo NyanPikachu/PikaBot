@@ -10,6 +10,10 @@ import traceback
 import textwrap
 from contextlib import redirect_stdout
 
+class ClassName:
+    '''commands.'''
+    def __init__(self, bot):
+        self.bot = bot
 
 bot.load_extentions("cogs.info")
 
