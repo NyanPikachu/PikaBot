@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class owner-only:
+class owneronly:
     '''commands for bot owner only'''
     def __init__(self, bot):
         self.bot = bot
@@ -101,4 +101,4 @@ class owner-only:
 
 
 def setup(bot):
-    bot.add_cog(owner-only(bot))
+    bot.add_cog(owneronly(bot))
