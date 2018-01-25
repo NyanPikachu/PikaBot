@@ -6,7 +6,8 @@ class owner-only:
     def __init__(self, bot):
         self.bot = bot
         
-        
+    @commands.command
+    @command.is_owner
     async def _eval(self, ctx, *, body: str, edit=True):
        """Evaluates python code"""
 
