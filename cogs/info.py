@@ -56,12 +56,7 @@ class info:
         passed = (ctx.message.created_at - guild.created_at).days
         created_at = "Since {}. That's over {} days ago!".format(guild.created_at.strftime("%d %b %Y %H:%M"), passed)
         
-        for role in roles:
-            if str(role.color) != "#000000":
-                color = role.color
-        if 'color' not in local
-        
-        colour = color
+        colour = "0000ff"
         
         data = discord.Embed(description=created_at,colour=colour)
         data.add_field(name="Region", value=str(guild.region))
