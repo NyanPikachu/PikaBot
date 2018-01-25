@@ -3,7 +3,7 @@ from discord.ext import commands
 
 class info:
     '''Info related commands!'''
-    def __iniy__(self, bot):
+    def __init__(self, bot):
         self.bot = bot
     @commands.command()
     async def info(ctx, user: discord.Member=None):
