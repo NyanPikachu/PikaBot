@@ -6,7 +6,7 @@ class info:
     def __iniy__(self, bot):
         self.bot = bot
     @commands.command()
-        async def info(ctx, user: discord.Member=None):
+    async def info(ctx, user: discord.Member=None):
         """user info"""
         if not user:
             user = ctx.author
