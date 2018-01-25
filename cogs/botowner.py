@@ -77,27 +77,27 @@ class owneronly:
            await err.add_reaction('\u2049')  # x
        else:
            await ctx.message.add_reaction('\u2705')
+    
+    async def edit_to_codeblock(self, ctx, body, pycc='blank'):
+        if pycc == 'blank':
+            msg = f'{ctx.prefix}eval\n```py\n{body}\n```'
+        else:
+            msg = f'{ctx.prefix}cc make {pycc}\n```py\n{body}\n```'
+        await ctx.message.edit(content=msg)
 
-   async def edit_to_codeblock(self, ctx, body, pycc='blank'):
-       if pycc == 'blank':
-           msg = f'{ctx.prefix}eval\n```py\n{body}\n```'
-       else:
-           msg = f'{ctx.prefix}cc make {pycc}\n```py\n{body}\n```'
-       await ctx.message.edit(content=msg)
+    def cleanup_code(self, content):
+        """Automatically removes code blocks from the code."""
+        # remove ```py\n```
+        if content.startswith('```') and content.endswith('```'):
+            return '\n'.join(content.split('\n')[1:-1])
 
-   def cleanup_code(self, content):
-       """Automatically removes code blocks from the code."""
-       # remove ```py\n```
-       if content.startswith('```') and content.endswith('```'):
-           return '\n'.join(content.split('\n')[1:-1])
+        # remove `foo`
+        return content.strip('` \n')
 
-       # remove `foo`
-       return content.strip('` \n')
-
-   def get_syntax_error(self, e):
-       if e.text is None:
-           return f'```py\n{e.__class__.__name__}: {e}\n```'
-       return f'```py\n{e.text}{"^":>{e.offset}}\n{e.__class__.__name__}: {e}```'
+    def get_syntax_error(self, e):
+        if e.text is None:
+            return f'```py\n{e.__class__.__name__}: {e}\n```'
+        return f'```py\n{e.text}{"^":>{e.offset}}\n{e.__class__.__name__}: {e}```'
 
 
 def setup(bot):
