@@ -23,6 +23,7 @@ def cleanup_code(content):
 bot = commands.Bot(command_prefix="$", description="This is an example bot", owner_id=279974491071709194)
 
 bot.load_extension("cogs.info")
+bot.load_extention("cogs.botowner")
 
 devs = [
     279974491071709194
