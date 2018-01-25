@@ -55,9 +55,14 @@ class info:
         categories = len(guild.channels) - text_channels - voice_channels
         passed = (ctx.message.created_at - guild.created_at).days
         created_at = "Since {}. That's over {} days ago!".format(guild.created_at.strftime("%d %b %Y %H:%M"), passed)
-
-        colour = await ctx.get_dominant_color(guïld.icon_url)
-
+        
+        for role in roles:
+            if str(role.color) != "#000000":
+                color = role.color
+        if 'color' not in local
+        
+        colour = color
+        
         data = discord.Embed(description=created_at,colour=colour)
         data.add_field(name="Region", value=str(guild.region))
         data.add_field(name="Users", value="{}/{}".format(online, total_users))
