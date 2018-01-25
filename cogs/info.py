@@ -6,7 +6,7 @@ class info:
     def __init__(self, bot):
         self.bot = bot
     @commands.command()
-    async def info(ctx, user: discord.Member=None):
+    async def info(self, ctx, user: discord.Member=None):
         """user info"""
         if not user:
             user = ctx.author
@@ -20,7 +20,7 @@ class info:
         await ctx.send(embed=embed)
     
     @commands.command()
-    async def serverinfo(ctx): 
+    async def serverinfo(self, ctx): 
         """server info"""
         embed = discord.Embed(name="{}'s info".format(ctx.message.guild.name), description="Here's what I could find.", color=0x00ff00)
         embed.set_author(name="Pika Bot")
