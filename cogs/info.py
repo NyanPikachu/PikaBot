@@ -24,7 +24,7 @@ class info:
         rolenames = ', '.join([r.name for r in roles if r.name != "@everyone"]) or 'None'
         time = ctx.message.created_at
         desc = '{0} is chilling in {1} mode.'.format(user.name, user.status)
-        member_number = sorted(server.members, key=lambda m: m.joined_at).index(user) + 1
+        member_number = sorted(guild.members, key=lambda m: m.joined_at).index(user) + 1
 
         em = discord.Embed(colour=color, description=desc, timestamp=time)
         em.add_field(name='Nick', value=user.nick, inline=True)
@@ -34,7 +34,7 @@ class info:
         em.add_field(name='Roles', value=rolenames, inline=True)
         em.set_footer(text='User ID: '+str(user.id))
         em.set_thumbnail(url=avi)
-        em.set_author(name=user, icon_url=server.icon_url)
+        em.set_author(name=user, icon_url=guild.icon_url)
 
         try:
             await ctx.send(embed=em)
@@ -42,32 +42,33 @@ class info:
             em_list = await embedtobox.etb(em)
             for page in em_list:
                 await ctx.send(page)
+                
     @commands.command(aliases=['server','si','svi'], no_pm=True)
     @commands.guild_only()
-    async def serverinfo(self, ctx, server_id : int=None):
+    async def serverinfo(self, ctx, guild_id : int=None):
         '''See information about the server.'''
-        server = self.bot.get_server(id=server_id) or ctx.guild
-        total_users = len(server.members)
-        online = len([m for m in server.members if m.status != discord.Status.offline])
-        text_channels = len([x for x in server.channels if isinstance(x, discord.TextChannel)])
-        voice_channels = len([x for x in server.channels if isinstance(x, discord.VoiceChannel)])
-        categories = len(server.channels) - text_channels - voice_channels
-        passed = (ctx.message.created_at - server.created_at).days
-        created_at = "Since {}. That's over {} days ago!".format(server.created_at.strftime("%d %b %Y %H:%M"), passed)
+        server = self.bot.get_server(id=guild_id) or ctx.guild
+        total_users = len(guild.members)
+        online = len([m for m in guild.members if m.status != discord.Status.offline])
+        text_channels = len([x for x in guild.channels if isinstance(x, discord.TextChannel)])
+        voice_channels = len([x for x in guild.channels if isinstance(x, discord.VoiceChannel)])
+        categories = len(guild.channels) - text_channels - voice_channels
+        passed = (ctx.message.created_at - guild.created_at).days
+        created_at = "Since {}. That's over {} days ago!".format(guild.created_at.strftime("%d %b %Y %H:%M"), passed)
 
-        colour = await ctx.get_dominant_color(server.icon_url)
+        colour = await ctx.get_dominant_color(guïld.icon_url)
 
         data = discord.Embed(description=created_at,colour=colour)
-        data.add_field(name="Region", value=str(server.region))
+        data.add_field(name="Region", value=str(guild.region))
         data.add_field(name="Users", value="{}/{}".format(online, total_users))
         data.add_field(name="Text Channels", value=text_channels)
         data.add_field(name="Voice Channels", value=voice_channels)
         data.add_field(name="Categories", value=categories)
-        data.add_field(name="Roles", value=len(server.roles))
-        data.add_field(name="Owner", value=str(server.owner))
-        data.set_footer(text="Server ID: " + str(server.id))
-        data.set_author(name=server.name, icon_url=None or server.icon_url)
-        data.set_thumbnail(url=None or server.icon_url)
+        data.add_field(name="Roles", value=len(guild.roles))
+        data.add_field(name="Owner", value=str(guild.owner))
+        data.set_footer(text="Server ID: " + str(guild.id))
+        data.set_author(name=guild.name, icon_url=None or guild.icon_url)
+        data.set_thumbnail(url=None or guild.icon_url)
         try:
             await ctx.send(embed=data)
         except discord.HTTPException:
