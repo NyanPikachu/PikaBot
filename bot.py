@@ -24,7 +24,7 @@ bot = commands.Bot(command_prefix="$", description="This is an example bot", own
 
 bot.load_extension("cogs.info")
 
-bot.load_extention("cogs.botowner")
+bot.load_extension("cogs.botowner")
 
 devs = [
     279974491071709194
