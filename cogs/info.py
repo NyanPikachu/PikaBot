@@ -24,7 +24,17 @@ class info:
         desc = '{0} is chillin in {1} mode.'.format(user.name, user.status)
         member_number = sorted(guild.members, key=lambda m: m.joined_at).index(user) + 1
         
-        
+        em = discord.Embed(colour=color, description=desc, timestamp=time)
+        em.add_field(name='Nick', value=user.nick, inline=True)
+        em.add_field(name='Member No.',value=str(member_number),inline = True)
+        em.add_field(name='Account Created', value=user.created_at.__format__('%A, %d. %B %Y'))
+        em.add_field(name='Join Date', value=user.joined_at.__format__('%A, %d. %B %Y'))
+        em.add_field(name='Roles', value=rolenames, inline=True)
+        em.set_footer(text='User ID: '+str(user.id))
+        em.set_thumbnail(url=avi)
+        em.set_author(name=user, icon_url=guild.icon_url)
+
+        await ctx.send(embed=em)
                 
     @commands.command(aliases=['server','si','svi'], no_pm=True)
     @commands.guild_only()
