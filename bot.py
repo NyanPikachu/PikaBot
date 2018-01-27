@@ -22,7 +22,6 @@ def cleanup_code(content):
 bot = commands.Bot(command_prefix="$", description="This is an example bot", owner_id=279974491071709194)
 
 bot.load_extension("cogs.info")
-bot.load_extension("cogs.api")
 
 devs = [
     279974491071709194
@@ -90,7 +89,7 @@ async def ping(ctx):
     await ctx.send(embed=embed)
     
 @bot.command()
-async def say(ctx, msg: str):
+async def say(ctx, *, msg: str):
     """owner only command- print a message"""
     await ctx.message.delete()
     await ctx.send(msg)
