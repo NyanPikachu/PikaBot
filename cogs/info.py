@@ -21,6 +21,7 @@ class info:
         await ctx.send(embed=embed)
      
     @commands.command()
+    @commands.guild_only
     async def serverinfo(self, ctx): 
         """server info"""
         embed = discord.Embed(name="{}'s info".format(ctx.message.guild.name), description="Here's what I could find.", color=0x00ff00)
@@ -31,7 +32,17 @@ class info:
         embed.add_field(name="Members", value=len(ctx.message.guild.members))
         embed.set_thumbnail(url=ctx.message.guild.icon_url)
         await ctx.send(embed=embed)
-    
-    
+        
+    @commands.command()
+    @commands.guild_only
+    async def avatar(self, ctx, user: discord.Member=None):
+        """an avatar picture"""
+        if not user:
+            user = ctx.author
+        embed = discord.Embed(name="{}'s avatar!".format(ctx.message.guild.name), color=0x00ff00)
+        embed.set_author(name="Pika Bot")
+        embed.set_image(url=ctx.user.avatar_url)
+        await ctx.send(embed=embed)
+            
 def setup(bot):
     bot.add_cog(info(bot))
