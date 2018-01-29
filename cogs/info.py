@@ -38,11 +38,11 @@ class info:
     @commands.guild_only()
     async def avatar(self, ctx, user: discord.Member=None):
         """an avatar picture"""
-        if not user:
-            user = ctx.author
+        member = member or ctx.author
+        av = member.avatar_url
         embed = discord.Embed(name="{}'s avatar!".format(ctx.message.guild.name), color=0x00ff00)
         embed.set_author(name="Pika Bot")
-        embed.set_image(url=user.avatar_url)
+        embed.set_image(url=av)
         await ctx.send(embed=embed)
             
 def setup(bot):
