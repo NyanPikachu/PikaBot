@@ -5,6 +5,7 @@ class info:
     '''Info related commands!'''
     def __init__(self, bot):
         self.bot = bot
+        
     @commands.command()
     async def info(self, ctx, user: discord.Member=None):
         """user info"""
@@ -19,8 +20,8 @@ class info:
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
      
-   @commands.command()
-   async def serverinfo(self, ctx): 
+    @commands.command()
+    async def serverinfo(self, ctx): 
         """server info"""
         embed = discord.Embed(name="{}'s info".format(ctx.message.guild.name), description="Here's what I could find.", color=0x00ff00)
         embed.set_author(name="Pika Bot")
