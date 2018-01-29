@@ -41,8 +41,8 @@ class info:
         if not user:
             user = ctx.author
         av = user.avatar_url
-        embed = discord.Embed(name="{}'s avatar!".format(ctx.message.guild.name), color=0x00ff00)
-        embed.set_author(name="Pika Bot")
+        embed = discord.Embed(name="{}'s avatar!".format(ctx.message.guild.name), color=0x0080ff)
+        embed.set_author(name="{}'s avatar!")
         embed.set_image(url=av)
         await ctx.send(embed=embed)
             
