@@ -42,7 +42,7 @@ class info:
             user = ctx.author
         embed = discord.Embed(name="{}'s avatar!".format(ctx.message.guild.name), color=0x00ff00)
         embed.set_author(name="Pika Bot")
-        embed.set_image(url=ctx.user.avatar_url)
+        embed.set_image(url=user.avatar_url)
         await ctx.send(embed=embed)
             
 def setup(bot):
