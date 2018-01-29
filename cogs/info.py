@@ -42,7 +42,7 @@ class info:
             user = ctx.author
         av = user.avatar_url
         embed = discord.Embed(name="{}'s avatar!".format(ctx.message.guild.name), color=0x0080ff)
-        embed.set_author(name="{}'s avatar!")
+        embed.set_author(name=f"{user.name}'s avatar!")
         embed.set_image(url=av)
         await ctx.send(embed=embed)
             
