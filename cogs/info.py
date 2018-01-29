@@ -7,6 +7,7 @@ class info:
         self.bot = bot
         
     @commands.command()
+    @commands.guild_only()
     async def info(self, ctx, user: discord.Member=None):
         """user info"""
         if not user:
@@ -21,7 +22,7 @@ class info:
         await ctx.send(embed=embed)
      
     @commands.command()
-    @commands.guild_only
+    @commands.guild_only()
     async def serverinfo(self, ctx): 
         """server info"""
         embed = discord.Embed(name="{}'s info".format(ctx.message.guild.name), description="Here's what I could find.", color=0x00ff00)
@@ -34,7 +35,7 @@ class info:
         await ctx.send(embed=embed)
         
     @commands.command()
-    @commands.guild_only
+    @commands.guild_only()
     async def avatar(self, ctx, user: discord.Member=None):
         """an avatar picture"""
         if not user:
