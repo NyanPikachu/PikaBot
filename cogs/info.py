@@ -33,6 +33,8 @@ class info:
         embed.add_field(name="ID", value=ctx.message.guild.id, inline=True)
         embed.add_field(name="Roles", value=len(ctx.message.guild.roles), inline=True)
         embed.add_field(name="Members", value=len(ctx.message.guild.members))
+        embed.add_field(name="Owner", value=(ctx.message.guild.owner))
+        embed.add_field(name="Created at", value=(ctx.message.guild.created_at))
         embed.set_thumbnail(url=ctx.message.guild.icon_url)
         await ctx.send(embed=embed)
         
@@ -47,6 +49,14 @@ class info:
         embed.set_author(name=f"{user.name}'s avatar!")
         embed.set_image(url=av)
         await ctx.send(embed=embed)
+        
+    @bot.commands()
+    async def membercount(ctx)
+        """shows how many members in the server"""
+        embed = discord.Embed(name="Member count".format(ctx.message.guild.name), color=0x33BFFF)
+        embed.set_author(name=f"{guild.name}'s member count")
+        embed.add_field(name="Members", value=len(ctx.message.guild.members))
+        embed.set_thumbnail(url=ctx.message.guild.icon_url)
             
 def setup(bot):
     bot.add_cog(info(bot))
