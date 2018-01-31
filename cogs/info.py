@@ -6,9 +6,10 @@ class info:
     def __init__(self, bot):
         self.bot = bot
         
-    @commands.command()
+    
+    @bot.command()
     @commands.guild_only()
-    async def info(self, ctx, user: discord.Member=None):
+    async def info(ctx, user: discord.Member=None):
         """user info"""
         if not user:
             user = ctx.author
@@ -16,11 +17,12 @@ class info:
         embed.add_field(name="Name", value=user.name, inline=True)
         embed.add_field(name="ID", value=user.id, inline=True)
         embed.add_field(name="Status", value=user.status, inline=True)
-        embed.add_field(name="Highest role", value=user.top_role)
+        embed.add_field(name="Game", value=str(user.game))
+        embed.add_field(name="Highest role", value=user.top_role.name or "Empty")
         embed.add_field(name="Joined", value=user.joined_at)
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
-     
+    
     @commands.command()
     @commands.guild_only()
     async def serverinfo(self, ctx): 
