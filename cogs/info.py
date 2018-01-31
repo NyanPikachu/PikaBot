@@ -7,9 +7,9 @@ class info:
         self.bot = bot
         
     
-    @bot.command()
+    @commands.command()
     @commands.guild_only()
-    async def info(ctx, user: discord.Member=None):
+    async def info(self, ctx, user: discord.Member=None):
         """user info"""
         if not user:
             user = ctx.author
