@@ -50,13 +50,14 @@ class info:
         embed.set_image(url=av)
         await ctx.send(embed=embed)
         
-    @commands.commands()
+    @commands.command()
     async def membercount(self, ctx):
         """shows how many members in the server"""
         embed = discord.Embed(name="Member count".format(ctx.message.guild.name), color=0x33BFFF)
         embed.set_author(name=f"{guild.name}'s member count")
         embed.add_field(name="Members", value=len(ctx.message.guild.members))
         embed.set_thumbnail(url=ctx.message.guild.icon_url)
+        await ctx.send(embed=embed)
             
 def setup(bot):
     bot.add_cog(info(bot))
