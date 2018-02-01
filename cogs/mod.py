@@ -19,7 +19,7 @@ class mod:
             embed.add_field(f"reason:" + reason) 
             embed.set_thumbnail(url=user.avatar_url)
             await ctx.guild.kick(user)
-        except discord.Forbidden:
+        except discord.MissingPermissions:
             await ctx.send("I could not kick the member, Please check i have kick member permission")
     
     @commands.command()
@@ -34,7 +34,7 @@ class mod:
             embed.add_field(f"reason:" + reason) 
             embed.set_thumbnail(url=user.avatar_url)
             await ctx.guild.ban(user)
-        except discord.Forbidden:
+        except discord.MissingPermissions:
             await ctx.send("I could not ban the member, Please check i have ban member permission")
     
 def setup(bot):
