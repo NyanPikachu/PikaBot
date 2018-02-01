@@ -82,7 +82,7 @@ async def on_ready():
     print("Bot is online!")
     
 @bot.event
-async def on_command_error(ctx, error)
+async def on_command_error(ctx, error):
     
 
 
