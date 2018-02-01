@@ -81,9 +81,7 @@ async def eval(ctx, *, body: str):
 async def on_ready():
     print("Bot is online!")
     
-@bot.event
-async def on_command_error(ctx, error):
-    
+
 
 
 @bot.command()
