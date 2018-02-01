@@ -15,7 +15,7 @@ class mod:
             return await ctx.send("Please mention a member for this command to work")
         try:
             embed = discord.Embed(title="Kick".format(user.name), description=f"{guild.name}", color=0xff0000)
-            embed.add_field(f"{ctx.author} has kicked {user.name=}")
+            embed.add_field(f"{ctx.author} has kicked {user.name}")
             embed.add_field(f"reason:" + reason) 
             embed.set_thumbnail(url=user.avatar_url)
             await ctx.guild.kick(user)
@@ -30,7 +30,7 @@ class mod:
             return await ctx.send("Please mention a member for this command to work")
         try:
             embed = discord.Embed(title="Ban".format(user.name), description=f"{guild.name}", color=0xff0000)
-            embed.add_field(f"{ctx.author} has banned {user.name=}")
+            embed.add_field(f"{ctx.author} has banned {user.name}")
             embed.add_field(f"reason:" + reason) 
             embed.set_thumbnail(url=user.avatar_url)
             await ctx.guild.ban(user)
