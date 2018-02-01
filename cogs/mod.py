@@ -24,7 +24,7 @@ class mod:
     
     @commands.command()
     @commands.has_permissions(ban_members=True)
-    async def kick(self, ctx, *,user: discord.Member, reason: str):
+    async def ban(self, ctx, *,user: discord.Member, reason: str):
         '''Ban a member from the server!'''
         if not user:
             return await ctx.send("Please mention a member for this command to work")
