@@ -9,7 +9,7 @@ class mod:
         
     @commands.command()
     @commands.has_permissions(kick_members=True)
-    async def kick(self, ctx ,user: discord.Member=None, *, reason: str):
+    async def kick(self, ctx ,user: discord.Member=None, *, reason: str=None):
         '''Kick a member from the server!'''
         if not user:
             await ctx.send("Please mention a member for this command to work")
@@ -17,13 +17,14 @@ class mod:
             embed = discord.Embed(title="Kick", description=f"{ctx.guild.name}", color=0xff0000)
             embed.add_field(name=f"{ctx.author} has kicked {user.name}", value=reason) 
             embed.set_thumbnail(url=user.avatar_url)
+            await ctx.send(embed=embed)
             await ctx.guild.kick(user)
         except discord.Forbidden:
             await ctx.send("I could not kick the member, Please check i have your permissions")
     
     @commands.command()
     @commands.has_permissions(ban_members=True)
-    async def ban(self, ctx ,user: discord.Member=None, *, reason: str):
+    async def ban(self, ctx ,user: discord.Member=None, *, reason: str=None):
         '''Ban a member from the server!'''
         if not user:
             await ctx.send("Please mention a member for this command to work")
@@ -31,6 +32,7 @@ class mod:
             embed = discord.Embed(title="Ban", description=f"{ctx.guild.name}", color=0xff0000)
             embed.add_field(name=f"{ctx.author} has banned {user.name}", value=reason) 
             embed.set_thumbnail(url=user.avatar_url)
+            await ctx.send(embed=embed)
             await ctx.guild.ban(user)
         except discord.Forbidden:
             await ctx.send("I could not ban the member, Please check your permissions")
