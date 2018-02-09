@@ -80,6 +80,8 @@ async def eval(ctx, *, body: str):
 @bot.event
 async def on_ready():
     print("Bot is online!")
+    await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds} Guilds! | $help", type=3))
+ 
     
 
 
