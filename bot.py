@@ -10,6 +10,10 @@ import traceback
 import textwrap
 from contextlib import redirect_stdout
 
+bot = commands.Bot(command_prefix="*", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
+
+bot.load_extension("cogs.info")
+bot.load_extension("cogs.mod")
 
 #eval!!!
 def cleanup_code(content):
@@ -19,7 +23,6 @@ def cleanup_code(content):
         return '\n'.join(content.split('\n')[1:-1])
 
     return content.strip('` \n')
-bot = commands.Bot(command_prefix="$", description="This is an example bot", owner_id=279974491071709194)
 
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
@@ -80,10 +83,7 @@ async def eval(ctx, *, body: str):
 @bot.event
 async def on_ready():
     print("Bot is online!")
-    await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds} Guilds! | $help", type=3))
- 
-    
-
+    await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
 
 
 @bot.command()
