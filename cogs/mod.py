@@ -19,11 +19,11 @@ class mod:
             embed.set_thumbnail(url=user.avatar_url)
             channel = discord.utils.get(ctx.guild.channels, name='mod-log')
             if not channel:
-                channdl = await ctx.guild.create_text_channel(name="mod-log")
+                channel = await ctx.guild.create_text_channel(name="mod-log")
                 await channel.send(embed=embed)
             else:
                 await channel.send(embed=embed)
-            user.send(embed=embed)
+            await user.send(embed=embed)
             await ctx.guild.kick(user)
         except discord.Forbidden:
             await ctx.send("I could not kick the member, Please check my permissions")
@@ -41,11 +41,11 @@ class mod:
             embed.add_field(name=f"{ctx.author} has banned {user.name}", value=reason) 
             embed.set_thumbnail(url=user.avatar_url)
             if not channel:
-                channdl = await ctx.guild.create_text_channel(name="mod-log")
+                channel = await ctx.guild.create_text_channel(name="mod-log")
                 await channel.send(embed=embed)
             else:
                 await channel.send(embed=embed)
-            user.send(embed=embed)
+            await user.send(embed=embed)
             await ctx.guild.ban(user)
         except discord.Forbidden:
             await ctx.send("I could not ban the member, Please check my permissions")
