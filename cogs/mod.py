@@ -14,8 +14,8 @@ class mod:
         if not user:
             await ctx.send("Please mention a member for this command to work")
         try:
-            embed = discord.Embed(title="Kick", description=f"{ctx.guild.name}", color=0xff0000)
-            embed.add_field(name=f"{ctx.author} has kicked {user.name}", value=reason) 
+            embed = discord.Embed(title="Kick", description=f"{ctx.guild.name}", color=0xff0000, inline=True)
+            embed.add_field(name=f"{ctx.author} has kicked {user.name}", value=reason, inline=True) 
             embed.set_thumbnail(url=user.avatar_url)
             channel = discord.utils.get(ctx.guild.channels, name='mod-log')
             if not channel:
@@ -37,8 +37,8 @@ class mod:
         if not user:
             await ctx.send("Please mention a member for this command to work")
         try:
-            embed = discord.Embed(title="Ban", description=f"{ctx.guild.name}", color=0xff0000)
-            embed.add_field(name=f"{ctx.author} has banned {user.name}", value=reason) 
+            embed = discord.Embed(title="Ban", description=f"{ctx.guild.name}", color=0xff0000, inline=True)
+            embed.add_field(name=f"{ctx.author} has banned {user.name}", value=reason, inline=True) 
             embed.set_thumbnail(url=user.avatar_url)
             if not channel:
                 channel = await ctx.guild.create_text_channel(name="mod-log")
