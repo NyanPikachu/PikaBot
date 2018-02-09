@@ -17,7 +17,13 @@ class mod:
             embed = discord.Embed(title="Kick", description=f"{ctx.guild.name}", color=0xff0000)
             embed.add_field(name=f"{ctx.author} has kicked {user.name}", value=reason) 
             embed.set_thumbnail(url=user.avatar_url)
-            await ctx.send(embed=embed)
+            channel = discord.utils.get(ctx.guild.channels, name='mod-log')
+            if not channel:
+                channdl = await ctx.guild.create_text_channel(name="mod-log")
+                await channel.send(embed=embed)
+            else:
+                await channel.send(embed=embed)
+            user.send(embed=embed)
             await ctx.guild.kick(user)
         except discord.Forbidden:
             await ctx.send("I could not kick the member, Please check my permissions")
@@ -34,7 +40,12 @@ class mod:
             embed = discord.Embed(title="Ban", description=f"{ctx.guild.name}", color=0xff0000)
             embed.add_field(name=f"{ctx.author} has banned {user.name}", value=reason) 
             embed.set_thumbnail(url=user.avatar_url)
-            await ctx.send(embed=embed)
+            if not channel:
+                channdl = await ctx.guild.create_text_channel(name="mod-log")
+                await channel.send(embed=embed)
+            else:
+                await channel.send(embed=embed)
+            user.send(embed=embed)
             await ctx.guild.ban(user)
         except discord.Forbidden:
             await ctx.send("I could not ban the member, Please check my permissions")
