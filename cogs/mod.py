@@ -9,12 +9,12 @@ class mod:
         
     @commands.command()
     @commands.has_permissions(kick_members=True)
-    async def kick(self, ctx, guild, *,user: discord.Member=None):
+    async def kick(self, ctx ,user: discord.Member=None):
         '''Kick a member from the server!'''
         if not user:
             await ctx.send("Please mention a member for this command to work")
         try:
-            embed = discord.Embed(title="Kick".format(user.name), description=f"{guild.name}", color=0xff0000)
+            embed = discord.Embed(title="Kick".format(user.name), description=f"{ctx.guild.name}", color=0xff0000)
             embed.add_field(f"{ctx.author} has kicked {user.name}")
             embed.add_field(f"reason:" + reason) 
             embed.set_thumbnail(url=user.avatar_url)
@@ -24,12 +24,12 @@ class mod:
     
     @commands.command()
     @commands.has_permissions(ban_members=True)
-    async def ban(self, ctx, guild, *,user: discord.Member=None):
+    async def ban(self, ctx ,user: discord.Member=None):
         '''Ban a member from the server!'''
         if not user:
             await ctx.send("Please mention a member for this command to work")
         try:
-            embed = discord.Embed(title="Ban".format(user.name), description=f"{guild.name}", color=0xff0000)
+            embed = discord.Embed(title="Ban".format(user.name), description=f"{ctx.guild.name}", color=0xff0000)
             embed.add_field(f"{ctx.author} has banned {user.name}")
             embed.add_field(f"reason:" + reason) 
             embed.set_thumbnail(url=user.avatar_url)
