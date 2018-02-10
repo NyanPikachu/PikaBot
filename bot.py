@@ -10,7 +10,7 @@ import traceback
 import textwrap
 from contextlib import redirect_stdout
 
-bot = commands.Bot(command_prefix="*", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
+bot = commands.Bot(command_prefix="$", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
 
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
@@ -84,13 +84,6 @@ async def eval(ctx, *, body: str):
 async def on_ready():
     print("Bot is online!")
     await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
-
-
-@bot.command()
-async def ping(ctx):
-    """Latency check"""
-    embed = discord.Embed(title="Pong!", description=f"{bot.ws.latency* 1000:.4f} ms", color=0x00ff00)
-    await ctx.send(embed=embed)
     
 @bot.command()
 async def say(ctx, *, msg: str):
