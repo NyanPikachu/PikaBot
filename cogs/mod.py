@@ -34,7 +34,9 @@ class mod:
             await ctx.guild.kick(user)
         except discord.Forbidden:
             await ctx.send("I could not kick the member, Please check my permissions")
-        
+        except discord.HTTPException:
+            await ctx.send("You do not have permission to execute this command")
+            
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx ,user: discord.Member=None, *, reason: str=None):
@@ -58,6 +60,17 @@ class mod:
             await ctx.guild.ban(user)
         except discord.Forbidden:
             await ctx.send("I could not ban the member, Please check my permissions")
-        
+        except discord.HTTPException:
+            await ctx.send("You do not have permission to execute this command")
+            
+    @commands.command()
+    @commands.has_permissions(ban_members=True)
+    async def unban(self, ctx, user: discord.Member=None):
+        if not user:
+            await ctx.send("Please mention someone for this command to work")
+        await ctx.guild.unban(user)
+        await ctx.send("Unbanned user from the server!")
+    
+    
 def setup(bot):
     bot.add_cog(mod(bot))
