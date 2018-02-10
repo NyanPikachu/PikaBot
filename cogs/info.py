@@ -51,12 +51,9 @@ class info:
         await ctx.send(embed=embed)
         
     @commands.command()
-    async def membercount(self, ctx):
-        """shows how many members in the server"""
-        embed = discord.Embed(name="Member count".format(ctx.message.guild.name), color=0x33BFFF)
-        embed.set_author(name=f"{guild.name}'s member count")
-        embed.add_field(name="Members", value=len(ctx.message.guild.members))
-        embed.set_thumbnail(url=ctx.message.guild.icon_url)
+    async def ping(ctx):
+        """Latency check"""
+        embed = discord.Embed(title="Pong!", description=f"{bot.ws.latency* 1000:.4f} ms", color=0x00ff00)
         await ctx.send(embed=embed)
             
 def setup(bot):
