@@ -14,6 +14,7 @@ class mod:
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx ,user: discord.Member=None, *, reason: str=None):
         '''Kick a member from the server!'''
+        now = datetime.datetime.utcnow()
         if not user:
             await ctx.send("Please mention a member for this command to work")
         try:
@@ -38,6 +39,7 @@ class mod:
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx ,user: discord.Member=None, *, reason: str=None):
         '''Ban a member from the server!'''
+        now = datetime.datetime.utcnow()
         if not user:
             await ctx.send("Please mention a member for this command to work")
         try:
