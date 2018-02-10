@@ -33,9 +33,7 @@ class mod:
             await ctx.guild.kick(user)
         except discord.Forbidden:
             await ctx.send("I could not kick the member, Please check my permissions")
-        except discord.MissingPermissions:
-            await ctx.send(f"{ctx.author.mention} you don't have kick permissions")
-    
+        
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx ,user: discord.Member=None, *, reason: str=None):
@@ -58,8 +56,6 @@ class mod:
             await ctx.guild.ban(user)
         except discord.Forbidden:
             await ctx.send("I could not ban the member, Please check my permissions")
-        except discord.MissingPermissions:
-            await ctx.send(f"{ctx.author.mention} you don't have ban permissions")
-    
+        
 def setup(bot):
     bot.add_cog(mod(bot))
