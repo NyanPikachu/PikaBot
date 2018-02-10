@@ -51,6 +51,7 @@ class mod:
             embed.add_field(name=f"Reason:", value=reason, inline=True)
             embed.add_field(name=f"Issued At:", value=now, inline=True)
             embed.set_thumbnail(url=user.avatar_url)
+            channel = discord.utils.get(ctx.guild.channels, name='mod-log')
             if not channel:
                 channel = await ctx.guild.create_text_channel(name="mod-log")
                 await channel.send(embed=embed)
