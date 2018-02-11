@@ -13,11 +13,11 @@ class info:
         embed.title = "Bot info"
         embed.set_author(name=ctx.message.author.name, icon_url=ctx.author.avatar_url)
         embed.description = "A simple bot created by Nyan Pikachu#4148"
-        embed.add_field(name="Servers", value=len(bot.guilds))
-        embed.add_field(name="Online Users", value=str(len({m.id for m in bot.get_all_members() if m.status is not discord.Status.offline})))
-        embed.add_field(name="Total Users", value=len(bot.users))
+        embed.add_field(name="Servers", value=len(self.bot.guilds))
+        embed.add_field(name="Online Users", value=str(len({m.id for m in self.bot.get_all_members() if m.status is not discord.Status.offline})))
+        embed.add_field(name="Total Users", value=len(self.bot.users))
         embed.add_field(name="Channels", value=f"{sum(1 for g in bot.guilds for _ in g.channels)}")
-        embed.add_field(name="Latency", value=f"{bot.ws.latency * 100:.3f} ms")
+        embed.add_field(name="Latency", value=f"{self.bot.ws.latency * 100:.3f} ms")
         embed.add_field(name="Library", value="discord.py")
         embed.add_field(name="Source", value="[GitHub](https://github.com/NyanPikachu/PikaBot)")
         embed.set_footer(text="Pika Bot | scripted in discord.py")
