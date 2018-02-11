@@ -6,8 +6,8 @@ class info:
     def __init__(self, bot):
         self.bot = bot
         
-    @commands.command()
-    async def bot(self, ctx):
+    @commands.command(name='bot')
+    async def func(self, ctx):
         """Info about the bot"""
         embed = discord.Embed(color=0xf1c40f)
         embed.title = "Bot info"
