@@ -11,7 +11,7 @@ class info:
         """Info about the bot"""
         embed = discord.Embed(color=0xf1c40f)
         embed.title = "Bot info"
-        embed.set_author(name=ctx.message.author.name, icon_url=ctx.message.author_url)
+        embed.set_author(name=ctx.message.author.name, icon_url=ctx.author.avatar_url)
         embed.description = "A simple bot created by Nyan Pikachu#4148"
         embed.add_field(name="Servers", value=len(bot.guilds))
         embed.add_field(name="Online Users", value=str(len({m.id for m in bot.get_all_members() if m.status is not discord.Status.offline})))
