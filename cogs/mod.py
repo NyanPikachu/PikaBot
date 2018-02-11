@@ -64,14 +64,6 @@ class mod:
         except discord.HTTPException:
             await ctx.send("You do not have permission to execute this command")
             
-    @commands.command()
-    @commands.has_permissions(ban_members=True)
-    async def unban(self, ctx, user: discord.Member=None):
-        '''Unbans a user from the server'''
-        if not user:
-            await ctx.send("Please mention someone for this command to work")
-        await ctx.guild.unban(user)
-        await ctx.send("Unbanned user from the server!")
     
     
 def setup(bot):
