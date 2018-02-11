@@ -15,6 +15,7 @@ bot = commands.Bot(command_prefix="$", description="A simple bot created in disc
 
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
+bot.load_extension("cogs.misc")
 
 #eval!!!
 def cleanup_code(content):
@@ -24,9 +25,6 @@ def cleanup_code(content):
         return '\n'.join(content.split('\n')[1:-1])
 
     return content.strip('` \n')
-
-bot.load_extension("cogs.info")
-bot.load_extension("cogs.mod")
 
 devs = [
     279974491071709194
