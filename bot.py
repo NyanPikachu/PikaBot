@@ -78,33 +78,10 @@ async def eval(ctx, *, body: str):
             else:
                 await ctx.send(f'```py\n{value}{ret}\n```')
                 
-
-
-#normal commands.ill put into cogs later
 @bot.event
 async def on_ready():
     print("Bot is online!")
     await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
     
-@bot.command()
-async def say(ctx, *, msg: str):
-    """owner only command- print a message"""
-    await ctx.message.delete()
-    await ctx.send(msg)
-    
-@bot.command()
-async def coinflip(ctx):
-    """Flips a coin!"""
-    flip = random.choice(["Heads", "Tails"])
-    await ctx.send(flip)
-    
-@bot.command()
-async def hug(ctx, user: discord.Member=None):
-   """hugs a user"""
-   if not user:
-      await ctx.send(f"Please mention someone for this command to work {ctx.author.mention}" )
-   embed = discord.Embed(title="Hug!".format(user.name), description= f"{ctx.author} has sent {user} a hug !", color=0xffb6c1)
-   embed.set_thumbnail(url=user.avatar_url)
-   await ctx.send(embed=embed)
     
 bot.run(os.environ.get("TOKEN"))
