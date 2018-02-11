@@ -8,7 +8,7 @@ class info:
         
     @commands.command()
     async def bot(self, ctx):
-        '''Info about the bot'''
+        """Info about the bot"""
         embed = discord.Embed(color=0xf1c40f)
         embed.title = "Bot info"
         embed.set_author(name=ctx.message.author.name, icon_url=ctx.message.author_url)
