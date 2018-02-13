@@ -159,7 +159,7 @@ async def on_ready():
     await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
 
 @bot.command()
-async def help(ctx, *, command: str):
+async def help(ctx, *, command: str=None):
     '''Shows this message'''
     
     if command is none:
