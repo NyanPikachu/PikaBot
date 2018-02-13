@@ -216,6 +216,9 @@ async def _presence(self, ctx, type=None, *, game=None):
         elif type.lower() == 'clear':
             await self.bot.change_presence(game=None)
             await ctx.send('Cleared Presence')
+        elif type.lower() == 'default':
+            await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
+            await ctx.send('Presence reverted to default')
         else:
             await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
  
