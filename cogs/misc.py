@@ -36,31 +36,7 @@ class misc:
         em = discord.Embed(description=body)
         await ctx.send(embed=em)
         
-    @commands.command(name='presence', hidden=True)
-    @commands.is_owner()
-    async def _presence(self, ctx, type=None, *, game=None):
-        '''Change the bot's presence'''
-        if type is None:
-            await ctx.send(f'Usage: `{ctx.prefix}presence [game/stream/watch/listen] [message]`')
-        else:
-            if type.lower() == 'stream':
-                await self.bot.change_presence(game=discord.Game(name=game, type=1, url='https://www.twitch.tv/a'), status='online')
-                await ctx.send(f'Set presence to. `Streaming {game}`')
-            elif type.lower() == 'game':
-                await self.bot.change_presence(game=discord.Game(name=game))
-                await ctx.send(f'Set presence to `Playing {game}`')
-            elif type.lower() == 'watch':
-                await self.bot.change_presence(game=discord.Game(name=game, type=3), afk=True)
-                await ctx.send(f'Set presence to `Watching {game}`')
-            elif type.lower() == 'listen':
-                await self.bot.change_presence(game=discord.Game(name=game, type=2), afk=True)
-                await ctx.send(f'Set presence to `Listening to {game}`')
-            elif type.lower() == 'clear':
-                await self.bot.change_presence(game=None)
-                await ctx.send('Cleared Presence')
-            else:
-                await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
- 
+    
         
 def setup(bot):
     bot.add_cog(misc(bot))
