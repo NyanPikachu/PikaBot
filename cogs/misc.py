@@ -33,7 +33,7 @@ class misc:
     @commands.command()
     async def embedsay(self, ctx, *, body: str):
         '''Send a simple embed'''
-        em = discord.Embed(description=body, color=discord.Member.color)
+        em = discord.Embed(description=body)
         await ctx.send(embed=em)
         
     @commands.command(name='presence', hidden=True)
