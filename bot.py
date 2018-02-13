@@ -24,7 +24,8 @@ def dev_check(id):
     if id in devs:
         return True
     return False
-def fomat_help_command(ctx, cmd):
+
+def fomat_command_help(ctx, cmd):
     '''Format help for a command'''
     color = discord.Color.gold()
     em = discord.Embed(color=color, description=cmd.help)
@@ -35,6 +36,57 @@ def fomat_help_command(ctx, cmd):
         em.title = f'{ctx.prefix}{cmd.signature}'
         
     return em
+
+async def send_cmd_help(ctx):
+    cmd = ctx.command
+    em = discord.Embed(title=f'Usage: {ctx.prefix + cmd.signature}')
+    em.color = discord.Color.green()
+    em.description = cmd.help
+    return em
+
+def format_cog_help(ctx, cog):
+    '''Format help for a cog'''
+    signatures = []
+    color = discord.Color.green()
+    em = discord.Embed(color=color, description=f'*{inspect.getdoc(cog)}*')
+    em.title = type(cog).__name__.replace('_', ' ')
+    cc = []
+    for cmd in bot.commands:
+        if not cmd.hidden:
+            if cmd.instance is cog:
+                cc.append(cmd)
+                signatures.append(len(cmd.name) + len(ctx.prefix))
+    max_length = max(signatures)
+    abc = sorted(cc, key=lambda x: x.name)
+    cmds = ''
+    for c in abc:
+        cmds += f'`{ctx.prefix + c.name:<{max_length}} '
+        cmds += f'{c.short_doc:<{max_length}}`\n'
+    em.add_field(name='Commands', value=cmds)
+ 
+    return em
+ 
+ 
+def format_bot_help(ctx):
+    signatures = []
+    fmt = ''
+    commands = []
+    for cmd in bot.commands:
+        if not cmd.hidden:
+            if type(cmd.instance).__name__ == 'NoneType':
+                commands.append(cmd)
+                signatures.append(len(cmd.name) + len(ctx.prefix))
+    max_length = max(signatures)
+    abc = sorted(commands, key=lambda x: x.name)
+    for c in abc:
+        fmt += f'`{ctx.prefix + c.name:<{max_length}} '
+        fmt += f'{c.short_doc:<{max_length}}`\n'
+    em = discord.Embed(title='Bot', color=discord.Color.green())
+    em.description = '*Commands for the main bot.*'
+    em.add_field(name='Commands', value=fmt)
+ 
+    return em
+ 
 
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
