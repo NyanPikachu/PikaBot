@@ -162,7 +162,7 @@ async def on_ready():
 async def help(ctx, *, command: str=None):
     '''Shows this message'''
     
-    if command is none:
+    if command is None:
         aliases = {
             'info': 'Info commands',
             'misc': 'Miscellaneous commands',
