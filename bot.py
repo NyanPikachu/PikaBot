@@ -13,6 +13,13 @@ from contextlib import redirect_stdout
 
 bot = commands.Bot(command_prefix="$", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
 
+def dev_check(id):
+    with open('data/devlist.json') as f:
+        devs = json.load(f)
+    if id in devs:
+        return True
+    return False
+
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.misc")
@@ -81,5 +88,32 @@ async def on_ready():
     print("Bot is online!")
     await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
     
+@commands.command(name='presence', hidden=True)
+async def _presence(self, ctx, type=None, *, game=None):
+    '''Change the bot's presence'''
+    if not dev_check(ctx.author.id):
+        return
     
+    if type is None:
+        await ctx.send(f'Usage: `{ctx.prefix}presence [game/stream/watch/listen] [message]`')
+    else:
+        if type.lower() == 'stream':
+            await self.bot.change_presence(game=discord.Game(name=game, type=1, url='https://www.twitch.tv/a'), status='online')
+            await ctx.send(f'Set presence to. `Streaming {game}`')
+        elif type.lower() == 'game':
+            await self.bot.change_presence(game=discord.Game(name=game))
+            await ctx.send(f'Set presence to `Playing {game}`')
+        elif type.lower() == 'watch':
+            await self.bot.change_presence(game=discord.Game(name=game, type=3), afk=True)
+            await ctx.send(f'Set presence to `Watching {game}`')
+        elif type.lower() == 'listen':
+            await self.bot.change_presence(game=discord.Game(name=game, type=2), afk=True)
+            await ctx.send(f'Set presence to `Listening to {game}`')
+        elif type.lower() == 'clear':
+            await self.bot.change_presence(game=None)
+            await ctx.send('Cleared Presence')
+        else:
+            await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
+ 
+
 bot.run(os.environ.get("TOKEN"))
