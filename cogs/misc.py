@@ -8,8 +8,7 @@ class misc:
         self.bot = bot
         
     
-    color = '#{:06x}'.format(random.randint(0, 256**3))
-        
+    
     @commands.command()
     async def hug(self, ctx, user: discord.Member=None):
         """hugs a user"""
@@ -34,6 +33,7 @@ class misc:
     @commands.command()
     async def embedsay(self, ctx, *, body: str):
         '''Send a simple embed'''
+        color = '#{:06x}'.format(random.randint(0, 256**3))
         em = discord.Embed(description=body, color=color)
         await ctx.send(embed=em)
         
