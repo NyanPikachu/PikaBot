@@ -98,16 +98,16 @@ async def _presence(self, ctx, type=None, *, game=None):
         await ctx.send(f'Usage: `{ctx.prefix}presence [game/stream/watch/listen] [message]`')
     else:
         if type.lower() == 'stream':
-            await self.bot.change_presence(game=discord.Game(name=game, type=1, url='https://www.twitch.tv/a'), status='online')
+            await self.bot.change_presence(game=discord.Game(name=f"{game}", type=1, url='https://www.twitch.tv/a'), status='online')
             await ctx.send(f'Set presence to. `Streaming {game}`')
         elif type.lower() == 'game':
-            await self.bot.change_presence(game=discord.Game(name=game))
+            await self.bot.change_presence(game=discord.Game(name=f"{game}"))
             await ctx.send(f'Set presence to `Playing {game}`')
         elif type.lower() == 'watch':
-            await self.bot.change_presence(game=discord.Game(name=game, type=3), afk=True)
+            await self.bot.change_presence(game=discord.Game(name=f"{game}", type=3), afk=True)
             await ctx.send(f'Set presence to `Watching {game}`')
         elif type.lower() == 'listen':
-            await self.bot.change_presence(game=discord.Game(name=game, type=2), afk=True)
+            await self.bot.change_presence(game=discord.Game(name=f"{game}", type=2), afk=True)
             await ctx.send(f'Set presence to `Listening to {game}`')
         elif type.lower() == 'clear':
             await self.bot.change_presence(game=None)
