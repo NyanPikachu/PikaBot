@@ -33,8 +33,7 @@ class misc:
     @commands.command()
     async def embedsay(self, ctx, *, body: str):
         '''Send a simple embed'''
-        color = '#{:06x}'.format(random.randint(0, 256**3))
-        em = discord.Embed(description=body, color=role.color)
+        em = discord.Embed(description=body, color=discord.member.Colour)
         await ctx.send(embed=em)
         
     @commands.command(name='presence', hidden=True)
