@@ -13,12 +13,28 @@ from contextlib import redirect_stdout
 
 bot = commands.Bot(command_prefix="$", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
 
+def load_json(path, key):
+    with open(f'.data{path}') as f:
+        config = json.load(f)
+    return config.get(key)
+
 def dev_check(id):
     with open('data/devlist.json') as f:
         devs = json.load(f)
     if id in devs:
         return True
     return False
+def fomat_help_command(ctx, cmd):
+    '''Format help for a command'''
+    color = discord.Color.gold()
+    em = discord.Embed(color=color, description=cmd.help)
+    
+    if hasattr(cmd, 'invoke_without_command') and cmd.invoke_without_command:
+        em.title = f'`Usage: {ctx.prefix}{cmd.signature}`'
+    else:
+        em.title = f'{ctx.prefix}{cmd.signature}'
+        
+    return em
 
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
@@ -82,13 +98,49 @@ async def eval(ctx, *, body: str):
                     await ctx.send(f'```py\n{value}\n```')
             else:
                 await ctx.send(f'```py\n{value}{ret}\n```')
+
+bot.remove_command('help')              
                 
 @bot.event
 async def on_ready():
     print("Bot is online!")
     await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
+
+@bot.command()
+async def help(ctx, *, command: str):
+    '''Shows this message'''
     
-@commands.command(name='presence', hidden=True)
+    if command is none:
+        aliases = {
+            'info': 'Info commands',
+            'misc': 'Miscellaneous commands',
+            'mod': 'Moderation commands'
+        }
+        
+        if command.lower() in aliases.keys():
+            command = aliases[command]
+            
+        cog = bot.get_cog(command.replace(' ', '_').title())
+        cmd = bot.get_command(command)
+        if cog is not None:
+            em = format_cog_help(ctx, cog)
+        elif cmd is not None:
+            em = format_command_help(ctx, cmd)
+        else:
+            await ctx.send('No command found.')
+        return await ctx.send(embed=em)
+    
+    pages = []
+    for cog in bot.cogs.values():
+        em = format_cog_help(ctx, cog)
+        pages.append(em)
+    em = format_bot_help(ctx)
+    pages.append(em)
+    
+    p_session = PaginatorSession(ctx, footer=f'Type {ctx.prefix}help command for more info on a command.', pages=pages)
+    await p_session.run()
+    
+@bot.command(name='presence', hidden=True)
 async def _presence(self, ctx, type=None, *, game=None):
     '''Change the bot's presence'''
     if not dev_check(ctx.author.id):
