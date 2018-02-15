@@ -44,6 +44,12 @@ async def send_cmd_help(ctx):
     em.description = cmd.help
     return em
 
+def tags(ctx):
+    if type.lower() == 'hi':
+        await ctx.send('hello')
+    elif type.lower() == 'bye':
+        await ctx.send('byeee!')
+
 def format_cog_help(ctx, cog):
     '''Format help for a cog'''
     signatures = []
@@ -149,51 +155,21 @@ async def eval(ctx, *, body: str):
                 if value:
                     await ctx.send(f'```py\n{value}\n```')
             else:
-                await ctx.send(f'```py\n{value}{ret}\n```')
-
-bot.remove_command('help')              
+                await ctx.send(f'```py\n{value}{ret}\n```')            
                 
 @bot.event
 async def on_ready():
     print("Bot is online!")
     await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
-
-@bot.command()
-async def help(ctx, *, command: str=None):
-    '''Shows this message'''
     
-    if command is None:
-        aliases = {
-            'info': 'Info commands',
-            'misc': 'Miscellaneous commands',
-            'mod': 'Moderation commands'
-        }
+@bot.command
+asynx def tag(ctx, tag=None)
+    if not tag:
+        return
+    await ctx.send(tags)
         
-        if command.lower() in aliases.keys():
-            command = aliases[command]
-            
-        cog = bot.get_cog(command.replace(' ', '_').title())
-        cmd = bot.get_command(command)
-        if cog is not None:
-            em = format_cog_help(ctx, cog)
-        elif cmd is not None:
-            em = format_command_help(ctx, cmd)
-        else:
-            await ctx.send('No command found.')
-        return await ctx.send(embed=em)
-    
-    pages = []
-    for cog in bot.cogs.values():
-        em = format_cog_help(ctx, cog)
-        pages.append(em)
-    em = format_bot_help(ctx)
-    pages.append(em)
-    
-    p_session = PaginatorSession(ctx, footer=f'Type {ctx.prefix}help command for more info on a command.', pages=pages)
-    await p_session.run()
-    
 @bot.command(name='presence', hidden=True)
-async def _presence(self, ctx, type=None, *, game=None):
+async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
     if not dev_check(ctx.author.id):
         return
