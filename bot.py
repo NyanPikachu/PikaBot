@@ -44,11 +44,6 @@ async def send_cmd_help(ctx):
     em.description = cmd.help
     return em
 
-def tags(ctx):
-    if type.lower() == 'hi':
-        await ctx.send('hello')
-    elif type.lower() == 'bye':
-        await ctx.send('byeee!')
 
 def format_cog_help(ctx, cog):
     '''Format help for a cog'''
@@ -162,12 +157,6 @@ async def on_ready():
     print("Bot is online!")
     await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
     
-@bot.command
-asynx def tag(ctx, tag=None)
-    if not tag:
-        return
-    await ctx.send(tags)
-        
 @bot.command(name='presence', hidden=True)
 async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
