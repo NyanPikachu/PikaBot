@@ -46,7 +46,7 @@ class Fortnite:
         
         pages.append(embed)
         
-        p_session = PaginatorSession(ctx, footer=f'Stats made by Cree-Py | Powered by fortnitetracker.com', pages=pages)
+        p_session = PaginatorSession(ctx, footer=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com', pages=pages)
         await p_session.run()
         
         
