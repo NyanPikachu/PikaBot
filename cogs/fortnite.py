@@ -11,7 +11,7 @@ class Fortnite:
         
     client = pynite.Client('FNAPI')
         
-    @commands.command
+    @commands.command()
     async def fnprofile(self, ctx, plat=None, name=None):
         pages = []
         
