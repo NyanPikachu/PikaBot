@@ -86,8 +86,8 @@ class info:
         embed.set_image(url=av)
         await ctx.send(embed=embed)
         
-    @bot.command()
-    async def ping(ctx):
+    @commands.command()
+    async def ping(self, ctx):
         '''Pong! Get the bot's response time'''
         em = discord.Embed(color=discord.Color.gold())
         em.title = "Pong!"
