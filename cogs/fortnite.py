@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import pynite
 from ext.paginator import PaginatorSession
 
 class Fortnite:
