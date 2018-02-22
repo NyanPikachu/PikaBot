@@ -1,10 +1,30 @@
 import discord
 from discord.ext import commands
+from ext.paginator import PaginatorSession
 
 class info:
     '''Info related commands!'''
     def __init__(self, bot):
         self.bot = bot
+        
+    @commands.command()
+    async def paginate(self, ctx):
+        pages = []
+        
+        embed = discord.Embed(color=0xflc40f)
+        embed.title = "page 1"
+        embed.description = "lol"
+        
+        pages.append(embed)
+        
+        embed = discord.Embed(color=0xflc40f)
+        embed.title = "page 1"
+        embed.description = "lol2"
+        
+        pages.append(embed)
+        
+        p_session = PaginatorSession(ctx, footer=f'pagination test', pages=pages)
+        await p_session.run()
         
     @commands.command(name="bot")
     async def _bot(self, ctx):
