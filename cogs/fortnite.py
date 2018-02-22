@@ -17,6 +17,8 @@ class Fortnite:
         player = await client.get_player(plat, name)
         lifetime = await player.get_lifetime_stats()
         solo = await player.get_solos()
+        duos = await player.get_duos()
+        squads = awaits player.get_squads()
         
         embed = discord.Embed(color=discord.Color.green())
         embed.title = 'Name: ' + name
@@ -46,6 +48,31 @@ class Fortnite:
         
         pages.append(embed)
         
+        embed = discord.Embed(color=discord.Color.green())
+        embed.title = 'Name: ' + name
+        embed.description = 'Platform: ' + plat
+        embed.add_field(name='Victory Royales', value=solo.top1.value)
+        embed.add_field(name='Top 10', value=duos.top10.value)
+        embed.add_field(name='Score', value=duos.score.value)
+        embed.add_field(name='K/D', value=duos.kd.value)
+        embed.add_field(name='Kills', value=duos.kills.value)
+        embed.add_field(name='Matches Played', value=duos.matches.value)
+        embed.add_field(name='Time Played', value=duos.minutes_played.value)
+        
+        pages.append(embed)
+        
+        embed = discord.Embed(color=discord.Color.green())
+        embed.title = 'Name: ' + name
+        embed.description = 'Platform: ' + plat
+        embed.add_field(name='Victory Royales', value=solo.top1.value)
+        embed.add_field(name='Top 10', value=squads.top10.value)
+        embed.add_field(name='Score', value=squads.score.value)
+        embed.add_field(name='K/D', value=squads.kd.value)
+        embed.add_field(name='Kills', value=squads.kills.value)
+        embed.add_field(name='Matches Played', value=squads.matches.value)
+        embed.add_field(name='Time Played', value=squads.minutes_played.value)
+        
+        pages.append(embed)
         p_session = PaginatorSession(ctx, footer=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com', pages=pages)
         await p_session.run()
         
