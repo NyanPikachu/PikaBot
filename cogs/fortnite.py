@@ -8,13 +8,12 @@ class Fortnite:
 
     def __init__(self, bot):
         self.bot = bot
-        
-    client = pynite.Client('FNAPI')
+       
         
     @commands.command()
     async def fnprofile(self, ctx, plat=None, name=None):
         pages = []
-        
+        client = pynite.Client('FNAPI')
         player = client.get_player(plat, name)
         lifetime = await player.get_lifetime_stats()
         
