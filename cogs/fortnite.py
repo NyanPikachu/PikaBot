@@ -16,6 +16,7 @@ class Fortnite:
         client = pynite.Client('5a20baea-b8a7-4e42-9de3-741534219452')
         player = await client.get_player(plat, name)
         lifetime = await player.get_lifetime_stats()
+        solo = await player.get_solos()
         
         embed = discord.Embed(color=discord.Color.green())
         embed.title = 'Name: ' + name
