@@ -86,11 +86,14 @@ class info:
         embed.set_image(url=av)
         await ctx.send(embed=embed)
         
-    @commands.command()
+    @bot.command()
     async def ping(ctx):
-        """Latency check"""
-        embed = discord.Embed(title="Pong!", description=f"{bot.ws.latency* 1000:.4f} ms", color=0x00ff00)
-        await ctx.send(embed=embed)
+        '''Pong! Get the bot's response time'''
+        em = discord.Embed(color=discord.Color.gold())
+        em.title = "Pong!"
+        em.description = f'{bot.latency * 1000:.0f} ms'
+        await ctx.send(embed=em)
+
             
 def setup(bot):
     bot.add_cog(info(bot))
