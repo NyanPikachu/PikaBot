@@ -64,7 +64,30 @@ class mod:
         except discord.HTTPException:
             await ctx.send("You do not have permission to execute this command")
             
-    
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def purge(self, ctx, messages: int):
+        '''Delete messages a certain number of messages from a channel.'''
+        if messages > 99:
+            messages = 99
+
+        try:
+            await ctx.channel.purge(limit=messages + 1)
+        except Exception as e:
+            await ctx.send("I cannot delete the messages. Make sure I have the manage messages permission.")
+        else:
+            await ctx.send(f'{messages} messages deleted. 👌', delete_after=3)
+   
+    @commands.command()
+    @commands.has_permissions(kick_members=True)
+    async def warn(self, ctx, user: discord.Member, *, reason: str):
+        '''Warn a member via DMs'''
+        warning = f"You have been warned in **{ctx.message.guild}** by **{ctx.message.author}** for {reason}"
+        if not reason:
+            warning = f"You have been warned in **{ctx.message.guild}** by **{ctx.message.author}**"
+        await user.send(warning)
+        await ctx.send(f"**{user}** has been **warned**")
+
     
 def setup(bot):
     bot.add_cog(mod(bot))
