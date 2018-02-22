@@ -93,6 +93,7 @@ def format_bot_help(ctx):
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.misc")
+bot.load_extension("cogs.fortnite')
 
 #eval!!!
 def cleanup_code(content):
