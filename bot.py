@@ -8,6 +8,7 @@ import os
 import sys
 import traceback
 import datetime
+import pynite
 import textwrap
 from contextlib import redirect_stdout
 
