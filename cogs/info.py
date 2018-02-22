@@ -11,13 +11,13 @@ class info:
     async def paginate(self, ctx):
         pages = []
         
-        embed = discord.Embed(color=0xflc40f)
+        embed = discord.Embed(color=0xf1c40f)
         embed.title = "page 1"
         embed.description = "lol"
         
         pages.append(embed)
         
-        embed = discord.Embed(color=0xflc40f)
+        embed = discord.Embed(color=0xf1c40f)
         embed.title = "page 1"
         embed.description = "lol2"
         
