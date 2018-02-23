@@ -50,6 +50,7 @@ class Fortnite:
         embed.add_field(name='Score', value=solo.score.value)
         embed.add_field(name='K/D', value=solo.kd.value)
         embed.add_field(name='Kills', value=solo.kills.value)
+        embed.add_field(name='Average kills per match', value=solo.kpg.value)
         embed.add_field(name='Matches Played', value=solo.matches.value)
         embed.add_field(name='Time Played', value=solo.minutes_played.value)
         
@@ -63,6 +64,7 @@ class Fortnite:
         embed.add_field(name='Score', value=duos.score.value)
         embed.add_field(name='K/D', value=duos.kd.value)
         embed.add_field(name='Kills', value=duos.kills.value)
+        embed.add_field(name='Average kills per match', value=duos.kpg.value)
         embed.add_field(name='Matches Played', value=duos.matches.value)
         embed.add_field(name='Time Played', value=duos.minutes_played.value)
         
@@ -76,6 +78,7 @@ class Fortnite:
         embed.add_field(name='Score', value=squads.score.value)
         embed.add_field(name='K/D', value=squads.kd.value)
         embed.add_field(name='Kills', value=squads.kills.value)
+        embed.add_field(name='Average kills per match', value=squads.kpg.value)
         embed.add_field(name='Matches Played', value=squads.matches.value)
         embed.add_field(name='Time Played', value=squads.minutes_played.value)
         
