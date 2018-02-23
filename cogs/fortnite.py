@@ -21,7 +21,7 @@ class Fortnite:
         squads = awaits player.get_squads()
         
         embed = discord.Embed(color=discord.Color.green())
-        embed.title = 'Name: ' + name
+        embed.title = 'Name: ' + name + 'LifeTime stats'
         embed.description = 'Platform: ' + plat
         embed.add_field(name=lifetime[9].key, value=lifetime[9].value)
         embed.add_field(name=lifetime[1].key, value=lifetime[1].value)
@@ -36,7 +36,7 @@ class Fortnite:
         pages.append(embed)
         
         embed = discord.Embed(color=discord.Color.green())
-        embed.title = 'Name: ' + name
+        embed.title = 'Name: ' + name + 'Solo Stats'
         embed.description = 'Platform: ' + plat
         embed.add_field(name='Victory Royales', value=solo.top1.value)
         embed.add_field(name='Top 10', value=solo.top10.value)
@@ -49,7 +49,7 @@ class Fortnite:
         pages.append(embed)
         
         embed = discord.Embed(color=discord.Color.green())
-        embed.title = 'Name: ' + name
+        embed.title = 'Name: ' + name + 'Duo Stats'
         embed.description = 'Platform: ' + plat
         embed.add_field(name='Victory Royales', value=solo.top1.value)
         embed.add_field(name='Top 10', value=duos.top10.value)
@@ -62,7 +62,7 @@ class Fortnite:
         pages.append(embed)
         
         embed = discord.Embed(color=discord.Color.green())
-        embed.title = 'Name: ' + name
+        embed.title = 'Name: ' + name + 'Squad Stats'
         embed.description = 'Platform: ' + plat
         embed.add_field(name='Victory Royales', value=solo.top1.value)
         embed.add_field(name='Top 10', value=squads.top10.value)
