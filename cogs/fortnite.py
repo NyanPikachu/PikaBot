@@ -12,6 +12,11 @@ class Fortnite:
         
     @commands.command()
     async def fnprofile(self, ctx, plat=None, name=None):
+        '''Get stats for your fortnite account !'''
+        try:
+            player = await self.client.get_player(plat, name)
+        except Exception as e:
+            return await ctx.send(f'```py\nError {e.code}: {e.error}\n```')
         pages = []
         client = pynite.Client('5a20baea-b8a7-4e42-9de3-741534219452')
         player = await client.get_player(plat, name)
@@ -21,8 +26,8 @@ class Fortnite:
         squads = await player.get_squads()
         
         embed = discord.Embed(color=discord.Color.green())
-        embed.title = 'Name: ' + name + ' - LifeTime stats'
-        embed.description = 'Platform: ' + plat
+        embed.title = 'Name: ' + player.epic_user_handle + ' - LifeTime stats'
+        embed.description = 'Platform: ' + player.platform_name_long
         embed.add_field(name=lifetime[9].key, value=lifetime[9].value)
         embed.add_field(name=lifetime[1].key, value=lifetime[1].value)
         embed.add_field(name=lifetime[4].key, value=lifetime[4].value)
@@ -36,8 +41,8 @@ class Fortnite:
         pages.append(embed)
         
         embed = discord.Embed(color=discord.Color.green())
-        embed.title = 'Name: ' + name + ' - Solo Stats'
-        embed.description = 'Platform: ' + plat
+        embed.title = 'Name: ' + player.epic_user_handle + ' - Solo Stats'
+        embed.description = 'Platform: ' + player.platform_name_long
         embed.add_field(name='Victory Royales', value=solo.top1.value)
         embed.add_field(name='Top 10', value=solo.top10.value)
         embed.add_field(name='Score', value=solo.score.value)
@@ -49,8 +54,8 @@ class Fortnite:
         pages.append(embed)
         
         embed = discord.Embed(color=discord.Color.green())
-        embed.title = 'Name: ' + name + ' - Duo Stats'
-        embed.description = 'Platform: ' + plat
+        embed.title = 'Name: ' + player.epic_user_handle + ' - Duo Stats'
+        embed.description = 'Platform: ' + player.platform_name_long
         embed.add_field(name='Victory Royales', value=solo.top1.value)
         embed.add_field(name='Top 10', value=duos.top10.value)
         embed.add_field(name='Score', value=duos.score.value)
@@ -62,8 +67,8 @@ class Fortnite:
         pages.append(embed)
         
         embed = discord.Embed(color=discord.Color.green())
-        embed.title = 'Name: ' + name + ' - Squad Stats'
-        embed.description = 'Platform: ' + plat
+        embed.title = 'Name: ' + player.epic_user_handle + ' - Squad Stats'
+        embed.description = 'Platform: ' + player.platform_name_long
         embed.add_field(name='Victory Royales', value=solo.top1.value)
         embed.add_field(name='Top 10', value=squads.top10.value)
         embed.add_field(name='Score', value=squads.score.value)
