@@ -13,10 +13,6 @@ class Fortnite:
     @commands.command()
     async def fnprofile(self, ctx, plat=None, name=None):
         '''Get stats for your fortnite account !'''
-        try:
-            player = await self.client.get_player(plat, name)
-        except Exception as e:
-            return await ctx.send(f'```py\nError {e.code}: {e.error}\n```')
         pages = []
         client = pynite.Client('5a20baea-b8a7-4e42-9de3-741534219452')
         player = await client.get_player(plat, name)
@@ -24,6 +20,11 @@ class Fortnite:
         solo = await player.get_solos()
         duos = await player.get_duos()
         squads = await player.get_squads()
+        
+        try:
+            player = await self.client.get_player(plat, name)
+        except Exception as e:
+            return await ctx.send(f'```py\nError {e.code}: {e.error}\n```')
         
         embed = discord.Embed(color=discord.Color.green())
         embed.title = 'Name: ' + player.epic_user_handle + ' - LifeTime stats'
