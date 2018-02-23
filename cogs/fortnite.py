@@ -18,7 +18,7 @@ class Fortnite:
         lifetime = await player.get_lifetime_stats()
         solo = await player.get_solos()
         duos = await player.get_duos()
-        squads = awaits player.get_squads()
+        squads = await player.get_squads()
         
         embed = discord.Embed(color=discord.Color.green())
         embed.title = 'Name: ' + name + 'LifeTime stats'
