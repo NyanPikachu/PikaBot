@@ -170,11 +170,9 @@ async def ping(ctx):
 
     
 @bot.command(name='presence', hidden=True)
+@commands.is_owner()
 async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
-    if not dev_check(ctx.author.id):
-        return
-    
     if type is None:
         await ctx.send(f'Usage: `{ctx.prefix}presence [game/stream/watch/listen] [message]`')
     else:
