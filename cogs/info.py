@@ -85,15 +85,7 @@ class info:
         embed.set_author(name=f"{user.name}'s avatar!")
         embed.set_image(url=av)
         await ctx.send(embed=embed)
-        
-    @commands.command()
-    async def ping(self, ctx):
-        '''Pong! Get the bot's response time'''
-        em = discord.Embed(color=discord.Color.gold())
-        em.title = "Pong!"
-        em.description = f'{bot.latency * 1000:.0f} ms'
-        await ctx.send(embed=em)
-
+       
             
 def setup(bot):
     bot.add_cog(info(bot))
