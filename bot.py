@@ -169,7 +169,7 @@ async def ping(ctx):
     await ctx.send(embed=em)
 
     
-@bot.command(name='presence', hidden=True)
+@bot.command(name='presence')
 @commands.is_owner()
 async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
