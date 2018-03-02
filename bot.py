@@ -94,6 +94,7 @@ bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.misc")
 bot.load_extension("cogs.fortnite")
+bot.load_extension("cogs.pokedex")
 
 #eval!!!
 def cleanup_code(content):
@@ -158,6 +159,15 @@ async def eval(ctx, *, body: str):
 async def on_ready():
     print("Bot is online!")
     await bot.change_presence(game=discord.Game(name=f"over {len(bot.guilds)} Guilds! | $help", type=3))
+    
+@bot.command()
+async def ping(ctx):
+    '''Pong! Get the bot's response time'''
+    em = discord.Embed(color=discord.Color.gold())
+    em.title = "Pong!"
+    em.description = f'{bot.latency * 1000:.0f} ms'
+    await ctx.send(embed=em)
+
     
 @bot.command(name='presence', hidden=True)
 async def _presence(ctx, type=None, *, game=None):
