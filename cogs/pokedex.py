@@ -12,7 +12,7 @@ class Pokedex:
     async def pokemon(self, ctx, poke: str=None):
         '''Get A Pokemon's info!'''
         pokemon = pokedex.get_pokemon_by_name(poke)
-        em = discord.Embed(name=f"{pokemon[0]['name']'s info!'}")
+        em = discord.Embed(name=pokemon[0]['name'] + "'s info!")
         em.set_author(name=ctx.author.name)
         em.add_field(name='Species', value=pokemon[0]['species'])
         em.add_field(name='Number', value=pokemon[0]['number'])
