@@ -95,6 +95,7 @@ bot.load_extension("cogs.mod")
 bot.load_extension("cogs.misc")
 bot.load_extension("cogs.fortnite")
 bot.load_extension("cogs.pokedex")
+bot.load_extension("cogs.cr")
 
 #eval!!!
 def cleanup_code(content):
