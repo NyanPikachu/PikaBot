@@ -22,6 +22,7 @@ class Clash_Royale:
         embed = discord.Embed(name=ctx.author.name)
         embed.add_field(name='Name', value=data['name'])
         await ctx.send(embed=embed)
+
         
 def setup(bot):
     bot.add_cog(Clash_Royale(bot))
