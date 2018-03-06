@@ -20,7 +20,7 @@ class Clash_Royale:
                 embed = discord.Embed(name=ctx.author.name)
                 embed.add_field(name='Name', value=data['name'])
                 await ctx.send(embed=embed)
-        asyncio.get_event_loop().run_until_complete(main())
+        asyncio.run_until_complete(main())
         
 def setup(bot):
     bot.add_cog(Clash_Royale(bot))
