@@ -17,9 +17,9 @@ class Clash_Royale:
         async with aiohttp.ClientSession() as session:
             async with session.get("https://api.cr-api.com/players/{tag}", headers=headers) as resp:
                 data = await resp.json()
-        embed = discord.Embed(name=ctx.author.name)
-        embed.add_field(name='Name', value=data['name'])
-        await ctx.send(embed=embed)
+                embed = discord.Embed(name=ctx.author.name)
+                embed.add_field(name='Name', value=data['name'])
+                await ctx.send(embed=embed)
         asyncio.get_event_loop().run_until_complete(main())
         
 def setup(bot):
