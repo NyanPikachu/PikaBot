@@ -19,7 +19,6 @@ class Clash_Royale:
         async with aiohttp.ClientSession as session:
             async with session.get(f"https://api.cr-api.com/players/{name}", headers=headers) as resp:
                 data = await resp.json()
-                    print(data['name'])
         embed = discord.Embed(name=ctx.author.name)
         embed.add_field(name='Name', value=data['name'])
         await ctx.send(embed=embed)
