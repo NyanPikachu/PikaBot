@@ -16,7 +16,7 @@ class Clash_Royale:
         headers = {
             "auth":"c94d84443b5345d784418332e81a5d3b272f67619a6b45368f2cbe5f064d3d55"
         }
-        async with aiohttp.ClientSession as session:
+        async with aiohttp.ClientSession() as session:
             async with session.get(f"https://api.cr-api.com/players/{name}", headers=headers) as resp:
                 data = await resp.json()
         embed = discord.Embed(name=ctx.author.name)
