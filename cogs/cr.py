@@ -13,14 +13,17 @@ class Clash_Royale:
         '''Gets your Clash Royale Profile using Tag!'''
         if not tag:
             return await ctx.send('Please provide a tag for this command to work `Usage : $crprofile [tag]`')
-        headers = {"auth":"c94d84443b5345d784418332e81a5d3b272f67619a6b45368f2cbe5f064d3d55"}
-        async with aiohttp.ClientSession() as session:
-            async with session.get("https://api.cr-api.com/players/{tag}", headers=headers) as resp:
+        headers = {
+            "auth":"c94d84443b5345d784418332e81a5d3b272f67619a6b45368f2cbe5f064d3d55"
+        }
+        async with aiohttp.ClientSession as session:
+            async with session.get(f"https://api.cr-api.com/players/{name}", headers=headers) as resp:
                 data = await resp.json()
-                embed = discord.Embed(name=ctx.author.name)
-                embed.add_field(name='Name', value=data['name'])
-                await ctx.send(embed=embed)
-        asyncio.run_until_complete(main())
+                    print(data['name'])
+        embed = discord.Embed(name=ctx.author.name)
+        embed.add_field(name='Name', value=data['name'])
+        await ctx.send(embed=embed)
+        asyncio.run_until_complete(crprofile())
         
 def setup(bot):
     bot.add_cog(Clash_Royale(bot))
