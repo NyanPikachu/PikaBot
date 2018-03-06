@@ -161,8 +161,8 @@ async def on_ready():
     print("Bot is online!")
     await bot.change_presence(activity=discord.Activity(name=f"over {len(bot.guilds)} Guilds! | $help", type=3)
     
-@bot.command()
-async def ping(ctx):
+@bot.command(name='ping')
+async def _ping(ctx):
     '''Pong! Get the bot's response time'''
     em = discord.Embed(color=discord.Color.gold())
     em.title = "Pong!"
