@@ -9,18 +9,19 @@ class Clash_Royale:
         self.bot = bot
         
     @commands.command()
-    async def crprofile(self, ctx, tag: str=None):
+    async def crprofile(tag: str=None):
         '''Gets your Clash Royale Profile using Tag!'''
         if not tag:
             return await ctx.send('Please provide a tag for this command to work `Usage : $crprofile [tag]`')
         headers = {
         	"auth": "c94d84443b5345d784418332e81a5d3b272f67619a6b45368f2cbe5f064d3d55"
        	}
-        r = requests.get(f"https://api.cr-api.com/players/{tag}", headers=headers)
-        cr = r.json()
-        embed = discord.Embed(name=ctx.author.name)
-        embed.add_field(name='Name', value=cr['name'])
-        await ctx.send(embed=embed)
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get('https://api.royaleapi.com/players/{tag}', headers=headers) as r:
+                res = await r.json()
+                embed = discord.Embed(name=ctx.author.name)
+                embed.add_field(name='Name', value=res['name'])
+                await ctx.send(embed=embed)
         
 def setup(bot):
-    bot.add_cog(Clash_Royale(bot))
+    bot.add_cog(Clash_Royale(bot)e)
