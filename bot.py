@@ -83,7 +83,7 @@ async def eval(ctx, *, body: str):
 @bot.event
 async def on_ready():
     print("Bot is online!")
-    await bot.change_presence(activity=discord.Activity(name=f"{len(bot.guilds} Guilds! | {bot.prefix}", type=discord.ActivityType.streaming))
+    await bot.change_presence(activity=discord.Activity(name=f"{len(bot.guilds)} Guilds! | {bot.prefix}", type=discord.ActivityType.streaming))
     
 @bot.command()
 async def ping(ctx):
