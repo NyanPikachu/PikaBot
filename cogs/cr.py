@@ -17,7 +17,7 @@ class Clash_Royale:
         	"auth": "c94d84443b5345d784418332e81a5d3b272f67619a6b45368f2cbe5f064d3d55"
        	}
         async with aiohttp.ClientSession() as cs:
-            async with cs.get('https://api.royaleapi.com/players/{tag}', headers=headers) as r:
+            async with cs.get(f'https://api.royaleapi.com/players/{tag}', headers=headers) as r:
                 res = await r.json()
                 embed = discord.Embed(name=ctx.author.name)
                 embed.add_field(name='Name', value=res['name'])
