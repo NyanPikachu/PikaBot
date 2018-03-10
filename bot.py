@@ -14,82 +14,6 @@ import asyncio
 
 bot = commands.Bot(command_prefix="$", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
 
-def load_json(path, key):
-    with open(f'.data{path}') as f:
-        config = json.load(f)
-    return config.get(key)
-
-def dev_check(id):
-    with open('data/devlist.json') as f:
-        devs = json.load(f)
-    if id in devs:
-        return True
-    return False
-
-def fomat_command_help(ctx, cmd):
-    '''Format help for a command'''
-    color = discord.Color.gold()
-    em = discord.Embed(color=color, description=cmd.help)
-    
-    if hasattr(cmd, 'invoke_without_command') and cmd.invoke_without_command:
-        em.title = f'`Usage: {ctx.prefix}{cmd.signature}`'
-    else:
-        em.title = f'{ctx.prefix}{cmd.signature}'
-        
-    return em
-
-async def send_cmd_help(ctx):
-    cmd = ctx.command
-    em = discord.Embed(title=f'Usage: {ctx.prefix + cmd.signature}')
-    em.color = discord.Color.green()
-    em.description = cmd.help
-    return em
-
-
-def format_cog_help(ctx, cog):
-    '''Format help for a cog'''
-    signatures = []
-    color = discord.Color.green()
-    em = discord.Embed(color=color, description=f'*{inspect.getdoc(cog)}*')
-    em.title = type(cog).__name__.replace('_', ' ')
-    cc = []
-    for cmd in bot.commands:
-        if not cmd.hidden:
-            if cmd.instance is cog:
-                cc.append(cmd)
-                signatures.append(len(cmd.name) + len(ctx.prefix))
-    max_length = max(signatures)
-    abc = sorted(cc, key=lambda x: x.name)
-    cmds = ''
-    for c in abc:
-        cmds += f'`{ctx.prefix + c.name:<{max_length}} '
-        cmds += f'{c.short_doc:<{max_length}}`\n'
-    em.add_field(name='Commands', value=cmds)
- 
-    return em
- 
- 
-def format_bot_help(ctx):
-    signatures = []
-    fmt = ''
-    commands = []
-    for cmd in bot.commands:
-        if not cmd.hidden:
-            if type(cmd.instance).__name__ == 'NoneType':
-                commands.append(cmd)
-                signatures.append(len(cmd.name) + len(ctx.prefix))
-    max_length = max(signatures)
-    abc = sorted(commands, key=lambda x: x.name)
-    for c in abc:
-        fmt += f'`{ctx.prefix + c.name:<{max_length}} '
-        fmt += f'{c.short_doc:<{max_length}}`\n'
-    em = discord.Embed(title='Bot', color=discord.Color.green())
-    em.description = '*Commands for the main bot.*'
-    em.add_field(name='Commands', value=fmt)
- 
-    return em
- 
-
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.misc")
@@ -159,6 +83,7 @@ async def eval(ctx, *, body: str):
 @bot.event
 async def on_ready():
     print("Bot is online!")
+    await bot.change_presence(activity=discord.Activity(name=f"{len(bot.guilds} Guilds! | {bot.prefix}", type=discord.ActivityType.streaming))
     
 @bot.command()
 async def ping(ctx):
@@ -177,19 +102,19 @@ async def _presence(ctx, type=None, *, game=None):
         await ctx.send(f'Usage: `{ctx.prefix}presence [game/stream/watch/listen] [message]`')
     else:
         if type.lower() == 'stream':
-            await self.bot.change_presence(game=discord.Game(name=f"{game}", type=1, url='https://www.twitch.tv/a'), status='online')
+            await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.streaming))
             await ctx.send(f'Set presence to. `Streaming {game}`')
         elif type.lower() == 'game':
-            await self.bot.change_presence(game=discord.Game(name=f"{game}"))
+            await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.playing))
             await ctx.send(f'Set presence to `Playing {game}`')
         elif type.lower() == 'watch':
-            await self.bot.change_presence(game=discord.Game(name=f"{game}", type=3), afk=True)
+            await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.watching))
             await ctx.send(f'Set presence to `Watching {game}`')
         elif type.lower() == 'listen':
-            await self.bot.change_presence(game=discord.Game(name=f"{game}", type=2), afk=True)
+            await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.listening))
             await ctx.send(f'Set presence to `Listening to {game}`')
         elif type.lower() == 'clear':
-            await self.bot.change_presence(game=None)
+            await bot.change_presence(activity=discord.Activity(name=None))
             await ctx.send('Cleared Presence')
         else:
             await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
