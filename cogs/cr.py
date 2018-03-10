@@ -9,7 +9,7 @@ class Clash_Royale:
         self.bot = bot
         
     @commands.command()
-    async def crprofile(tag: str=None):
+    async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag!'''
         if not tag:
             return await ctx.send('Please provide a tag for this command to work `Usage : $crprofile [tag]`')
