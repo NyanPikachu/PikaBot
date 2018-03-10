@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import asyncio
 import pickle
 import random
 import io
@@ -11,6 +10,7 @@ import datetime
 import pynite
 import textwrap
 from contextlib import redirect_stdout
+import asyncio
 
 bot = commands.Bot(command_prefix="$", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
 
