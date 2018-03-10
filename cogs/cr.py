@@ -24,4 +24,4 @@ class Clash_Royale:
                 await ctx.send(embed=embed)
         
 def setup(bot):
-    bot.add_cog(Clash_Royale(bot)e)
+    bot.add_cog(Clash_Royale(bot))
