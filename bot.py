@@ -10,6 +10,7 @@ import datetime
 import pynite
 import textwrap
 from contextlib import redirect_stdout
+from ext import utility
 import asyncio
 
 bot = commands.Bot(command_prefix="$", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
@@ -36,6 +37,7 @@ devs = [
 ]
 
 @bot.command()
+@utility.developer
 async def eval(ctx, *, body: str):
         """Evaluates a code"""
 
@@ -95,7 +97,7 @@ async def ping(ctx):
 
     
 @bot.command(name='presence')
-@commands.is_owner()
+@utility.developer()
 async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
     if type is None:
