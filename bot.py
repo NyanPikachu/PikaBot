@@ -31,11 +31,11 @@ def cleanup_code(content):
     return content.strip('` \n')
 
 devs = [
-    279974491071709194
+    279974491071709194,
+    199436790581559296
 ]
 
 @bot.command()
-@commands.is_owner()
 async def eval(ctx, *, body: str):
         """Evaluates a code"""
 
