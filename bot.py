@@ -11,6 +11,7 @@ import pynite
 import textwrap
 from contextlib import redirect_stdout
 import asyncio
+import json
 
 bot = commands.Bot(command_prefix="$", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
 
