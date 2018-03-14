@@ -47,6 +47,7 @@ devs = [
 ]
 
 @bot.command()
+@developer()
 async def eval(ctx, *, body: str):
         """Evaluates a code"""
 
@@ -58,8 +59,7 @@ async def eval(ctx, *, body: str):
             'guild': ctx.guild,
             'message': ctx.message,
         }
-        if ctx.author.id not in devs:
-            return await ctx.send('you are not allowed to use this command')
+        
         env.update(globals())
 
         body = cleanup_code(body)
@@ -107,7 +107,7 @@ async def ping(ctx):
 
     
 @bot.command(name='presence')
-@developer
+@developer()
 async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
     if type is None:
