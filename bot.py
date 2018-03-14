@@ -31,7 +31,7 @@ def cleanup_code(content):
     return content.strip('` \n')
 
 #developer check
-def developer()
+def developer():
     def wrapper(ctx):
         with open('data/devlist.json') as f:
             devs = json.load(f)
