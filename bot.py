@@ -30,6 +30,17 @@ def cleanup_code(content):
 
     return content.strip('` \n')
 
+#developer check
+def developer()
+    def wrapper(ctx):
+        with open('data/devlist.json') as f:
+            devs = json.load(f)
+        if ctx.author.id in devs:
+            return True
+        raise commands.MissingPermissions('Sorry, this command is only available for developers.')
+    return commands.check(wrapper)
+    
+
 devs = [
     279974491071709194,
     199436790581559296
@@ -96,6 +107,7 @@ async def ping(ctx):
 
     
 @bot.command(name='presence')
+@developer
 async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
     if type is None:
