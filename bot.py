@@ -111,7 +111,7 @@ def reaction_check(hearts):
 @bot.event
 async def on_reaction_add(reaction, user):
     x = reaction.message.channel
-    def heart():
+    async def heart():
         em = discord.Embed(color=discord.Color.gold())
         head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
         em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
