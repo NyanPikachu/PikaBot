@@ -100,21 +100,24 @@ async def on_ready():
     x = bot.get_channel(424677910314745856)
     await x.send('Bot is online :thumbsup:')
 
-def reaction_check():
+def reaction_check(hearts):
     if reaction.emoji != '❤':
         return False
     if reaction.count >= 2:
         return True
+    if user.id == reaction.message.author.id:
+        return False
 
 @bot.event
 async def on_reaction_add(reaction, user):
     x = reaction.message.channel
-    if reaction_check():
+    def heart():
         em = discord.Embed(color=discord.Color.gold())
         head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
         em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
         em.description = reaction.message.content 
-        await x.send(head, embed=em)
+        return(head, embed=em)
+    reaction_check(heart())
 
 @bot.command()
 async def ping(ctx):
