@@ -24,9 +24,3 @@ def paginate(text: str):
     if appd_index != len(text) - 1:
         pages.append(text[last:curr])
     return list(filter(lambda a: a != '', pages))
-    
-def random_color()
-    color = ('#%06x' % random.randint(8, 0xFFFFFF)
-    color = int(color[1:], 16)
-    color = discord.Color(value=color)
-    return color
