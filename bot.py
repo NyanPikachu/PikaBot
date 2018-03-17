@@ -109,9 +109,7 @@ async def on_reaction_add(reaction, user):
         em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
         em.description = reaction.message.content 
         await x.send(head, embed=em)
-    else:
-        await x.send('an error happened')
-
+    
 @bot.command()
 async def ping(ctx):
     '''Pong! Get the bot's response time'''
@@ -120,7 +118,6 @@ async def ping(ctx):
     em.description = f'{bot.latency * 1000:.0f} ms'
     await ctx.send(embed=em)
 
-    
 @bot.command(name='presence')
 @developer()
 async def _presence(ctx, type=None, *, game=None):
