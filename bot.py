@@ -104,7 +104,7 @@ async def on_reaction_add(reaction, user):
     if reaction.emoji == ':heart:':
         em = discord.Embed(color=0xf1c40f)
         em.add_field(value=reaction.message.content)
-        em.set_author(namd=reaction.message.author.name, icon_url=reaction.author.avatar_url)
+        em.set_author(namd=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
         await x.send(embed=em)
 
 @bot.command()
