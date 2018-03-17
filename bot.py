@@ -100,7 +100,7 @@ async def on_ready():
 
 @bot.event
 async def on_reaction_add(reaction):
-    if reaction = '❤':
+    if reaction == '❤':
         await ctx.send('luv u too')
     
 @bot.command()
