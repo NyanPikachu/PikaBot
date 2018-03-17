@@ -103,7 +103,7 @@ async def on_ready():
 @bot.event
 async def on_reaction_add(reaction, user):
     x = reaction.message.channel
-    if reaction.emoji == ':heart:':
+    if reaction.emoji == '❤':
         em = discord.Embed(color=discord.Color.gold())
         em.title = reaction.message.author.name
         em.description = reaction.message.content
