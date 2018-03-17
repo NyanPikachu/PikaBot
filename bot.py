@@ -104,9 +104,12 @@ async def on_ready():
 async def on_reaction_add(reaction, user):
     x = reaction.message.channel
     if reaction.emoji == ':heart:':
-        embed = discord.Embed(color=0xf1c40f)
-        embed.add_field(value=reaction.message.content)
-        await x.send(embed=embed)
+        em = discord.Embed(color=discord.Color.gold())
+        em.title = reaction.message.author.name
+        em.description = reaction.message.content
+        await x.send(embed=em)
+    else:
+        await x.send('an error happened')
 
 @bot.command()
 async def ping(ctx):
