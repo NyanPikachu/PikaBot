@@ -106,7 +106,7 @@ async def on_reaction_add(reaction, user):
     if reaction.emoji == '❤':
         em = discord.Embed(color=discord.Color.gold())
         em.title = reaction.message.author.name
-        head = f'{reaction.emoji} {reaction.count} {reaction.message.channel} ID: {reaction.message.id}')
+        head = f'{reaction.emoji} {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
         em.set_author(name=reaction.message.author.name, url=reaction.message.author.avatar_url)
         em.description = reaction.message.content 
         await x.send(head, embed=em)
