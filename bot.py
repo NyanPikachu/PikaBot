@@ -97,6 +97,8 @@ async def eval(ctx, *, body: str):
 @bot.event
 async def on_ready():
     print("Bot is online!")
+    x = bot.get_channel(424677910314745856)
+    await x.send('Bot is online :thumbsup')
 
 @bot.event
 async def on_reaction_add(reaction, user):
