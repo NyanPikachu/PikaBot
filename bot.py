@@ -99,8 +99,8 @@ async def on_ready():
     print("Bot is online!")
 
 @bot.event
-async def on_reaction_add(reaction):
-    if reaction == '❤':
+async def on_reaction_add(reaction, user):
+    if reaction.emoji == '❤':
         await ctx.send('luv u too')
     
 @bot.command()
