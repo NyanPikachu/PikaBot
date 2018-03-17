@@ -10,6 +10,7 @@ import datetime
 import pynite
 import textwrap
 from contextlib import redirect_stdout
+from ext.utility import developer
 import asyncio
 import json
 
@@ -96,6 +97,11 @@ async def eval(ctx, *, body: str):
 @bot.event
 async def on_ready():
     print("Bot is online!")
+
+@bot.event
+async def on_reaction_add(reaction):
+    if reaction = '❤':
+        await ctx.send('luv u too')
     
 @bot.command()
 async def ping(ctx):

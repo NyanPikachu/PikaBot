@@ -3,7 +3,7 @@ from discord.ext import commands
 import random
 import json
 
-def developer()
+def developer():
     def wrapper(ctx):
         with open('data/devlist.json') as f:
             devs = json.load(f)
