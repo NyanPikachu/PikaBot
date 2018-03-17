@@ -103,13 +103,15 @@ async def on_ready():
 @bot.event
 async def on_reaction_add(reaction, user):
     x = reaction.message.channel
-    if reaction.emoji == '❤' and user.id != reaction.message.author.id and reaction.count >= 2:
+    if reaction.emoji == '❤' and reaction.count >= 2:
         em = discord.Embed(color=discord.Color.gold())
         head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
         em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
         em.description = reaction.message.content 
         await x.send(head, embed=em)
-    
+    elif user.id == reaction.message.author.id:
+        return False
+
 @bot.command()
 async def ping(ctx):
     '''Pong! Get the bot's response time'''
