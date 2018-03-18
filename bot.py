@@ -111,13 +111,14 @@ def reaction_check(hearts):
 @bot.event
 async def on_reaction_add(reaction, user):
     x = reaction.message.channel
-    async def heart():
+    if reaction.emoji != '❤' and if user.id == reaction.message.author.id:
         em = discord.Embed(color=discord.Color.gold())
         head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
         em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
         em.description = reaction.message.content 
+        await message.edit(reaction.message.content)
+        await message.remove_reaction(reaction.message)
         await x.send(head, embed=em)
-    reaction_check(heart())
 
 @bot.command()
 async def ping(ctx):
@@ -125,6 +126,7 @@ async def ping(ctx):
     em = discord.Embed(color=discord.Color.gold())
     em.title = "Pong!"
     em.description = f'{bot.latency * 1000:.0f} ms'
+    await 
     await ctx.send(embed=em)
 
 @bot.command(name='presence')
