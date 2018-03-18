@@ -116,8 +116,8 @@ async def on_reaction_add(reaction, user):
         head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
         em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
         em.description = reaction.message.content 
-        await message.edit(reaction.message.content)
-        await message.remove_reaction(reaction.message)
+        await reaction.message.edit(reaction.message.content)
+        await reaction.message.remove_reaction(reaction.message)
         await x.send(head, embed=em)
 
 @bot.command()
