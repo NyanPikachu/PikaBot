@@ -126,7 +126,6 @@ async def ping(ctx):
     em = discord.Embed(color=discord.Color.gold())
     em.title = "Pong!"
     em.description = f'{bot.latency * 1000:.0f} ms'
-    await 
     await ctx.send(embed=em)
 
 @bot.command(name='presence')
