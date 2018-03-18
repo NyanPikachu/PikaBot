@@ -112,15 +112,19 @@ def reaction_check(hearts):
 async def on_reaction_add(reaction, user):
     x = reaction.message.channel
     if reaction.emoji != '❤' and user.id == reaction.message.author.id:
+        channel = message.channel 
         em = discord.Embed(color=discord.Color.gold())
         head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
         em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
-        em.description = reaction.message.content 
+        em.description = reaction.message.content
         await x.send(head, embed=em)
-        await reaction.message.edit(reaction.message.content)
-        await reaction.message.remove_reaction(reaction.message)
+        def check(reaction, user): 
+            return user != reaction.message.author and str(reaction.emoji) == '❤' 
+        try:
+            reaction, user = await client.wait_for('reaction_remove', timeout=60.0, check=check)
+        except asyncio.TimeoutError: 
+            await channel.send('error')
         
-
 @bot.command()
 async def ping(ctx):
     '''Pong! Get the bot's response time'''
