@@ -101,7 +101,7 @@ async def on_ready():
     await x.send('Bot is online :thumbsup:')
 
 @bot.event
-async def on_message(message)
+async def on_message(message):
     channel = message.channel 
     if message.content == 'f':
         await channel.send(f'{message.author.mention} paid their respect')
