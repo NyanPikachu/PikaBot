@@ -100,13 +100,11 @@ async def on_ready():
     x = bot.get_channel(424677910314745856)
     await x.send('Bot is online :thumbsup:')
 
-def reaction_check(hearts):
-    if reaction.emoji != '❤':
-        return False
-    if reaction.count >= 2:
-        return True
-    if user.id == reaction.message.author.id:
-        return False
+@bot.event
+async def on_message(message)
+    channel = message.channel 
+    if message.content == 'f':
+        await channel.send(f'{message.author.mention} paid their respect')
 
 @bot.event
 async def on_reaction_add(reaction, user):
