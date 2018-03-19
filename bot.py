@@ -107,9 +107,8 @@ async def on_reaction_add(reaction, user):
         return user != reaction.message.author and str(reaction.emoji) == '👍' and reaction.count >= 2
     try:
         reaction, user = await bot.wait_for('reaction_add', timeout=60.0, check=check)
-        reaction, user = await bot.wait_for('reaction_remove', timeout=60.0, check=check)
     except asyncio.TimeoutError:
-        await channel.send('👎')
+        pass
     else:
         em = discord.Embed(color=discord.Color.gold())
         head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
