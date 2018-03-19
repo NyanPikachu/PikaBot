@@ -100,29 +100,6 @@ async def on_ready():
     x = bot.get_channel(424677910314745856)
     await x.send('Bot is online :thumbsup:')
 
-@bot.event
-async def on_message(message):
-    channel = message.channel 
-    if message.content == 'f':
-        await channel.send(f'{message.author.mention} paid their respect')
-
-@bot.event
-async def on_reaction_add(reaction, user):
-    x = reaction.message.channel
-    if reaction.emoji != '❤' and user.id == reaction.message.author.id:
-        channel = message.channel 
-        em = discord.Embed(color=discord.Color.gold())
-        head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
-        em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
-        em.description = reaction.message.content
-        await x.send(head, embed=em)
-        def check(reaction, user): 
-            return user != reaction.message.author and str(reaction.emoji) == '❤' 
-        try:
-            reaction, user = await client.wait_for('reaction_remove', timeout=60.0, check=check)
-        except asyncio.TimeoutError: 
-            await channel.send('error')
-        
 @bot.command()
 async def ping(ctx):
     '''Pong! Get the bot's response time'''
