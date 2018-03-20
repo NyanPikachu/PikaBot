@@ -104,7 +104,7 @@ async def on_ready():
 async def on_reaction_add(reaction, user):
     channel = reaction.message.channel
     def check(reaction, user):
-        return user != reaction.message.author and str(reaction.emoji) == '👍' and reaction.count >= 2
+        return user != reaction.message.author and str(reaction.emoji) == '👍'
     try:
         reaction, user = await bot.wait_for('reaction_add', timeout=60.0, check=check)
         em = discord.Embed(color=discord.Color.gold())
