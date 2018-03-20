@@ -112,6 +112,10 @@ async def on_reaction_add(reaction, user):
         em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
         em.description = reaction.message.content
         await channel.send(head, embed=em)
+        reaction, user = await bot.wait_for('reaction_remove', timeout=60.0, check=check)
+        await message.edit(embed=em)
+        reaction, user = await bot.wait_for('reaction_clear', timeout=60.0, check=check)
+        await message.delete(embed=em)
     except asyncio.TimeoutError:
         pass
     else:
