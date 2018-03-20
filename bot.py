@@ -107,15 +107,17 @@ async def on_reaction_add(reaction, user):
         return user != reaction.message.author and str(reaction.emoji) == '👍' and reaction.count >= 2
     try:
         reaction, user = await bot.wait_for('reaction_add', timeout=60.0, check=check)
-    except asyncio.TimeoutError:
-        pass
-    else:
         em = discord.Embed(color=discord.Color.gold())
         head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
         em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
         em.description = reaction.message.content
         await channel.send(head, embed=em)
-
+        reaction, user = await bot.wait_for('reaction_remove', timeout=60.0, check=check)       
+        await message.edit(embed=em
+    except asyncio.TimeoutError:
+        pass
+    else:
+        await ctx.send("i tried :shrug:")
 
 @bot.command()
 async def ping(ctx):
