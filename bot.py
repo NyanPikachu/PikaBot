@@ -113,7 +113,7 @@ async def on_reaction_add(reaction, user):
         em.description = reaction.message.content
         await channel.send(head, embed=em)
         reaction, user = await bot.wait_for('reaction_remove', timeout=60.0, check=check)       
-        await message.edit(embed=em
+        await message.edit(embed=em)
     except asyncio.TimeoutError:
         pass
     else:
