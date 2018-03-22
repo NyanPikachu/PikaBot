@@ -21,13 +21,16 @@ class Fortnite:
         duos = await player.get_duos()
         squads = await player.get_squads()
         
-        if plat is None or name is None:
-                return await ctx.send("Please specify a username as well as the platform.")
+        if plat is None:
+            plat = 'pc'
+            
+        if name is None:
+            return await ctx.send("Please specify a username as well as the platform (defaults to pc if not specified).")
 
         if plat not in ['psn', 'xbl', 'pc']:
-            return await ctx.send("Invalid platform.")
+            return await ctx.send("Invalid platform, platforms are {psn, xbl, pc}.")
         
-        embed = discord.Embed(color=discord.Color.green())
+        embed = discord.Embed(color=discord.Color.blue())
         embed.title = 'Name: ' + player.epic_user_handle + ' - LifeTime stats'
         embed.description = 'Platform: ' + player.platform_name_long
         embed.add_field(name=lifetime[9].key, value=lifetime[9].value)

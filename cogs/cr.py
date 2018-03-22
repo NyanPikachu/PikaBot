@@ -1,27 +1,38 @@
 import discord
 from discord.ext import commands
 from ext.paginator import PaginatorSession
-import aiohttp
+import clashroyale
 
 class Clash_Royale:
     '''Clash Royale commands to get your fancy stats here!'''
     def __init__(self, bot):
         self.bot = bot
+     
+    token = os.environ.get("CRTOKEN")
         
+    
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag!'''
         if not tag:
-            return await ctx.send('Please provide a tag for this command to work `Usage : $crprofile [tag]`')
-        headers = {
-         "auth": "c94d84443b5345d784418332e81a5d3b272f67619a6b45368f2cbe5f064d3d55"
-       	}
-        async with aiohttp.ClientSession() as cs:
-            async with cs.get(f'https://api.royaleapi.com/players/{tag}', headers=headers) as r:
-                res = await r.json()
-        embed = discord.Embed(name=ctx.author.name)
-        embed.add_field(name='Name', value=res['name'])
-        await ctx.send(embed=embed)
-        
+            return await ctx.send('Please provide a tag for this command to work `Usage : $crprofile [tag]`. saving tags will be implemented soon')
+        client = clashroyale.Client(token, is_async=True) # is_async=True argument
+        profile = await client.get_player(tag)
+        clan = await profile.get_clan()
+        em = discord.Embed(color=discord.Color.gold())
+        em.title = profile.name
+        em.description = f'{tag}\'s info'
+        em.add_field(name='League Statistics:', value=profile.league_statistics)
+        await profile.refresh()
+        em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
+        em.add_field(name='Clan:', value=clan)
+        em.add_field(name='Clan chest:', value=clan.clan_chest)
+        await clan.refresh()
+        await ctx.send(embed=em)
+        client.close()
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main()       
+
 def setup(bot):
     bot.add_cog(Clash_Royale(bot))
