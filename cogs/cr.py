@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from ext.paginator import PaginatorSession
 import clashroyale
+import os
 
 class Clash_Royale:
     '''Clash Royale commands to get your fancy stats here!'''
