@@ -8,15 +8,13 @@ class Clash_Royale:
     '''Clash Royale commands to get your fancy stats here!'''
     def __init__(self, bot):
         self.bot = bot
-     
-    token = os.environ.get("CRTOKEN")
-        
-    
+         
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag!'''
         if not tag:
             return await ctx.send('Please provide a tag for this command to work `Usage : $crprofile [tag]`. saving tags will be implemented soon')
+        token = os.environ.get("CRTOKEN")
         client = clashroyale.Client(token, is_async=True) # is_async=True argument
         profile = await client.get_player(tag)
         clan = await profile.get_clan()
