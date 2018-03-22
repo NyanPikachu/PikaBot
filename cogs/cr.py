@@ -28,11 +28,8 @@ class Clash_Royale:
         em.add_field(name='Clan:', value=clan)
         em.add_field(name='Clan chest:', value=clan.clan_chest)
         await clan.refresh()
-        await ctx.send(embed=em)
         client.close()
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main()       
+        await ctx.send(embed=em)
 
 def setup(bot):
     bot.add_cog(Clash_Royale(bot))
