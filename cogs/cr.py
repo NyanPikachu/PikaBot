@@ -15,7 +15,7 @@ class Clash_Royale:
         if not tag:
             return await ctx.send('Please provide a tag for this command to work `Usage : $crprofile [tag]`. saving tags will be implemented soon')
         token = os.environ.get("CRTOKEN")
-        client = clashroyale.Client(token, is_async=True) # is_async=True argument
+        client = clashroyale.Client(token, is_async=True)
         profile = await client.get_player(tag)
         clan = await profile.get_clan()
         em = discord.Embed(color=discord.Color.gold())
@@ -23,9 +23,6 @@ class Clash_Royale:
         em.description = f'{tag}\'s info'
         await profile.refresh()
         em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
-        em.add_field(name='Clan:', value=clan)
-        await clan.refresh()
-        client.close()
         await ctx.send(embed=em)
 
 def setup(bot):

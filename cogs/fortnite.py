@@ -11,7 +11,7 @@ class Fortnite:
        
         
     @commands.command()
-    async def fnprofile(self, ctx, plat=None, name=None):
+    async def fnprofile(self, ctx, name=None, *, plat=None):
         '''Get stats for your fortnite account !'''
         pages = []
         client = pynite.Client('5a20baea-b8a7-4e42-9de3-741534219452')
@@ -45,7 +45,7 @@ class Fortnite:
         
         pages.append(embed)
         
-        embed = discord.Embed(color=discord.Color.green())
+        embed = discord.Embed(color=discord.Color.blue())
         embed.title = 'Name: ' + player.epic_user_handle + ' - Solo Stats'
         embed.description = 'Platform: ' + player.platform_name_long
         embed.add_field(name='Victory Royales', value=solo.top1.value)
@@ -58,7 +58,7 @@ class Fortnite:
         
         pages.append(embed)
         
-        embed = discord.Embed(color=discord.Color.green())
+        embed = discord.Embed(color=discord.Color.blue())
         embed.title = 'Name: ' + player.epic_user_handle + ' - Duo Stats'
         embed.description = 'Platform: ' + player.platform_name_long
         embed.add_field(name='Victory Royales', value=solo.top1.value)
@@ -71,7 +71,7 @@ class Fortnite:
         
         pages.append(embed)
         
-        embed = discord.Embed(color=discord.Color.green())
+        embed = discord.Embed(color=discord.Color.blue())
         embed.title = 'Name: ' + player.epic_user_handle + ' - Squad Stats'
         embed.description = 'Platform: ' + player.platform_name_long
         embed.add_field(name='Victory Royales', value=solo.top1.value)
