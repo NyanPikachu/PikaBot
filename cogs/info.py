@@ -53,7 +53,7 @@ class info:
         embed.add_field(name="Name", value=user.name, inline=True)
         embed.add_field(name="ID", value=user.id, inline=True)
         embed.add_field(name="Status", value=user.status, inline=True)
-        embed.add_field(name="Game", value=str(user.game))
+        embed.add_field(name="Game", value=str(user.activity))
         embed.add_field(name="Highest role", value=user.top_role.name or "Empty")
         embed.add_field(name="Joined", value=user.joined_at)
         embed.set_thumbnail(url=user.avatar_url)

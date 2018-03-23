@@ -21,7 +21,6 @@ class Clash_Royale:
         em = discord.Embed(color=discord.Color.gold())
         em.title = profile.name
         em.description = f'{tag}\'s info'
-        em.add_field(name='League Statistics:', value=profile.league_statistics)
         await profile.refresh()
         em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
         em.add_field(name='Clan:', value=clan)

@@ -55,7 +55,6 @@ class Fortnite:
         embed.add_field(name='Kills', value=solo.kills.value)
         embed.add_field(name='Average kills per match', value=solo.kpg.value)
         embed.add_field(name='Matches Played', value=solo.matches.value)
-        embed.add_field(name='Time Played', value=solo.minutes_played.value)
         
         pages.append(embed)
         
@@ -69,7 +68,6 @@ class Fortnite:
         embed.add_field(name='Kills', value=duos.kills.value)
         embed.add_field(name='Average kills per match', value=duos.kpg.value)
         embed.add_field(name='Matches Played', value=duos.matches.value)
-        embed.add_field(name='Time Played', value=duos.minutes_played.value)
         
         pages.append(embed)
         
@@ -83,12 +81,10 @@ class Fortnite:
         embed.add_field(name='Kills', value=squads.kills.value)
         embed.add_field(name='Average kills per match', value=squads.kpg.value)
         embed.add_field(name='Matches Played', value=squads.matches.value)
-        embed.add_field(name='Time Played', value=squads.minutes_played.value)
         
         pages.append(embed)
         p_session = PaginatorSession(ctx, footer=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com', pages=pages)
         await p_session.run()
-        
         
 def setup(bot):
     bot.add_cog(Fortnite(bot))
