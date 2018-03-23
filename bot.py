@@ -99,7 +99,7 @@ async def on_ready():
     print("Bot is online!")
     x = bot.get_channel(424677910314745856)
     now = datetime.datetime.utcnow()
-    await x.send('Bot is online :thumbsup:' + now.strftime("%A, %d. %B %Y %I:%M%p") )
+    await x.send('Bot is online :thumbsup: at ' + now.strftime("%A, %d. %B %Y %I:%M%p") )
 
 @bot.event
 async def on_reaction_add(reaction, user):

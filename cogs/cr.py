@@ -25,7 +25,6 @@ class Clash_Royale:
         await profile.refresh()
         em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
         em.add_field(name='Clan:', value=clan)
-        em.add_field(name='Clan chest:', value=clan.clan_chest)
         await clan.refresh()
         client.close()
         await ctx.send(embed=em)
