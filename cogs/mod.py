@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import datetime
 
-class mod:
+class Moderation:
     '''Moderation commands!'''
     def __init__(self, bot):
         self.bot = bot
@@ -90,4 +90,4 @@ class mod:
 
     
 def setup(bot):
-    bot.add_cog(mod(bot))
+    bot.add_cog(Moderation(bot))
