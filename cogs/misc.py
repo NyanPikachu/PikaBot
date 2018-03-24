@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import random
 from random import randint
-class Miscellaneous:
+class Misc:
     '''Miscellaneous commands that are fun!'''
     def __init__(self, bot):
         self.bot = bot
@@ -39,4 +39,4 @@ class Miscellaneous:
     
         
 def setup(bot):
-    bot.add_cog(Miscellaneous(bot))
+    bot.add_cog(Misc(bot))
