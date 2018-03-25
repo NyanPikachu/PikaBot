@@ -3,3 +3,4 @@ pynite
 pokedex.py
 pillow
 clashroyale
+aiofirebase
