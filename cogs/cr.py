@@ -14,10 +14,10 @@ class Clash_Royale:
     @commands.command()
     async def crsave(self, ctx, tag :str=None):
         if not tag:
-            await ctx.send('Please provide a tag')
-        try:
-           await self.firebase.put(path='clashroyale', value={ctx.author.id: tag})
-           await ctx.send('Tag successfully saved!')
+            return await ctx.send('Please provide a tag')
+        await self.firebase.put(path='clashroyale', value={ctx.author.id: tag})
+        await ctx.send('Tag successfully saved!')
+         
          
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
