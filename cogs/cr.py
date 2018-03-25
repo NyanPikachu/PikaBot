@@ -19,7 +19,7 @@ class Clash_Royale:
            await self.firebase.put(path='clashroyale', value={ctx.author.id: tag})
            await ctx.send('Tag successfully saved!')
         except Exception as e:
-           await ctx.send(str(e))
+           print(str(e))
          
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
