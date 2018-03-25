@@ -12,7 +12,7 @@ class Clash_Royale:
         self.firebase = aiofirebase.FirebaseHTTP("https://pikabot-fa952.firebaseio.com/")
          
     @commands.command()
-    async def crsave(self, ctx, tag :str=None)
+    async def crsave(self, ctx, tag :str=None):
         if not tag:
             await ctx.send('Please provide a tag')
         try:
