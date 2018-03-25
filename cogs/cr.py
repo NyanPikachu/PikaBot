@@ -15,15 +15,20 @@ class Clash_Royale:
     async def crsave(self, ctx, tag :str=None):
         if not tag:
             return await ctx.send('Please provide a tag')
-        await self.firebase.put(path='clashroyale', value={ctx.author.id: tag})
-        await ctx.send('Tag successfully saved!')
-         
+        try:
+            await self.firebase.put(path='clashroyale', value={str(ctx.author.id): tag})
+            await ctx.send('Tag successfully saved!')
+        except Exception as e:
+            await ctx.send('Error occured:' + e)
          
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag!'''
         if not tag:
-            tag = await self.firebase.get(path='clash royale', value=ctx.author.id)
+            try:
+                tag = await self.firebase.get(path='clash royale', value=str(ctx.author.id))
+            except Exception as e:
+                await ctx.send('Error occured:' + e)
         token = os.environ.get("CRTOKEN")
         client = clashroyale.Client(token, is_async=True)
         profile = await client.get_player(tag)
