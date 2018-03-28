@@ -9,26 +9,23 @@ class Clash_Royale:
     '''Clash Royale commands to get your fancy stats here!'''
     def __init__(self, bot):
         self.bot = bot
-        self.firebase = aiofirebase.FirebaseHTTP("https://pikabot-fa952.firebaseio.com/")
+        self.firebase = aiofirebase.FirebaseHTTP("https://pikabot-fa952.firebaseio.com/", auth='AIzaSyB48L7AFMTepuFkvoFIcauJLJrrmVaRrVQ')
          
     @commands.command()
     async def crsave(self, ctx, tag :str=None):
         if not tag:
-            return await ctx.send('Please provide a tag')
+            await ctx.send('Please provide a tag')
         try:
-            await self.firebase.put(path='clashroyale', value={str(ctx.author.id): tag})
-            await ctx.send('Tag successfully saved!')
+           await self.firebase.put(path='clashroyale', value={ctx.author.id: tag})
+           await ctx.send('Tag successfully saved!. Run this command again to replace with another tag.')
         except Exception as e:
-            await ctx.send('Error occured:' + e)
+           await ctx.send(str(e))
          
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag!'''
         if not tag:
-            try:
-                tag = await self.firebase.get(path='clash royale', value=str(ctx.author.id))
-            except Exception as e:
-                await ctx.send('Error occured:' + e)
+            tag = await self.firebase.get(path='clash royale', value=ctx.author.id)
         token = os.environ.get("CRTOKEN")
         client = clashroyale.Client(token, is_async=True)
         profile = await client.get_player(tag)
