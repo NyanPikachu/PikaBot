@@ -3,4 +3,5 @@ pynite
 pokedex.py
 pillow
 clashroyale
+urlparse
 git+https://github.com/mikexstudios/python-firebase.git#egg=python-firebase
