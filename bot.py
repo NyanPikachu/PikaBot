@@ -14,14 +14,17 @@ from ext.utility import developer
 import asyncio
 import json
 
-bot = commands.Bot(command_prefix="$", description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
+async def get_pre(bot, message):
+    return ["P.", "p.", f"{bot.user.mention} "]
+
+bot = commands.Bot(command_prefix=get_pre, description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
 
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.misc")
 bot.load_extension("cogs.fortnite")
 bot.load_extension("cogs.pokedex")
-bot.load_extension("cogs.cr")
+#bot.load_extension("cogs.cr")
 
 #eval!!!
 def cleanup_code(content):
@@ -101,26 +104,6 @@ async def on_ready():
     now = datetime.datetime.utcnow()
     await x.send('Bot is online :thumbsup: at ' + now.strftime("%A, %d. %B %Y %I:%M%p") )
 
-@bot.event
-async def on_reaction_add(reaction, user):
-    channel = reaction.message.channel
-    def check(reaction, user):
-        return user != reaction.message.author and str(reaction.emoji) == '👍'
-    try:
-        reaction, user = await bot.wait_for('reaction_add', timeout=60.0, check=check)
-        em = discord.Embed(color=discord.Color.gold())
-        head = f'{reaction.emoji}  {reaction.count} {reaction.message.channel} ID: {reaction.message.id}'
-        em.set_author(name=reaction.message.author.name, icon_url=reaction.message.author.avatar_url)
-        em.description = reaction.message.content
-        await channel.send(head, embed=em)
-        reaction, user = await bot.wait_for('reaction_remove', timeout=60.0, check=check)
-        await message.edit(embed=em)
-        reaction, user = await bot.wait_for('reaction_clear', timeout=60.0, check=check)
-        await message.delete(embed=em)
-    except asyncio.TimeoutError:
-        pass
-    else:
-        await ctx.send("i tried :shrug:")
 
 @bot.command()
 async def ping(ctx):
@@ -156,4 +139,4 @@ async def _presence(ctx, type=None, *, game=None):
             await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
  
 
-bot.run(os.environ.get("TOKEN"))
+bot.run('MzU5MDM0NDI2NjI3NDU3MDM1.DYXZ1A.P3WvF3E1dBHoYEk8Qk-5j2SCOoQ')

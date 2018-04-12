@@ -11,8 +11,16 @@ class Fortnite:
        
         
     @commands.command()
-    async def fnprofile(self, ctx, name=None, *, plat=None):
+    async def fnprofile(self, ctx, plat=None, *, name=None):
         '''Get stats for your fortnite account !'''
+        if name is None:
+            await ctx.send("Please specify a username as well as the platform (defaults to pc if not specified).")
+            return
+
+        if plat not in ['psn', 'xbl', 'pc']:
+            await ctx.send("Invalid platform, platforms are {psn, xbl, pc}.")
+            return
+
         pages = []
         client = pynite.Client('5a20baea-b8a7-4e42-9de3-741534219452')
         player = await client.get_player(plat, name)
@@ -20,15 +28,6 @@ class Fortnite:
         solo = await player.get_solos()
         duos = await player.get_duos()
         squads = await player.get_squads()
-        
-        if plat is None:
-            plat = 'pc'
-            
-        if name is None:
-            return await ctx.send("Please specify a username as well as the platform (defaults to pc if not specified).")
-
-        if plat not in ['psn', 'xbl', 'pc']:
-            return await ctx.send("Invalid platform, platforms are {psn, xbl, pc}.")
         
         embed = discord.Embed(color=discord.Color.blue())
         embed.title = 'Name: ' + player.epic_user_handle + ' - LifeTime stats'
