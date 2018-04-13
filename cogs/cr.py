@@ -23,7 +23,6 @@ class Clash_Royale:
         em.title = profile.name
         em.description = f'{tag}\'s info'
         em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
-        em.add_field(name='chests', value=profile.chests.upcoming)
         em.add_field(name='clan name', value=clan.name)
         em.add_field(name='clan tag', value=clan.tag)
         em.add_field(name='clan type', value=clan.type)
