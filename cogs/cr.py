@@ -8,7 +8,7 @@ class Clash_Royale:
     '''Clash Royale commands to get your fancy stats here!'''
     def __init__(self, bot):
         self.bot = bot
-        self.token = ("c94d84443b5345d784418332e81a5d3b272f67619f2cbe5f064d3d55")
+        self.token = (os.environ.get('CRTOKEN'))
         self.client = clashroyale.Client(self.token, is_async=True)
         
     @commands.command()
