@@ -15,10 +15,11 @@ class Clash_Royale:
     async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag!'''
         if not tag:
-             return await ctx.send('Please provide a tag for this command')
+            return await ctx.send('Please provide a tag for this command')
+            
         profile = await self.client.get_player(tag)
         clan = await profile.get_clan()
-	    em = discord.Embed(color=discord.Color.gold())
+        em = discord.Embed(color=discord.Color.gold())
         em.title = profile.name
         em.description = f'{tag}\'s info'
         em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)

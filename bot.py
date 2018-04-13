@@ -10,7 +10,7 @@ import datetime
 import pynite
 import textwrap
 from contextlib import redirect_stdout
-from ext.utility import developer
+from ext import utility
 import asyncio
 import json
 
@@ -24,7 +24,7 @@ bot.load_extension("cogs.mod")
 bot.load_extension("cogs.misc")
 bot.load_extension("cogs.fortnite")
 bot.load_extension("cogs.pokedex")
-#bot.load_extension("cogs.cr")
+bot.load_extension("cogs.cr")
 
 #eval!!!
 def cleanup_code(content):
@@ -35,24 +35,13 @@ def cleanup_code(content):
 
     return content.strip('` \n')
 
-#developer check
-def developer():
-    def wrapper(ctx):
-        with open('data/devlist.json') as f:
-            devs = json.load(f)
-        if ctx.author.id in devs:
-            return True
-        raise commands.MissingPermissions('Sorry, this command is only available for developers.')
-    return commands.check(wrapper)
-    
-
 devs = [
     279974491071709194,
     199436790581559296
 ]
 
 @bot.command()
-@developer()
+@utility.developer()
 async def eval(ctx, *, body: str):
         """Evaluates a code"""
 
@@ -114,7 +103,7 @@ async def ping(ctx):
     await ctx.send(embed=em)
 
 @bot.command(name='presence')
-@developer()
+@utility.developer()
 async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
     if type is None:
@@ -139,4 +128,4 @@ async def _presence(ctx, type=None, *, game=None):
             await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
  
 
-bot.run('MzU5MDM0NDI2NjI3NDU3MDM1.DYXZ1A.P3WvF3E1dBHoYEk8Qk-5j2SCOoQ')
+bot.run(os.environ.get('TOKEN'))
