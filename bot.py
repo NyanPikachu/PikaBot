@@ -139,4 +139,4 @@ async def _presence(ctx, type=None, *, game=None):
             await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
  
 
-bot.run('MzU5MDM0NDI2NjI3NDU3MDM1.DYXZ1A.P3WvF3E1dBHoYEk8Qk-5j2SCOoQ')
+bot.run('TOKEN')
