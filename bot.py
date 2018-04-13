@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import pickle
 import random
 import io
 import os
