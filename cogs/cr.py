@@ -26,22 +26,21 @@ class Clash_Royale:
 
         pages = []
 
-        if hasProfile:
-            em = discord.Embed(color=discord.Color.gold())
-            em.title = profile.name
-            em.description = f'{tag}\'s info'
-            em.add_field(name='Trophies', value=profile.trophies)
-            em.add_field(name='Max Trophies', value=profile.stats.maxTrophies)
-            em.add_field(name='Arena', value=profile.arena.name)
-            em.add_field(name='League', value=profile.arena.arena)
-            em.add_field(name='Rank', value=profile.rank)
-            em.add_field(name='Wins', value=profile.games.wins)
-            em.add_field(name='Wins', value=profile.games.wins)
-            em.add_field(name='Losses', value=profile.games.losses)
-            em.add_field(name='Draws', value=profile.games.draws)
-            em.add_field(name='Cards Found', value=profile.stats.cardsFound)
-            em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
-            pages.append(em)
+        em = discord.Embed(color=discord.Color.gold())
+        em.title = profile.name
+        em.description = f'{tag}\'s info'
+        em.add_field(name='Trophies', value=profile.trophies)
+        em.add_field(name='Max Trophies', value=profile.stats.maxTrophies)
+        em.add_field(name='Arena', value=profile.arena.name)
+        em.add_field(name='League', value=profile.arena.arena)
+        em.add_field(name='Rank', value=profile.rank)
+        em.add_field(name='Wins', value=profile.games.wins)
+        em.add_field(name='Wins', value=profile.games.wins)
+        em.add_field(name='Losses', value=profile.games.losses)
+        em.add_field(name='Draws', value=profile.games.draws)
+        em.add_field(name='Cards Found', value=profile.stats.cardsFound)
+        em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
+        pages.append(em)
 
         if hasClan:
             em = discord.Embed(color=discord.Color.gold())
