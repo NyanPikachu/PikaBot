@@ -45,7 +45,6 @@ class Clash_Royale:
         if hasClan:
             em = discord.Embed(color=discord.Color.gold())
             em.title = clan.name
-            em.thumbnail = clan.badge.image
             em.add_field(name='Name', value=clan.name)
             em.add_field(name='Role', value=clan.role)
             em.add_field(name='Tag', value=clan.tag)
