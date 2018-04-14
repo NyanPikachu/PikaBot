@@ -29,6 +29,7 @@ class Clash_Royale:
         em = discord.Embed(color=discord.Color.gold())
         em.title = profile.name
         em.description = f'{tag}\'s info'
+        em.thumbnail = f'https://cr-api.github.io/cr-api-assets/arenas/arena{profile.arena.arenaID}.png'
         em.add_field(name='Trophies', value=profile.trophies)
         em.add_field(name='Max Trophies', value=profile.stats.maxTrophies)
         em.add_field(name='Arena', value=profile.arena.name)
