@@ -35,7 +35,7 @@ class Clash_Royale:
         try:
             await self.db.clashroyale.insert_one(document)
         except Exception as e:
-            await ctx.send('error: ' + e)
+            await ctx.send('error: ' + str(e))
 
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
