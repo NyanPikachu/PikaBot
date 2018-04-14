@@ -28,9 +28,10 @@ class Clash_Royale:
 
     @commands.command()
     async def crsave(self, tag=None):
+        authorID = ctx.author.id
         if not tag:
             return await ctx.send(f'Please provide a tag `Usage: crsave tag`')
-        document = {ctx.author.id: str(tag)}
+        document = {authorID: str(tag)}
         try:
             await db.test_collection.insert_one(document)
         except Exception as e:
