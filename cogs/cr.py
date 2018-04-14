@@ -20,6 +20,12 @@ class Clash_Royale:
             return 'None'
         return result['tag']
 
+    def check_tag(self, tag):
+        for char in tag:
+            if char.upper() not in '0289PYLQGRJCUV':
+                return False
+        return True
+
     @commands.command()
     async def crsave(self, tag=None):
         if not tag:
@@ -33,26 +39,24 @@ class Clash_Royale:
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag!'''
-        if not tag:
-            try:
                 #following lines of code was taken from cree-py/remix-bot full credits to them
-                if tag is None:
-                    if await self.get_tag(str(ctx.author.id)) == 'None':
-                        return await ctx.send(f'No tag found. Please use `{ctx.prefix}save <tag>` to save a tag to your discord profile.')
-                tag = await self.get_tag(str(ctx.author.id))
-                try:
-                    profile = await self.client.get_player(tag)
-                except (clashroyale.errors.NotResponding, clashroyale.errors.ServerError) as e:
-                    return await ctx.send(f'`Error {e.code}: {e.error}`')
-            else:
-                if not self.check_tag(tag):
-                    return await ctx.send('Invalid Tag. Please make sure your tag is correct.')
-                try:
-                    profile = await self.client.get_player(tag.strip('#').replace('O', '0'))
-                except (clashroyale.errors.NotResponding, clashroyale.errors.ServerError) as e:
-                    return await ctx.send(f'`Error {e.code}: {e.error}`')
-                except Exception as e:
-                    return await ctx.send('Please provide a tag for this command')
+        if tag is None:
+            if await self.get_tag(str(ctx.author.id)) == 'None':
+                return await ctx.send(f'No tag found. Please use `{ctx.prefix}save <tag>` to save a tag to your discord profile.')
+            tag = await self.get_tag(str(ctx.author.id))
+            try:
+                profile = await self.client.get_player(tag)
+            except (clashroyale.errors.NotResponding, clashroyale.errors.ServerError) as e:
+                return await ctx.send(f'`Error {e.code}: {e.error}`')
+        else:
+            if not self.check_tag(tag):
+                return await ctx.send('Invalid Tag. Please make sure your tag is correct.')
+            try:
+                profile = await self.client.get_player(tag.strip('#').replace('O', '0'))
+            except (clashroyale.errors.NotResponding, clashroyale.errors.ServerError) as e:
+                return await ctx.send(f'`Error {e.code}: {e.error}`')
+            except Exception as e:
+                return await ctx.send('Please provide a tag for this command')
 
         profile = await self.client.get_player(tag)
 
