@@ -92,7 +92,8 @@ async def on_ready():
     now = datetime.datetime.utcnow()
     em = discord.Embed(color=discord.Color.gold())
     em.title = bot.user.name
-    em.description = 'bot is online!\nUser ID:' + bot.user.id
+    em.description = 'bot is online!'
+    em.add_field(name='User ID:', value=bot.user.id)
     em.add_field(name='Started at:', value=now.strftime("%A, %d. %B %Y %I:%M%p"))
     await x.send(embed=em)
 
