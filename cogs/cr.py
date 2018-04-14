@@ -4,6 +4,8 @@ from ext.paginator import PaginatorSession
 import clashroyale
 import os
 import json
+import motor.motor_asyncio
+
 
 class Clash_Royale:
     '''Clash Royale commands to get your fancy stats here!'''
@@ -11,6 +13,7 @@ class Clash_Royale:
         self.bot = bot
         self.token = (os.environ.get('CRTOKEN'))
         self.client = clashroyale.Client(self.token, is_async=True)
+        self.db = motor.motor_asyncio.AsyncIOMotorClient('mongodb://Nyan Pikachu:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
         
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
@@ -29,7 +32,6 @@ class Clash_Royale:
         em = discord.Embed(color=discord.Color.gold())
         em.title = profile.name
         em.description = f'{tag}\'s info'
-        em.thumbnail = f'https://cr-api.github.io/cr-api-assets/arenas/arena{profile.arena.arenaID}.png'
         em.add_field(name='Trophies', value=profile.trophies)
         em.add_field(name='Max Trophies', value=profile.stats.maxTrophies)
         em.add_field(name='Arena', value=profile.arena.name)
