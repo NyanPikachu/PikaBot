@@ -90,7 +90,7 @@ async def on_ready():
     print("Bot is online!")
     x = bot.get_channel(424677910314745856)
     now = datetime.datetime.utcnow()
-    em = discord.Embed(color=discord.color.gold())
+    em = discord.Embed(color=discord.Color.gold())
     em.title = bot.user.name
     em.description = 'bot is online!\nUser ID:' + bot.user.id
     em.add_field(name='Started at:', value=now.strftime("%A, %d. %B %Y %I:%M%p"))
