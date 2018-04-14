@@ -17,14 +17,8 @@ class Clash_Royale:
         '''Gets your Clash Royale Profile using Tag!'''
         if not tag:
             return await ctx.send('Please provide a tag for this command')
-        
-        hasProfile = True
+        profile = await self.client.get_player(tag)
         hasClan = True
-
-        if hasProfile:
-            profile = await self.client.get_player(tag)
-        except Exception as e:
-            return await ctx.send(f'```py\nError {e.code}: {e.error}\n```')
         try:
             clan = await profile.get_clan()
         except Exception as e:
