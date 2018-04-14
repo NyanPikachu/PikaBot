@@ -18,6 +18,13 @@ async def get_pre(bot, message):
 
 bot = commands.Bot(command_prefix=get_pre, description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
 
+devs = [
+    279974491071709194,
+    199436790581559296
+]
+
+default_presence = f'{len(bot.guilds)} servers! | p.help'
+
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.misc")
@@ -33,11 +40,6 @@ def cleanup_code(content):
         return '\n'.join(content.split('\n')[1:-1])
 
     return content.strip('` \n')
-
-devs = [
-    279974491071709194,
-    199436790581559296
-]
 
 @bot.command()
 @utility.developer()
@@ -88,6 +90,7 @@ async def eval(ctx, *, body: str):
 @bot.event
 async def on_ready():
     print("Bot is online!")
+    await bot.change_presence(activity=discord.Activity(name=default_presence, type=discord.ActivityType.streaming))
     x = bot.get_channel(424677910314745856)
     now = datetime.datetime.utcnow()
     em = discord.Embed(color=discord.Color.gold())
