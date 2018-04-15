@@ -11,7 +11,7 @@ class Fortnite:
         self.client = pynite.Client('5a20baea-b8a7-4e42-9de3-741534219452')
        
     @commands.command(aliases=[])
-    async def fnprofile(self, ctx, plat=None, *, name=None):
+    async def fnprofile(self, ctx, plat=None, name=None):
         '''Get stats for your fortnite account !'''
         plat =  plat.lower()
         

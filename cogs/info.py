@@ -43,13 +43,13 @@ class info:
         embed.set_footer(text="Pika Bot | scripted in discord.py")
         await ctx.send(embed=embed)
     
-    @commands.command()
+    @commands.command(aliases=['ui'])
     @commands.guild_only()
-    async def info(self, ctx, user: discord.Member=None):
+    async def userinfo(self, ctx, user: discord.Member=None):
         """user info"""
         if not user:
             user = ctx.author
-        embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=0x00ff00)
+        embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=user.Role.colour)
         embed.add_field(name="Name", value=user.name, inline=True)
         embed.add_field(name="ID", value=user.id, inline=True)
         embed.add_field(name="Status", value=user.status, inline=True)
@@ -86,6 +86,5 @@ class info:
         embed.set_image(url=av)
         await ctx.send(embed=embed)
        
-            
 def setup(bot):
     bot.add_cog(info(bot))
