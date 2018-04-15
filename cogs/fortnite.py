@@ -13,8 +13,6 @@ class Fortnite:
     @commands.command(aliases=[])
     async def fnprofile(self, ctx, plat=None, name=None):
         '''Get stats for your fortnite account !'''
-        plat =  plat.lower()
-        
         if name is None:
             await ctx.send("Please specify a username as well as the platform (defaults to pc if not specified).")
             return

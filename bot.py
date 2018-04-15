@@ -23,8 +23,6 @@ devs = [
     199436790581559296
 ]
 
-default_presence = f'{len(bot.guilds)} servers! | p.help'
-
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.misc")
@@ -90,7 +88,7 @@ async def eval(ctx, *, body: str):
 @bot.event
 async def on_ready():
     print("Bot is online!")
-    await bot.change_presence(activity=discord.Activity(name=default_presence, type=discord.ActivityType.streaming))
+    await bot.change_presence(activity=discord.Activity(name=f'{len(bot.guilds)} servers! | p.help', type=discord.ActivityType.streaming))
     x = bot.get_channel(424677910314745856)
     now = datetime.datetime.utcnow()
     em = discord.Embed(color=discord.Color.gold())
