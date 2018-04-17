@@ -39,7 +39,7 @@ class Clash_Royale:
         tag = tag.strip('#').replace('O', '0')
         if not self.check_tag:
             return await ctx.send('Invalid Tag. Please make sure your tag is correct then try again')
-        await self.save_tag(authorID, tag)
+        await self.save_tag(tag, authorID)
         await ctx.send(f'Your tag `#{tag}` has been successfully saved')
 
     @commands.command()
