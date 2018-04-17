@@ -32,13 +32,20 @@ class Clash_Royale:
             return await ctx.send(f'Please provide a tag `Usage: crsave tag`')
         document = {authorID: tag}
         try:
-            await self.db.clashroyale.insert_one(document)
+            await self.db.clashroyale.insert_one(document)    
+            await ctx.send('Tag successfully saved! (use this command again to change tag)')
         except Exception as e:
             await ctx.send(f'Error: `{str(e)}`')
 
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag'''
+        authorID = str(ctx.author.id)
+        if not tag:
+            try:
+                tag = await db.test_collection.find_one({'_id': authorID})
+            except Exception as e:
+                await ctx.send(f'Error: `{str(e)}`')
         profile = await self.client.get_player(tag)
 
         hasClan = True
