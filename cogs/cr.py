@@ -26,12 +26,12 @@ class Clash_Royale:
                 return False
         return True
 
-    def getcoll(self, game):
-        return getattr(self.mongoclient, game)
+    #def getcoll(self, game):
+        #return getattr(self.mongoclient, game)
 
     @commands.command()
     async def crsave(self, ctx, tag=None):
-        crdb = self.getcoll("clashroyale")
+        #crdb = self.getcoll("clashroyale")
         authorID = str(ctx.author.id)
         if not tag:
             return await ctx.send(f'Please provide a tag `Usage: crsave tag`')
