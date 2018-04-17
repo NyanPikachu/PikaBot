@@ -4,4 +4,3 @@ pokedex.py
 pillow
 clashroyale
 motor
-pylast
