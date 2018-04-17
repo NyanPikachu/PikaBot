@@ -12,6 +12,9 @@ class Moderation:
       
     now = datetime.datetime.utcnow()
     
+    async def save_prefix(self, prefix, guildID):
+        await self.db.settings.update_one({'_id': guildID}, {'$set': {'_id': guildID, 'prefix': prefix}}, upsert=True)
+
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx ,user: discord.Member=None, *, reason: str=None):
@@ -93,9 +96,10 @@ class Moderation:
     @commands.command()
     @commands.has_permissions(manage_messages=True, name="prefix")
     async def _prefix(self, ctx, prefix):
+        guildID = str(ctx.guild.id)
         if not prefix:
             await ctx.send('Please provide a prefix for this command to work')
-        await self.db.settings.update_one({'_id': ctx.guild.id}, {'$set': {'_id': str(ctx.guild.id, 'prefix': prefix}}, upsert=True)
+        await self.save_tag(prefix, guildID)
         await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it')
 
    
