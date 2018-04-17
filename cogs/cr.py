@@ -4,7 +4,7 @@ from ext.paginator import PaginatorSession
 import clashroyale
 import os
 import json
-import motor.motor_asyncio
+from motor import motor_asyncio
 
 class Clash_Royale:
     '''Clash Royale commands to get your fancy stats here!'''
@@ -12,7 +12,7 @@ class Clash_Royale:
         self.bot = bot
         self.token = (os.environ.get('CRTOKEN'))
         self.client = clashroyale.Client(self.token, is_async=True)
-        self.db = motor.motor_asyncio.AsyncIOMotorClient('mongodb://Nyan Pikachu:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
+        self.mongoclient = motor_asyncio.AsyncIOMotorClient('mongodb://Nyan Pikachu:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
 
     async def get_tag(self, userid):
         result = await self.db.clashroyale.find_one({'_id': userid})
@@ -26,16 +26,20 @@ class Clash_Royale:
                 return False
         return True
 
+    def getcoll(self, game):
+        return getattr(self.mongoclient, game)
+
     @commands.command()
     async def crsave(self, ctx, tag=None):
-        authorID = ctx.author.id
+        crdb = self.getcoll("clashroyale")
+        authorID = str(ctx.author.id)
         if not tag:
             return await ctx.send(f'Please provide a tag `Usage: crsave tag`')
-        document = {authorID: str(tag)}
+        document = {authorID: tag}
         try:
-            await self.db.clashroyale.insert_one(document)
+            await crdb.insert_one(document)
         except Exception as e:
-            await ctx.send('error: ' + str(e))
+            await ctx.send(f'Error: `{str(e)}`')
 
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
