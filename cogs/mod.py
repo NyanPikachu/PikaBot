@@ -96,12 +96,12 @@ class Moderation:
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
-    async def prefix(self, ctx, prefix):
+    async def prefix(self, ctx, prefix=None):
         guildID = str(ctx.guild.id)
         if not prefix:
             await ctx.send('Please provide a prefix for this command to work')
         await self.save_prefix(prefix, guildID)
-        await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it')
+        await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it)')
 
    
 def setup(bot):
