@@ -12,7 +12,7 @@ class Clash_Royale:
         self.bot = bot
         self.token = (os.environ.get('CRTOKEN'))
         self.client = clashroyale.Client(self.token, is_async=True)
-        self.dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://Nyan Pikachu:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
+        self.dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://Nyan Pikachu:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711')
         self.db = self.dbclient.pikabot
 
     def check_tag(self, tag):
