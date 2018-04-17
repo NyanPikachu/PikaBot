@@ -95,8 +95,8 @@ class Moderation:
         await ctx.send(f"**{user}** has been **warned**")
 
     @commands.command()
-    @commands.has_permissions(manage_messages=True, name="prefix")
-    async def _prefix(self, ctx, prefix):
+    @commands.has_permissions(manage_messages=True)
+    async def prefix(self, ctx, prefix):
         guildID = str(ctx.guild.id)
         if not prefix:
             await ctx.send('Please provide a prefix for this command to work')
