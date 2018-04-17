@@ -30,6 +30,22 @@ class Clash_Royale:
             return 'None'
         return result['tag']
 
+    def get_emoji(self, emoji):
+        if emoji == 'chestmagic':
+            emoji = 'chestmagical'
+        with open('data/emojis.json') as f:
+            emojis = json.load(f)
+            e = emojis[emoji]
+        return self.bot.get_emoji(e)
+
+    #next lines of codes are provided by RemixBot, we give full credits to them
+    def get_chests(self, ctx, p):
+        cycle = p.chest_cycle
+        chests = f'| {self.emoji("chest" + cycle.upcoming[0].lower())} | '
+        chests += ''.join([f'{self.emoji("chest" + cycle.upcoming[x].lower())}' for x in range(1, 8)])
+        special = f'{self.emoji("chestsupermagical")}{cycle.super_magical} {self.emoji("chestmagical")}{cycle.magical} {self.emoji("chestlegendary")}{cycle.legendary} {self.emoji("chestepic")}{cycle.epic} {self.emoji("chestgiant")}{cycle.giant}'
+        return (chests, special)
+
     @commands.command()
     async def crsave(self, ctx, tag=None):
         #crdb = self.getcoll("clashroyale")
@@ -51,6 +67,9 @@ class Clash_Royale:
                 await ctx.send(f'Please provide a tag or save your tag using `{ctx.prefix}crsave <tag>`')
             tag = await self.get_tag(authorID)
         profile = await self.client.get_player(tag)
+
+        chests = self.get_chests(ctx, profile)[0]
+        special = self.get_chests(ctx, profile)[1]
 
         hasClan = True
         try:
@@ -74,6 +93,8 @@ class Clash_Royale:
         em.add_field(name='Draws', value=profile.games.draws)
         em.add_field(name='Cards Found', value=profile.stats.cardsFound)
         em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
+        em.add_field(name='Upcoming Chests:', value=chests, inline=False)
+        em.add_field(name='Chests Until:', value=special, inline=False)
         pages.append(em)
 
         if hasClan:
