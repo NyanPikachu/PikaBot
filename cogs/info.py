@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from ext.paginator import PaginatorSession
+import os
 
 class info:
     '''Info related commands!'''
