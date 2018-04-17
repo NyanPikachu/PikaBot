@@ -49,7 +49,7 @@ class Clash_Royale:
         if not tag:
             if await self.get_tag(authorID) == None:
                 await ctx.send(f'Please provide a tag or save your tag using `{ctx.prefix}crsave <tag>`')
-            tag = self.get_tag(authorID)
+            tag = await self.get_tag(authorID)
         profile = await self.client.get_player(tag)
 
         hasClan = True
