@@ -12,6 +12,7 @@ from contextlib import redirect_stdout
 from ext import utility
 import asyncio
 import json
+from motor import motor_asyncio
 
 dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://PikaBot:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
 db = dbclient.pikabot
