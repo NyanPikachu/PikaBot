@@ -40,10 +40,10 @@ class Clash_Royale:
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag'''
-        authorID = str(ctx.author.id)
+        userid = str(ctx.author.id)
         if not tag:
             try:
-                tag = await self.db.clashroyale.find_one({'_id': authorID})
+                tag = await self.db.clashroyale.find_one({'_id': userid})['tag']
                 await ctx.send(tag)
             except Exception as e:
                 await ctx.send(f'Error: `{str(e)}`')
