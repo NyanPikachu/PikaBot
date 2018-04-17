@@ -21,8 +21,14 @@ class Clash_Royale:
                 return False
         return True
 
-    #def getcoll(self, game):
-        #return getattr(self.mongoclient, game)
+    async def save_tag(self, tag, authorID):
+        await self.db.clashroyale.update_one({'_id': authorID}, {'$set': {'_id': authorID, 'tag': tag}}, upsert=True)
+
+    async def get_tag(self, authorID):
+        result = await self.db.clashroyale.find_one({'_id': authorID})
+        if not result:
+            return 'None'
+        return result['tag']
 
     @commands.command()
     async def crsave(self, ctx, tag=None):
@@ -30,23 +36,20 @@ class Clash_Royale:
         authorID = str(ctx.author.id)
         if not tag:
             return await ctx.send(f'Please provide a tag `Usage: crsave tag`')
-        document = {authorID: tag}
-        try:
-            await self.db.clashroyale.insert_one(document)    
-            await ctx.send('Tag successfully saved! (use this command again to change tag)')
-        except Exception as e:
-            await ctx.send(f'Error: `{str(e)}`')
+        tag = tag.strip('#').replace('O', '0')
+        if not self.check_tag:
+            return await ctx.send('Invalid Tag. Please make sure your tag is correct then try again')
+        await self.save_tag(authorID, tag)
+        await ctx.send(f'Your tag `#{tag}` has been successfully saved')
 
     @commands.command()
     async def crprofile(self, ctx, tag: str=None):
         '''Gets your Clash Royale Profile using Tag'''
-        userid = str(ctx.author.id)
+        authorID = str(ctx.author.id)
         if not tag:
-            try:
-                tag = await self.db.clashroyale.find_one({'_id': userid})['tag']
-                await ctx.send(tag)
-            except Exception as e:
-                await ctx.send(f'Error: `{str(e)}`')
+            if await self.get_tag(authorID) == 'None':
+                await ctx.send(f'Please provide a tag or save your tag using `{ctx.prefix}crsave <tag>`')
+            tag = self.get_tag(authorID)
         profile = await self.client.get_player(tag)
 
         hasClan = True
