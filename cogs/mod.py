@@ -100,7 +100,7 @@ class Moderation:
         guildID = str(ctx.guild.id)
         if not prefix:
             await ctx.send('Please provide a prefix for this command to work')
-        await self.save_tag(prefix, guildID)
+        await self.save_prefix(prefix, guildID)
         await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it')
 
    
