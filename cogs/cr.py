@@ -12,7 +12,8 @@ class Clash_Royale:
         self.bot = bot
         self.token = (os.environ.get('CRTOKEN'))
         self.client = clashroyale.Client(self.token, is_async=True)
-        self.db = motor_asyncio.AsyncIOMotorClient('mongodb://Nyan Pikachu:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
+        self.dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://Nyan Pikachu:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
+        self.db = client.clashroyale
 
     async def get_tag(self, userid):
         result = await self.db.clashroyale.find_one({'_id': userid})
@@ -37,7 +38,7 @@ class Clash_Royale:
             return await ctx.send(f'Please provide a tag `Usage: crsave tag`')
         document = {authorID: tag}
         try:
-            await self.db.clashroyale.insert_one(document)
+            await self.db.insert_one(document)
         except Exception as e:
             await ctx.send(f'Error: `{str(e)}`')
 
