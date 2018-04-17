@@ -43,7 +43,7 @@ class Clash_Royale:
         authorID = str(ctx.author.id)
         if not tag:
             try:
-                tag = await db.test_collection.find_one({'_id': authorID})
+                tag = await self.db.clashroyale.find_one({'_id': authorID})
             except Exception as e:
                 await ctx.send(f'Error: `{str(e)}`')
         profile = await self.client.get_player(tag)
