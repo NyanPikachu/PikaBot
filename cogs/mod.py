@@ -6,7 +6,8 @@ class Moderation:
     '''Moderation commands!'''
     def __init__(self, bot):
         self.bot = bot
-        
+        self.dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://PikaBot:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
+        self.db = self.dbclient.pikabot
       
     now = datetime.datetime.utcnow()
     
@@ -88,6 +89,14 @@ class Moderation:
         await user.send(warning)
         await ctx.send(f"**{user}** has been **warned**")
 
-    
+    @commands.command()
+    @commands.has_permissions(manage_messages=True, name="prefix")
+    async def _prefix(self, ctx, prefix):
+        if not prefix:
+            await ctx.send('Please provide a prefix for this command to work')
+        await self.db.settings.update_one({'_id': ctx.guild.id}, {'$set': {'_id': str(ctx.guild.id, 'prefix': prefix}}, upsert=True)
+        await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it')
+
+   
 def setup(bot):
     bot.add_cog(Moderation(bot))

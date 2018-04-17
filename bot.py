@@ -13,10 +13,20 @@ from ext import utility
 import asyncio
 import json
 
+dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://PikaBot:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
+db = dbclient.pikabot
+
 async def get_pre(bot, message):
-    return ["P.", "p.", f"{bot.user.mention} "]
+    try:
+        result = await db.settings.find_one({'_id': str(message.guild.id)})
+    except AttributeError:
+        return ["P.", "p.", f"{bot.user.mention} "]
+    if not result or not result.get('prefix'):
+        return ["P.", "p.", f"{bot.user.mention} "]
+    return result['prefix']
 
 bot = commands.Bot(command_prefix=get_pre, description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
+
 
 devs = [
     279974491071709194,
