@@ -13,7 +13,7 @@ class Clash_Royale:
         self.token = (os.environ.get('CRTOKEN'))
         self.client = clashroyale.Client(self.token, is_async=True)
         self.dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://Nyan Pikachu:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
-        self.db = client.clashroyale
+        self.db = self.dbclient.clashroyale
 
     async def get_tag(self, userid):
         result = await self.db.clashroyale.find_one({'_id': userid})
