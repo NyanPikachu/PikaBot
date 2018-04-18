@@ -39,7 +39,7 @@ class Clash_Royale:
         return self.bot.get_emoji(e)
 
     #next lines of codes are provided by RemixBot, we give full credits to them
-    def get_chests(self, ctx, p):
+    def get_chests(self, ctx, profile):
         cycle = profile.chest_cycle
         chests = f'| {self.emoji("chest" + cycle.upcoming[0].lower())} | '
         chests += ''.join([f'{self.emoji("chest" + cycle.upcoming[x].lower())}' for x in range(1, 8)])
