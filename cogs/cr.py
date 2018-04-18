@@ -30,7 +30,7 @@ class Clash_Royale:
             return 'None'
         return result['tag']
 
-    def get_emoji(self, emoji):
+    def emoji(self, emoji):
         if emoji == 'chestmagic':
             emoji = 'chestmagical'
         with open('data/emojis.json') as f:
