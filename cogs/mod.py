@@ -103,6 +103,10 @@ class Moderation:
         await self.save_prefix(prefix, guildID)
         await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it)')
 
-   
+    @commands.command()
+    @commands.has_permissions(manage_guild=True)
+    async def welcome
+
+
 def setup(bot):
     bot.add_cog(Moderation(bot))

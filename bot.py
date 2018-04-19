@@ -95,7 +95,8 @@ async def eval(ctx, *, body: str):
                     await ctx.send(f'```py\n{value}\n```')
             else:
                 await ctx.send(f'```py\n{value}{ret}\n```')            
-                
+
+#events                
 @bot.event
 async def on_ready():
     print("Bot is online!")
@@ -109,6 +110,31 @@ async def on_ready():
     em.add_field(name='Started at:', value=now.strftime("%A, %d. %B %Y %I:%M%p"))
     await x.send(embed=em)
 
+@bot.event
+async def on_guild_join(guild):
+    x = bot.get_channel(424677910314745856)
+    now = datetime.datetime.utcnow()
+    em = discord.Embed(color=discord.Color.green())
+    em.title = bot.user.name
+    em.description = 'Guild added'
+    em.add_field(name='Guild Name:', value=guild.name)
+    em.add_field(name='Guild id:', value=guild.id)
+    em.add_field(name='Joined at:', value=now.strftime("%A, %d. %B %Y %I:%M%p"))
+    await x.send(embed=em)
+
+@bot.event
+async def on_guild_remove(guild):
+    x = bot.get_channel(424677910314745856)
+    now = datetime.datetime.utcnow()
+    em = discord.Embed(color=discord.Color.red())
+    em.title = bot.user.name
+    em.description = 'Guild removed'
+    em.add_field(name='Guild Name:', value=guild.name)
+    em.add_field(name='Guild id:', value=guild.id)
+    em.add_field(name='Left at:', value=now.strftime("%A, %d. %B %Y %I:%M%p"))
+    await x.send(embed=em)
+
+#commands
 @bot.command()
 async def ping(ctx):
     '''Pong! Get the bot's response time'''
