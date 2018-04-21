@@ -12,7 +12,6 @@ class Fun:
         self.bot = bot
         self.pokedex = pokedex.Pokedex()
         self.gif_api_key = os.environ.get('GIFTOKEN')
-        self.spotify = SpotifyApi()
 
     @commands.command()
     async def gif(self, ctx, *,search=None):
