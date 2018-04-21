@@ -4,6 +4,7 @@ import random
 from random import randint
 from pokedex import pokedex
 import requests
+import os
 
 class Fun:
     '''Miscellaneous commands that are fun!'''
