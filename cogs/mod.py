@@ -97,6 +97,7 @@ class Moderation:
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def prefix(self, ctx, prefix=None):
+        """Change Prefix of the server"""
         guildID = str(ctx.guild.id)
         if not prefix:
             await ctx.send('Please provide a prefix for this command to work')

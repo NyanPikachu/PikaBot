@@ -48,6 +48,7 @@ class Clash_Royale:
 
     @commands.command()
     async def crsave(self, ctx, tag=None):
+        """Save Clash Royale your tag"""
         #crdb = self.getcoll("clashroyale")
         authorID = str(ctx.author.id)
         if not tag:
