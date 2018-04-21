@@ -2,12 +2,45 @@ import discord
 from discord.ext import commands
 import random
 from random import randint
-class Misc:
+from pokedex import pokedex
+import requests
+
+class Fun:
     '''Miscellaneous commands that are fun!'''
     def __init__(self, bot):
         self.bot = bot
-        
-    
+        self.pokedex = pokedex.Pokedex()
+        self.gif_api_key = os.environ.get('GIFTOKEN')
+
+    @commands.command()
+    async def gif(self, ctx, search=None):
+        if not search:
+            await ctx.send('Please provide a search tag to run this command')
+        search = search.replace(' ', '+')
+        try:
+            r = requests.get(f'http://api.giphy.com/v1/gifs/search?q={search}&api_key={self.gif_api_key}')
+            data = r.json()
+            await ctx.send(data['data']['images']['fixed_height']['url'])
+        except Exception as e:
+            await ctx.send(f'Error : `{e}`')
+
+    @commands.command()
+    async def pokemon(self, ctx, poke: str=None):
+        '''Get A Pokemon's info!'''
+        pokemon = self.pokedex.get_pokemon_by_name(poke)
+        em = discord.Embed(name=pokemon[0]['name'] + "'s info!")
+        em.set_author(name=pokemon[0]['name'] + "'s info!")
+        em.add_field(name='Species', value=pokemon[0]['species'])
+        em.add_field(name='Number', value=pokemon[0]['number'])
+        em.add_field(name='Types', value=", ".join(pokemon[0]['types']))
+        em.add_field(name=' Normal Abilities', value=", ".join(pokemon[0]['abilities']['normal']))
+        em.add_field(name='Hidden Abilities', value=", ".join(pokemon[0]['abilities']['hidden']))
+        em.add_field(name='Height', value=pokemon[0]['height'])
+        em.add_field(name='Weight', value=pokemon[0]['weight'])
+        em.add_field(name='Evolutions', value=", ".join(pokemon[0]['family']['evolutionLine']))
+        em.set_thumbnail(url=pokemon[0]['sprite'])
+        em.set_footer(text="Pika Bot | scripted in discord.py")
+        await ctx.send(embed=em)
     
     @commands.command()
     async def hug(self, ctx, user: discord.Member=None):
@@ -39,4 +72,4 @@ class Misc:
     
         
 def setup(bot):
-    bot.add_cog(Misc(bot))
+    bot.add_cog(Fun(bot))

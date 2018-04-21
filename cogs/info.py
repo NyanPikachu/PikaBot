@@ -8,25 +8,6 @@ class info:
     def __init__(self, bot):
         self.bot = bot
         
-    @commands.command()
-    async def paginate(self, ctx):
-        pages = []
-        
-        embed = discord.Embed(color=0xf1c40f)
-        embed.title = "page 1"
-        embed.description = "lol"
-        
-        pages.append(embed)
-        
-        embed = discord.Embed(color=0xf1c40f)
-        embed.title = "page 1"
-        embed.description = "lol2"
-        
-        pages.append(embed)
-        
-        p_session = PaginatorSession(ctx, footer=f'pagination test', pages=pages)
-        await p_session.run()
-        
     @commands.command(name="bot")
     async def _bot(self, ctx):
         """Info about the bot"""
