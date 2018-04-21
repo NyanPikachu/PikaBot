@@ -1,5 +1,4 @@
 git+https://github.com/Rapptz/discord.py@rewrite
-git+https://github.com/mattdennewitz/python-spotify-api.git
 pynite
 pokedex.py
 pillow

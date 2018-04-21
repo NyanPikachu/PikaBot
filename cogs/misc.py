@@ -5,7 +5,6 @@ from random import randint
 from pokedex import pokedex
 import requests
 import os
-from spotify_api.api import SpotifyApi
 
 class Fun:
     '''Miscellaneous commands that are fun!'''
@@ -80,29 +79,6 @@ class Fun:
         """Flips a coin!"""
         flip = random.choice(["Heads", "Tails"])
         await ctx.send(flip)
-
-    #spotify command group
-    @commands.group(pass_context=True, invoke_without_command=True)
-    async def spotify(self, ctx):
-        '''Search for Spotify albums, tracks and artists'''
-
-    @spotify.command(pass_context=True)
-    async def album(self, ctx, search):
-        results = api.albums.search(search)
-        for album in results:
-            await ctx.send(album)
-
-    @spotify.command(pass_context=True)
-    async def artist(self, ctx, search):
-        results = api.artists.search(search)
-        for artist in results:
-            await ctx.send(artist)
-
-    @spotify.command(pass_context=True)
-    async def track(self, ctx, search):
-        results = api.tracks.search(search)
-        for track in results:
-            await ctx.send(track)
     
 def setup(bot):
     bot.add_cog(Fun(bot))
