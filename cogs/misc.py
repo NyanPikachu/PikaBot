@@ -48,8 +48,11 @@ class Fun:
         """hugs a user"""
         if not user:
             await ctx.send(f"Please mention someone for this command to work {ctx.author.mention}" )
+        r = requests.get(f'http://api.giphy.com/v1/gifs/random?tag=hug&api_key={self.gif_api_key}')
+        data = r.json()
         embed = discord.Embed(title="Hug!".format(user.name), description= f"{ctx.author} has sent {user} a hug !", color=0xffb6c1)
         embed.set_thumbnail(url=user.avatar_url)
+        embed.set_image(url=data['data'][0]['images']['fixed_height']['url'])
         await ctx.send(embed=embed)
         
     @commands.command(hidden=True)
