@@ -21,7 +21,7 @@ class Fun:
         try:
             r = requests.get(f'http://api.giphy.com/v1/gifs/search?q={search}&api_key={self.gif_api_key}')
             data = r.json()
-            await ctx.send(data['data']['images']['fixed_height']['url'])
+            await ctx.send(data['data'][0]['images']['fixed_height']['url'])
         except Exception as e:
             await ctx.send(f'Error : `{e}`')
 
