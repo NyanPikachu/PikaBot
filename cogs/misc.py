@@ -52,7 +52,7 @@ class Fun:
         data = r.json()
         embed = discord.Embed(title="Hug!".format(user.name), description= f"{ctx.author} has sent {user} a hug !", color=0xffb6c1)
         embed.set_thumbnail(url=user.avatar_url)
-        embed.set_image(url=data['data'][0]['images']['fixed_height']['url'])
+        embed.set_image(url=data['data']['images']['fixed_height']['url'])
         await ctx.send(embed=embed)
         
     @commands.command(hidden=True)
