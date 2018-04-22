@@ -101,8 +101,8 @@ class Utility:
         """a list of all emojis in the server"""
         em = discord.Embed()
         for l in len(ctx.guild.emojis):
-            em.add_field(name=ctx.guild.emojis.name, value=emoji_list)
+            em.add_field(name=ctx.guild.emojis.name, value=emoji_list(ctx))
         await ctx.send(embed=em)
 
 def setup(bot):
-    bot.add_cog(Fun(bot))
+    bot.add_cog(Utility(bot))
