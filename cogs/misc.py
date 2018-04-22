@@ -6,12 +6,24 @@ from pokedex import pokedex
 import requests
 import os
 
-class Fun:
+class Utility:
     '''Miscellaneous commands that are fun!'''
     def __init__(self, bot):
         self.bot = bot
         self.pokedex = pokedex.Pokedex()
         self.gif_api_key = os.environ.get('GIFTOKEN')
+
+    def emoji_list(self, ctx):
+        for i in ctx.guild.emojis:
+            return i
+
+    def emoji_name(self, ctx):
+        for i in ctx.guild.emojis:
+            return i.name
+
+    def emoji_id(self, ctx):
+        for i in ctx.guild.emojis:
+            return i.id
 
     @commands.command()
     async def gif(self, ctx, *,search=None):
@@ -79,5 +91,18 @@ class Fun:
         flip = random.choice(["Heads", "Tails"])
         await ctx.send(flip)
     
+    @commands.group()
+    async def emoji(self, ctx):
+        """emoji commands!"""
+        await ctx.send(f'Usage : `{ctx.prefix}emoji list/create/delete`')
+
+    @emoji.command()
+    async def list(self,ctx):
+        """a list of all emojis in the server"""
+        em = discord.Embed()
+        for l in len(ctx.guild.emojis):
+            em.add_field(name=ctx.guild.emojis.name, value=emoji_list)
+        await ctx.send(embed=em)
+
 def setup(bot):
     bot.add_cog(Fun(bot))
