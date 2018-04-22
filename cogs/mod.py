@@ -24,7 +24,7 @@ class Moderation:
         if not user:
             await ctx.send("Please mention a member for this command to work")
         try:
-            embed = discord.Embed(title=f"Kick | {ctx.guild.name}", color=0xff0000, inline=True)
+            embed = discord.Embed(title=f"Kick | {ctx.guild.name}", color=0xffa500, inline=True)
             embed.add_field(name=f"Moderator:", value=f"{ctx.author.name}", inline=True) 
             embed.add_field(name=f"User:", value=f"{user.name}", inline=True)
             embed.add_field(name=f"Reason:", value=reason, inline=True)
@@ -37,6 +37,7 @@ class Moderation:
             else:
                 await channel.send(embed=embed)
             await user.send(embed=embed)
+            await ctx.send(f'**{user.name}** has been **kicked**')
             await ctx.guild.kick(user)
         except discord.Forbidden:
             await ctx.send("I could not kick the member, Please check my permissions")
@@ -64,6 +65,7 @@ class Moderation:
             else:
                 await channel.send(embed=embed)
             await user.send(embed=embed)
+            await ctx.send(f'**{user.name}** has been **banned**')
             await ctx.guild.ban(user)
         except discord.Forbidden:
             await ctx.send("I could not ban the member, Please check my permissions")

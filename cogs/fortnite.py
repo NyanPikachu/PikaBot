@@ -54,7 +54,6 @@ class Fortnite:
             embed.add_field(name=lifetime[4].key, value=lifetime[4].value)
             embed.add_field(name=lifetime[6].key, value=lifetime[6].value)
             embed.add_field(name=lifetime[7].key, value=lifetime[7].value)
-            embed.add_field(name=lifetime[13].key, value=lifetime[13].value)
             embed.add_field(name=lifetime[10].key, value=lifetime[10].value)
             embed.add_field(name=lifetime[11].key, value=lifetime[11].value)
             embed.add_field(name=lifetime[12].key, value=lifetime[12].value)

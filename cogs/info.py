@@ -67,6 +67,11 @@ class info:
         embed.set_author(name=f"{user.name}'s avatar!")
         embed.set_image(url=av)
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def support(self, ctx):
+        """get a link to the support server"""
+        await ctx.send('')
        
 def setup(bot):
     bot.add_cog(info(bot))
