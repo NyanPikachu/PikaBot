@@ -91,18 +91,5 @@ class Utility:
         flip = random.choice(["Heads", "Tails"])
         await ctx.send(flip)
     
-    @commands.group()
-    async def emoji(self, ctx):
-        """emoji commands!"""
-        await ctx.send(f'Usage : `{ctx.prefix}emoji list/create/delete`')
-
-    @emoji.command()
-    async def list(self,ctx):
-        """a list of all emojis in the server"""
-        em = discord.Embed()
-        for l in len(ctx.guild.emojis):
-            em.add_field(name=ctx.guild.emojis.name, value=emoji_list(ctx))
-        await ctx.send(embed=em)
-
 def setup(bot):
     bot.add_cog(Utility(bot))
