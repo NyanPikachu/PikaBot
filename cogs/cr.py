@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from ext.paginator import PaginatorSession
+from ext.paginator import Paginator
 import clashroyale
 import os
 import json

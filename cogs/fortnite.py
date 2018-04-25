@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import pynite
-from ext.paginator import PaginatorSession
+from ext.paginator import Paginator
 
 class Fortnite:
     '''Get Fortnite stats by name'''
