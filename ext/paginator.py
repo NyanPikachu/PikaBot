@@ -4,8 +4,8 @@ import asyncio
 
 
 class Paginator:
-    def __init__(self, message, base, embeds, obj):
-        self.message = message
+    def __init__(self, ctx, base, embeds, obj):
+        self.ctx = ctx
         self.bot = ctx.bot
         self.base = base
         self.pointers = ['👈','👉','❌']
@@ -15,7 +15,7 @@ class Paginator:
 
     async def _add_handler(self):
         def reaction_check(reaction,user):
-            return user == self.message.author and reaction.message.id == self.base.id and reaction.emoji in self.pointers
+            return user == self.ctx.author and reaction.ctx.id == self.base.id and reaction.emoji in self.pointers
         while True: 
             reaction, user = await self.bot.wait_for(self.obj, event='reaction_add', check=reaction_check)
             op = self.pointers.index(reaction.emoji)
@@ -33,7 +33,7 @@ class Paginator:
 
     async def _remove_handler(self):
         def reaction_check(reaction,user):
-            return user == self.message.author and reaction.message.id == self.base.id and reaction.emoji in self.pointers
+            return user == self.ctx.author and reaction.ctx.id == self.base.id and reaction.emoji in self.pointers
         while True: 
             reaction, user = await self.bot.wait_for(self.obj, event='reaction_remove', check=reaction_check)
             op = self.pointers.index(reaction.emoji)

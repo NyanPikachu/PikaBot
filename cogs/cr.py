@@ -111,9 +111,8 @@ class Clash_Royale:
             em.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Wrapper provided by CodeGrok, API by RoyaleAPI')
             embeds.append(em)
 
-        message = ctx
         base = await ctx.send(content=None, embed=embeds[0])
-        p_session = Paginator(message, base , embeds, self)
+        p_session = Paginator(ctx, base , embeds, self)
         await p_session.run()
 
 def setup(bot):
