@@ -6,6 +6,7 @@ import asyncio
 class Paginator:
     def __init__(self, message, base, embeds, obj):
         self.message = message
+        self.bot = ctx.bot
         self.base = base
         self.pointers = ['👈','👉','❌']
         self.embeds = embeds
@@ -16,7 +17,7 @@ class Paginator:
         def reaction_check(reaction,user):
             return user == self.message.author and reaction.message.id == self.base.id and reaction.emoji in self.pointers
         while True: 
-            reaction, user = await discord.Client.wait_for(self.obj, event='reaction_add', check=reaction_check)
+            reaction, user = await self.bot.wait_for(self.obj, event='reaction_add', check=reaction_check)
             op = self.pointers.index(reaction.emoji)
             if op == 1 and self.cursor < len(self.embeds) - 1:
                 self.cursor += 1
@@ -34,7 +35,7 @@ class Paginator:
         def reaction_check(reaction,user):
             return user == self.message.author and reaction.message.id == self.base.id and reaction.emoji in self.pointers
         while True: 
-            reaction, user = await discord.Client.wait_for(self.obj, event='reaction_remove', check=reaction_check)
+            reaction, user = await self.bot.wait_for(self.obj, event='reaction_remove', check=reaction_check)
             op = self.pointers.index(reaction.emoji)
             if op == 1 and self.cursor < len(self.embeds) - 1:
                 self.cursor += 1
@@ -46,7 +47,7 @@ class Paginator:
                 pass                    
 
     async def run(self, content=None):
-        content = content or self.message.author.mention
+        content = content or None
         await self.base.edit(content=content,embed=self.embeds[0])
         for pointer in self.pointers:
             await self.base.add_reaction(pointer)
