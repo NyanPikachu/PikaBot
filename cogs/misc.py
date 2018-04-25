@@ -13,18 +13,6 @@ class Utility:
         self.pokedex = pokedex.Pokedex()
         self.gif_api_key = os.environ.get('GIFTOKEN')
 
-    def emoji_list(self, ctx):
-        for i in ctx.guild.emojis:
-            return i
-
-    def emoji_name(self, ctx):
-        for i in ctx.guild.emojis:
-            return i.name
-
-    def emoji_id(self, ctx):
-        for i in ctx.guild.emojis:
-            return i.id
-
     @commands.command()
     async def gif(self, ctx, *,search=None):
         """get a Gif by name"""

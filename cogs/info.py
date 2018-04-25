@@ -71,7 +71,7 @@ class info:
     @commands.command()
     async def support(self, ctx):
         """get a link to the support server"""
-        await ctx.send('')
+        await ctx.send('You can join the support server from here : https://discord.gg/wMU56UY')
        
 def setup(bot):
     bot.add_cog(info(bot))

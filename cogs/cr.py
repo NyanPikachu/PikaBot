@@ -78,7 +78,7 @@ class Clash_Royale:
         except Exception as e:
             hasClan = False
 
-        pages = []
+        embeds = []
 
         em = discord.Embed(color=discord.Color.gold())
         em.title = profile.name
@@ -96,6 +96,7 @@ class Clash_Royale:
         em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
         em.add_field(name='Upcoming Chests:', value=chests, inline=False)
         em.add_field(name='Chests Until:', value=special, inline=False)
+        em.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Wrapper provided by CodeGrok, API by RoyaleAPI')
         pages.append(em)
 
         if hasClan:
@@ -107,9 +108,14 @@ class Clash_Royale:
             em.add_field(name='Type', value=clan.type)
             em.add_field(name='Donations', value=clan.donations)
             em.add_field(name='Members', value=clan.memberCount)
+            em.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Wrapper provided by CodeGrok, API by RoyaleAPI')
             pages.append(em)
 
         p_session = PaginatorSession(ctx, footer=f'Bot made by Nyan Pikachu#4148 | Wrapper provided by CodeGrok, API by RoyaleAPI', pages=pages)
+        
+        message = ctx
+        base = await ctx.send(content=None, embed=embeds[0])
+        p_session = Paginator(message, base , embeds, self)
         await p_session.run()
 
 def setup(bot):
