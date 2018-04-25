@@ -97,7 +97,7 @@ class Clash_Royale:
         em.add_field(name='Upcoming Chests:', value=chests, inline=False)
         em.add_field(name='Chests Until:', value=special, inline=False)
         em.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Wrapper provided by CodeGrok, API by RoyaleAPI')
-        pages.append(em)
+        embeds.append(em)
 
         if hasClan:
             em = discord.Embed(color=discord.Color.gold())
@@ -109,7 +109,7 @@ class Clash_Royale:
             em.add_field(name='Donations', value=clan.donations)
             em.add_field(name='Members', value=clan.memberCount)
             em.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Wrapper provided by CodeGrok, API by RoyaleAPI')
-            pages.append(em)
+            embeds.append(em)
 
         p_session = PaginatorSession(ctx, footer=f'Bot made by Nyan Pikachu#4148 | Wrapper provided by CodeGrok, API by RoyaleAPI', pages=pages)
         

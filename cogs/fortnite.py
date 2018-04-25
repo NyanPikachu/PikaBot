@@ -58,7 +58,7 @@ class Fortnite:
             embed.add_field(name=lifetime[11].key, value=lifetime[11].value)
             embed.add_field(name=lifetime[12].key, value=lifetime[12].value)
             embed.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com')
-            pages.append(embed)
+            embeds.append(embed)
         
         if hasSolos:
             embed = discord.Embed(color=discord.Color.blue())
@@ -72,7 +72,7 @@ class Fortnite:
             embed.add_field(name='Average kills per match', value=solo.kpg.value)
             embed.add_field(name='Matches Played', value=solo.matches.value)
             embed.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com')
-            pages.append(embed)
+            embeds.append(embed)
         
         if hasDuos:
             embed = discord.Embed(color=discord.Color.blue())
@@ -86,7 +86,7 @@ class Fortnite:
             embed.add_field(name='Average kills per match', value=duos.kpg.value)
             embed.add_field(name='Matches Played', value=duos.matches.value)
             embed.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com')
-            pages.append(embed)
+            embeds.append(embed)
         
         if hasSquads:
             embed = discord.Embed(color=discord.Color.blue())
@@ -100,7 +100,7 @@ class Fortnite:
             embed.add_field(name='Average kills per match', value=squads.kpg.value)
             embed.add_field(name='Matches Played', value=squads.matches.value)
             embed.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com')
-            pages.append(embed)
+            embeds.append(embed)
 
         message = ctx
         base = await ctx.send(content=None, embed=embeds[0])
