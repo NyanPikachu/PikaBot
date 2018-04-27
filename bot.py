@@ -33,7 +33,7 @@ bot.load_extension("cogs.cr")
 bot.load_extension("cogs.fortnite")
 bot.load_extension("cogs.fun")
 bot.load_extension("cogs.mod")
-bot.load_extension("cogs.mod")
+bot.load_extension("cogs.utility")
 
 #eval!!!
 def cleanup_code(content):
@@ -41,7 +41,6 @@ def cleanup_code(content):
     # remove ```py\n```
     if content.startswith('```') and content.endswith('```'):
         return '\n'.join(content.split('\n')[1:-1])
-
     return content.strip('` \n')
 
 @bot.command(name='eval')
