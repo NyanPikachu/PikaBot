@@ -44,9 +44,9 @@ def cleanup_code(content):
 
     return content.strip('` \n')
 
-@bot.command()
+@bot.command(name='eval')
 @utils.developer()
-async def eval(ctx, *, body: str):
+async def _eval(ctx, *, body: str):
         """Evaluates a code"""
 
         env = {
