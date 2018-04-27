@@ -139,7 +139,7 @@ async def ping(ctx):
 
 @bot.command(name='presence')
 @utils.developer()
-async def _presence(ctx, =None, *, game=None):
+async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
     if type is None:
         await ctx.send(f'Usage: `{ctx.prefix}presence [game/stream/watch/listen] [message]`')
