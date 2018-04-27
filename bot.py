@@ -9,7 +9,7 @@ import datetime
 import pynite
 import textwrap
 from contextlib import redirect_stdout
-from ext import utils
+from ext.utils import developer
 import asyncio
 import json
 from motor import motor_asyncio
@@ -44,7 +44,7 @@ def cleanup_code(content):
     return content.strip('` \n')
 
 @bot.command(name='eval')
-@utils.developer()
+@developer()
 async def _eval(ctx, *, body: str):
         """Evaluates a code"""
 
