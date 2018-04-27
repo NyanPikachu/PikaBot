@@ -58,13 +58,16 @@ class info:
         """Change Prefix of the server"""
         guildID = str(ctx.guild.id)
         if not prefix:
-            await ctx.send('Please provide a prefix for this command to work')
+            em = discord.Embed(color=utils.random_color)
+            em.title = f'Usage: {ctx.prefix}prefix <prefix>'
+            em.description ='Pick a custom server prefix!'
+            await ctx.send(embed=em)
         await self.save_prefix(prefix, guildID)
         await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it)')
 
     @commands.command(name='presence')
     @utils.developer()
-    async def _presence(ctx, type: str=None, *, game: str=None):
+    async def _presence(ctx, type, *, game):
         '''Change the bot's presence'''
         if type is None:
             await ctx.send(f'Usage: `{ctx.prefix}presence [game/stream/watch/listen] [message]`')
