@@ -18,7 +18,7 @@ class Bot:
     @commands.command(name="bot")
     async def _bot(self, ctx):
         """Info about the bot"""
-        embed = discord.Embed(color=0xf1c40f)
+        embed = discord.Embed(color=utils.random_color())
         embed.title = "Bot info"
         embed.set_author(name=ctx.message.author.name, icon_url=ctx.author.avatar_url)
         embed.description = "A simple bot created by Nyan Pikachu#4148"
@@ -36,12 +36,12 @@ class Bot:
     async def suggest(self, ctx, suggestion):
         """suggest a feature to be added!"""
         if not suggestion:
-            em = discord.Embed(color=utils.random_color)
+            em = discord.Embed(color=utils.random_color())
             em.title = f'Usage: {ctx.prefix}suggest <suggestion>'
             em.description ='suggest a feature to be added!'
             await ctx.send(embed=em)
         ch = self.bot.get_channel(439454261466628096)
-        em = discord.Embed(color=utils.random_color)
+        em = discord.Embed(color=utils.random_color())
         em.description = str(suggestion)
         em.title = 'Suggestion'
         em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
@@ -59,7 +59,7 @@ class Bot:
         """Change Prefix of the server"""
         guildID = str(ctx.guild.id)
         if not prefix:
-            em = discord.Embed(color=utils.random_color)
+            em = discord.Embed(color=utils.random_color())
             em.title = f'Usage: {ctx.prefix}prefix <prefix>'
             em.description ='Pick a custom server prefix!'
             await ctx.send(embed=em)

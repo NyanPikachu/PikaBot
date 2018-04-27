@@ -15,7 +15,7 @@ class Utility:
 		if not user:
 			user = ctx.author
 		av = user.avatar_url
-		em = discord.Embed()
+		em = discord.Embed(color=utils.random_color())
 		em.set_athor(name=f'{ctx.author.name}\'s avatar!')
 		em.set_image(url=av)
 		await ctx.send(embed=em)
@@ -26,7 +26,7 @@ class Utility:
 		"""user info"""
 		if not user:
 			user = ctx.author
-		embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=utils.random_color)
+		embed = discord.Embed(title="{}'s info".format(user.name), description="Here's what i found.", color=utils.random_color())
 		embed.add_field(name="Name", value=user.name, inline=True)
 		embed.add_field(name="ID", value=user.id, inline=True)
 		embed.add_field(name="Status", value=user.status, inline=True)
@@ -40,7 +40,7 @@ class Utility:
 	@commands.guild_only()
 	async def serverinfo(self, ctx): 
 		"""server info"""
-		embed = discord.Embed(name=f"{user.name}'s info", description="Here's what I found.", color=utils.random_color)
+		embed = discord.Embed(name=f"{user.name}'s info", description="Here's what I found.", color=utils.random_color())
 		embed.set_author(name="Pika Bot")
 		embed.add_field(name="Name", value=ctx.message.guild.name, inline=True)
 		embed.add_field(name="ID", value=ctx.message.guild.id, inline=True)

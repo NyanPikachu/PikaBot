@@ -32,7 +32,7 @@ class Fun:
         '''Get A Pokemon's info!'''
         pokemon = self.pokedex.get_pokemon_by_name(poke)
         try:
-            em = discord.Embed(name=pokemon[0]['name'] + "'s info!")
+            em = discord.Embed(name=pokemon[0]['name'] + "'s info!", color=utils.random_color())
             em.set_author(name=pokemon[0]['name'] + "'s info!")
             em.add_field(name='Species', value=pokemon[0]['species'])
             em.add_field(name='Number', value=pokemon[0]['number'])
@@ -55,7 +55,7 @@ class Fun:
             await ctx.send(f"Please mention someone for this command to work {ctx.author.mention}" )
         r = requests.get(f'http://api.giphy.com/v1/gifs/random?tag=hug&api_key={self.gif_api_key}')
         data = r.json()
-        embed = discord.Embed(title="Hug!".format(user.name), description= f"{ctx.author} has sent {user} a hug !", color=0xffb6c1)
+        embed = discord.Embed(title="Hug!".format(user.name), description= f"{ctx.author} has sent {user} a hug !", color=utils.random_color())
         embed.set_thumbnail(url=user.avatar_url)
         embed.set_image(url=data['data']['images']['fixed_height']['url'])
         await ctx.send(embed=embed)
@@ -94,7 +94,7 @@ class Fun:
         "Ask me again"
         ]
 
-        em = discord.Embed(color=utils.random_color)
+        em = discord.Embed(color=utils.random_color())
         em.title = "8Ball"
         em.add_field(name="Question:", value=magic)
         em.add_field(name='Respone:', value=random.choice(responses))
