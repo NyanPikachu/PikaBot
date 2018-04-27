@@ -9,7 +9,7 @@ import datetime
 import pynite
 import textwrap
 from contextlib import redirect_stdout
-from ext import utility
+from ext import utils
 import asyncio
 import json
 from motor import motor_asyncio
@@ -28,17 +28,12 @@ async def get_pre(bot, message):
 
 bot = commands.Bot(command_prefix=get_pre, description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
 
-
-devs = [
-    279974491071709194,
-    199436790581559296
-]
-
-bot.load_extension("cogs.info")
-bot.load_extension("cogs.mod")
-bot.load_extension("cogs.misc")
-bot.load_extension("cogs.fortnite")
+bot.load_extension("cogs.bot_")
 bot.load_extension("cogs.cr")
+bot.load_extension("cogs.fortnite")
+bot.load_extension("cogs.fun")
+bot.load_extension("cogs.mod")
+bot.load_extension("cogs.mod")
 
 #eval!!!
 def cleanup_code(content):
@@ -50,7 +45,7 @@ def cleanup_code(content):
     return content.strip('` \n')
 
 @bot.command()
-@utility.developer()
+@utils.developer()
 async def eval(ctx, *, body: str):
         """Evaluates a code"""
 
@@ -141,31 +136,5 @@ async def ping(ctx):
     em.title = "Pong!"
     em.description = f'{bot.latency * 1000:.0f} ms'
     await ctx.send(embed=em)
-
-@bot.command(name='presence')
-@utility.developer()
-async def _presence(ctx, type=None, *, game=None):
-    '''Change the bot's presence'''
-    if type is None:
-        await ctx.send(f'Usage: `{ctx.prefix}presence [game/stream/watch/listen] [message]`')
-    else:
-        if type.lower() == 'stream':
-            await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.streaming))
-            await ctx.send(f'Set presence to. `Streaming {game}`')
-        elif type.lower() == 'game':
-            await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.playing))
-            await ctx.send(f'Set presence to `Playing {game}`')
-        elif type.lower() == 'watch':
-            await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.watching))
-            await ctx.send(f'Set presence to `Watching {game}`')
-        elif type.lower() == 'listen':
-            await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.listening))
-            await ctx.send(f'Set presence to `Listening to {game}`')
-        elif type.lower() == 'clear':
-            await bot.change_presence(activity=discord.Activity(name=None))
-            await ctx.send('Cleared Presence')
-        else:
-            await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
  
-
 bot.run(os.environ.get('TOKEN'))

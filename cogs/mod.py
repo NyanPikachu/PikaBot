@@ -8,14 +8,7 @@ class Moderation:
     '''Moderation commands!'''
     def __init__(self, bot):
         self.bot = bot
-        self.dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://PikaBot:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
-        self.db = self.dbclient.pikabot
-      
-    now = datetime.datetime.utcnow()
-    
-    async def save_prefix(self, prefix, guildID):
-        await self.db.settings.update_one({'_id': guildID}, {'$set': {'_id': guildID, 'prefix': prefix}}, upsert=True)
-
+        
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx ,user: discord.Member=None, *, reason: str=None):
@@ -95,16 +88,6 @@ class Moderation:
             warning = f"You have been warned in **{ctx.message.guild}** by **{ctx.message.author}**"
         await user.send(warning)
         await ctx.send(f"**{user}** has been **warned**")
-
-    @commands.command()
-    @commands.has_permissions(manage_messages=True)
-    async def prefix(self, ctx, prefix=None):
-        """Change Prefix of the server"""
-        guildID = str(ctx.guild.id)
-        if not prefix:
-            await ctx.send('Please provide a prefix for this command to work')
-        await self.save_prefix(prefix, guildID)
-        await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it)')
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
