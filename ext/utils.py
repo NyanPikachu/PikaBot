@@ -10,7 +10,7 @@ def developer():
 			if ctx.author.id in devs:
 				return True
 				raise commands.MissingPermissions('Sorry, this command is only available for developers.')
-			return commands.check(wrapper)
+	return commands.check(wrapper)
 
 def random_color():
 	color = random.randint(1, 0xffffff)
