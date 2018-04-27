@@ -154,7 +154,7 @@ async def _presence(ctx, type=None, *, game=None):
             await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.watching))
             await ctx.send(f'Set presence to `Watching {game}`')
         elif type.lower() == 'listen':
-            await .ot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.listening))
+            await bot.change_presence(activity=discord.Activity(name=game, type=discord.ActivityType.listening))
             await ctx.send(f'Set presence to `Listening to {game}`')
         elif type.lower() == 'clear':
             await bot.change_presence(activity=discord.Activity(name=None))
