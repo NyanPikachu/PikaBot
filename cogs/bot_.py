@@ -3,6 +3,7 @@ from discord.ext import commands
 from ext.paginator import Paginator
 from ext import utils
 import os
+from motor import motor_asyncio
 
 class Bot:
     '''Info related commands!'''
