@@ -158,8 +158,8 @@ async def _presence(ctx, type=None, *, game=None):
             await ctx.send(f'Set presence to `Listening to {game}`')
         elif type.lower() == 'clear':
             await bot.change_presence(activity=discord.Activity(name=None))
-                await ctx.send('Cleared Presence')
-            else:
-                await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
+            await ctx.send('Cleared Presence')
+        else:
+            await ctx.send('Usage: `.presence [game/stream/watch/listen] [message]`')
  
 bot.run(os.environ.get('TOKEN'))
