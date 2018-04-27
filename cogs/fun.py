@@ -7,7 +7,7 @@ import requests
 from ext import utils
 import os
 
-class Utility:
+class Fun:
     '''Miscellaneous commands that are fun!'''
     def __init__(self, bot):
         self.bot = bot
@@ -101,4 +101,4 @@ class Utility:
         await ctx.send(embed=em)
     
 def setup(bot):
-    bot.add_cog(Utility(bot))
+    bot.add_cog(Fun(bot))

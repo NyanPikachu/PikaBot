@@ -4,7 +4,7 @@ from ext.paginator import Paginator
 from ext import utils
 import os
 
-class info:
+class Bot:
     '''Info related commands!'''
     def __init__(self, bot):
         self.bot = bot
@@ -66,4 +66,4 @@ class info:
         await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it)')
         
 def setup(bot):
-    bot.add_cog(info(bot))
+    bot.add_cog(Bot(bot))

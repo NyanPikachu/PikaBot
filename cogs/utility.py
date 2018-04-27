@@ -55,3 +55,6 @@ class Utility:
 	async def id(self, ctx, identity: discord.Member or discord.TextChannel):
 		"""Returns a channel or user id"""
 		await ctx.send(f'id: `{identity.id}`')
+
+def setup(bot):
+    bot.add_cog(Utility(bot))
