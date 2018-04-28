@@ -33,13 +33,13 @@ class Bot:
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def suggest(self, ctx, suggestion=None):
+    async def suggest(self, ctx, *, suggestion=None):
         """suggest a feature to be added!"""
         if not suggestion:
             em = discord.Embed(color=utils.random_color())
             em.title = f'Usage: {ctx.prefix}suggest <suggestion>'
             em.description ='suggest a feature to be added!'
-            await ctx.send(embed=em)
+            return await ctx.send(embed=em)
         ch = self.bot.get_channel(439454261466628096)
         em = discord.Embed(color=utils.random_color())
         em.description = str(suggestion)
