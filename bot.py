@@ -140,6 +140,10 @@ async def ping(ctx):
 async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
     if type is None:
+        em = discord.Embed(color=utils.random_color())
+        em.title = f'{ctx.prefix}presence <game/stream/watch/listen> <message>'
+        em.description ='Change Presence of the Bot!'
+        return await ctx.send(embed=em)
         await ctx.send(f'Usage: `{ctx.prefix}presence [game/stream/watch/listen] [message]`')
     else:
         if type.lower() == 'stream':

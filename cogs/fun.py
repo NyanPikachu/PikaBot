@@ -18,8 +18,10 @@ class Fun:
     async def gif(self, ctx, *,search=None):
         """get a Gif by name"""
         if not search:
-            await ctx.send('Please provide a search tag to run this command')
-        search = search.replace(' ', '+')
+            em = discord.Embed(color=utils.random_color())
+            em.title = f'Usage: {ctx.prefix}gif <search tag>'
+            em.description ='Browse the Giphy website for Gifs'
+            return await ctx.send(embed=em)
         try:
             r = requests.get(f'http://api.giphy.com/v1/gifs/search?q={search}&api_key={self.gif_api_key}')
             data = r.json()
@@ -52,7 +54,10 @@ class Fun:
     async def hug(self, ctx, user: discord.Member=None):
         """hugs a user"""
         if not user:
-            await ctx.send(f"Please mention someone for this command to work {ctx.author.mention}" )
+            em = discord.Embed(color=utils.random_color())
+            em.title = f'Usage: {ctx.prefix}hug <user>'
+            em.description ='Hug a person with a random Gif!'
+            return await ctx.send(embed=em)
         r = requests.get(f'http://api.giphy.com/v1/gifs/random?tag=hug&api_key={self.gif_api_key}')
         data = r.json()
         embed = discord.Embed(title="Hug!".format(user.name), description= f"{ctx.author} has sent {user} a hug !", color=utils.random_color())
@@ -81,7 +86,12 @@ class Fun:
         await ctx.send(flip)
 
     @commands.command(name='8ball')
-    async def _8ball(self, ctx, *, magic):
+    async def _8ball(self, ctx, *, magic=None):
+        if not magis:
+            em = discord.Embed(color=utils.random_color())
+            em.title = f'Usage: {ctx.prefix}8ball <Yes/No question>'
+            em.description ='Ask the Mighty 8Ball a question!'
+            return await ctx.send(embed=em)
         responses = [
         "Yes, Of course",
         "Definitely",

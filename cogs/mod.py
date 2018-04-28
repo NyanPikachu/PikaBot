@@ -15,7 +15,10 @@ class Moderation:
         '''Kick a member from the server!'''
         now = datetime.datetime.utcnow()
         if not user:
-            await ctx.send("Please mention a member for this command to work")
+            em = discord.Embed(color=utils.random_color())
+            em.title = f'Usage: {ctx.prefix}kick <member>'
+            em.description ='Kick a Member from the server'
+            return await ctx.send(embed=em)
         try:
             embed = discord.Embed(title=f"Kick | {ctx.guild.name}", color=0xffa500, inline=True)
             embed.add_field(name=f"Moderator:", value=f"{ctx.author.name}", inline=True) 
@@ -43,7 +46,10 @@ class Moderation:
         '''Ban a member from the server!'''
         now = datetime.datetime.utcnow()
         if not user:
-            await ctx.send("Please mention a member for this command to work")
+            em = discord.Embed(color=utils.random_color())
+            em.title = f'Usage: {ctx.prefix}ban <member>'
+            em.description ='Ban a Member from the server'
+            return await ctx.send(embed=em)
         try:
             embed = discord.Embed(title=f"Ban | {ctx.guild.name}", color=0xff0000, inline=True)
             embed.add_field(name=f"Moderator:", value=f"{ctx.author.name}", inline=True) 

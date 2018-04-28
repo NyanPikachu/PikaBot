@@ -53,12 +53,17 @@ class Utility:
 
 	@commands.command()
 	async def id(self, ctx, identity: discord.Member=None):
-		"""Returns a channel or user id"""
+		"""Get the ID of a Member/TextChannel"""
 		if not identity:
-			return await ctx.send('Please provide a User/TextChannel to get an ID')
-		if identity == discord.Member:
+			em = discord.Embed(color=utils.random_color())
+            em.title = f'Usage: {ctx.prefix}id <member/channel>'
+            em.description ='Get the ID of a Member/TextChannel!'
+            return await ctx.send(embed=em)
+		try:
+			await ctx.send(f'id: `{identity.id}`')
+		except Exception
 			identity = discord.TextChannel
-		await ctx.send(f'id: `{identity.id}`')
+			await ctx.send(f'id: `{identity.id}`')
 
 def setup(bot):
     bot.add_cog(Utility(bot))
