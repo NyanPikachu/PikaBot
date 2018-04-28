@@ -52,8 +52,12 @@ class Utility:
 		await ctx.send(embed=embed)
 
 	@commands.command()
-	async def id(self, ctx, identity: discord.Member or discord.TextChannel):
+	async def id(self, ctx, identity: discord.Member=None):
 		"""Returns a channel or user id"""
+		if not identity:
+			return await ctx.send('Please provide a User/TextChannel to get an ID')
+		if identity == discord.Member:
+			identity = discord.TextChannel
 		await ctx.send(f'id: `{identity.id}`')
 
 def setup(bot):

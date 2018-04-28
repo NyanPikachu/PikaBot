@@ -33,7 +33,7 @@ class Bot:
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def suggest(self, ctx, suggestion):
+    async def suggest(self, ctx, suggestion=None):
         """suggest a feature to be added!"""
         if not suggestion:
             em = discord.Embed(color=utils.random_color())
@@ -62,7 +62,7 @@ class Bot:
             em = discord.Embed(color=utils.random_color())
             em.title = f'Usage: {ctx.prefix}prefix <prefix>'
             em.description ='Pick a custom server prefix!'
-            await ctx.send(embed=em)
+            return await ctx.send(embed=em)
         await self.save_prefix(prefix, guildID)
         await ctx.send(f'Prefix `{prefix}` successfully saved (re-run this command to replace it)')
         
