@@ -56,7 +56,7 @@ class Utility:
 		"""Get the ID of a Member/TextChannel"""
 		if not identity:
 			em = discord.Embed(color=utils.random_color())
-            em.title = f'Usage: {ctx.prefix}id <member/channel>'
+            em.title = f'Usage: {ctx.prefix}id <member>/<channel>'
             em.description ='Get the ID of a Member/TextChannel!'
             return await ctx.send(embed=em)
 		try:
