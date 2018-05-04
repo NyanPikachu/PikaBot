@@ -7,10 +7,8 @@ class Utility:
     '''Utility commands!'''
     def __init__(self, bot):
         self.bot = bot
-        
-        
+	
     @commands.command()
-    @commands.guild_only()
     async def avatar(self, ctx, user: discord.Member=None):
         """shows avatar of a certain user"""
         if not user:
