@@ -12,13 +12,13 @@ class Utility:
     async def avatar(self, ctx, user: discord.Member=None):
         """shows avatar of a certain user"""
         if not user:
-		         user = ctx.author
-		     av = user.avatar_url
-		     em = discord.Embed(color=utils.random_color())
-		     em.set_athor(name=f'{ctx.author.name}\'s avatar!')
-		     em.set_image(url=av)
-		     await ctx.send(embed=em)
-		     
+            user = ctx.author
+        av = user.avatar_url
+        em = discord.Embed(color=utils.random_color())
+        em.set_athor(name=f'{ctx.author.name}\'s avatar!')
+        em.set_image(url=av)
+        await ctx.send(embed=em)
+        
     @commands.command(aliases=['ui'])
     @commands.guild_only()
 	async def userinfo(self, ctx, user: discord.Member=None):
