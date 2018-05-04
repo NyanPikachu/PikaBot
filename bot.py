@@ -141,7 +141,8 @@ async def _presence(ctx, type=None, *, game=None):
     '''Change the bot's presence'''
     if not type:
         em = discord.Embed(color=utils.random_color())
-        em.title = f'{ctx.prefix}presence <type> <message>!'
+        title_text = f'{ctx.prefix}presence <type> <message>!'
+        em.title = title_text
         em.description ='Change Presence of the Bot!'
         return await ctx.send(embed=em)
     else:
