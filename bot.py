@@ -88,7 +88,16 @@ async def _eval(ctx, *, body: str):
             else:
                 await ctx.send(f'```py\n{value}{ret}\n```')            
 
-#events                
+#events
+@bot.event
+async def on_message(message):
+    ch = message.channel
+    if message.content == 'pika prefix':
+        em = discord.Embed(color=random_color())
+        em.title = "Server Prefix"
+        em.description = f'The current server prefix is {get_pre}'
+        await ch.send(embed=em)
+        
 @bot.event
 async def on_ready():
     print("Bot is online!")

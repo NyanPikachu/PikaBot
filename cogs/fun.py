@@ -93,11 +93,12 @@ class Fun:
 
     @commands.command(name='8ball')
     async def _8ball(self, ctx, *, magic=None):
-        if not magis:
+        if not magic:
             em = discord.Embed(color=utils.random_color())
             em.title = f'Usage: {ctx.prefix}8ball <Yes/No question>'
             em.description ='Ask the Mighty 8Ball a question!'
             return await ctx.send(embed=em)
+        
         responses = [
         "Yes, Of course",
         "Definitely",
