@@ -96,7 +96,6 @@ class Clash_Royale:
         em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
         em.add_field(name='Upcoming Chests:', value=chests, inline=False)
         em.add_field(name='Chests Until:', value=special, inline=False)
-        em.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Wrapper provided by CodeGrok, API by RoyaleAPI')
         embeds.append(em)
 
         if hasClan:
@@ -108,11 +107,9 @@ class Clash_Royale:
             em.add_field(name='Type', value=clan.type)
             em.add_field(name='Donations', value=clan.donations)
             em.add_field(name='Members', value=clan.memberCount)
-            em.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Wrapper provided by CodeGrok, API by RoyaleAPI')
             embeds.append(em)
 
-        base = await ctx.send(content=None, embed=embeds[0])
-        p_session = Paginator(ctx, base , embeds, self)
+        p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=pages)
         await p_session.run()
 
 def setup(bot):

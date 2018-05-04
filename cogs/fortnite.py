@@ -57,7 +57,6 @@ class Fortnite:
             embed.add_field(name=lifetime[10].key, value=lifetime[10].value)
             embed.add_field(name=lifetime[11].key, value=lifetime[11].value)
             embed.add_field(name=lifetime[12].key, value=lifetime[12].value)
-            embed.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com')
             embeds.append(embed)
         
         if hasSolos:
@@ -71,7 +70,6 @@ class Fortnite:
             embed.add_field(name='Kills', value=solo.kills.value)
             embed.add_field(name='Average kills per match', value=solo.kpg.value)
             embed.add_field(name='Matches Played', value=solo.matches.value)
-            embed.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com')
             embeds.append(embed)
         
         if hasDuos:
@@ -85,7 +83,6 @@ class Fortnite:
             embed.add_field(name='Kills', value=duos.kills.value)
             embed.add_field(name='Average kills per match', value=duos.kpg.value)
             embed.add_field(name='Matches Played', value=duos.matches.value)
-            embed.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com')
             embeds.append(embed)
         
         if hasSquads:
@@ -99,11 +96,9 @@ class Fortnite:
             embed.add_field(name='Kills', value=squads.kills.value)
             embed.add_field(name='Average kills per match', value=squads.kpg.value)
             embed.add_field(name='Matches Played', value=squads.matches.value)
-            embed.set_footer(text=f'Bot made by Nyan Pikachu#4148 | Powered by fortnitetracker.com')
             embeds.append(embed)
 
-        base = await ctx.send(content=None, embed=embeds[0])
-        p_session = Paginator(ctx, base , embeds, self)
+        p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=pages)
         await p_session.run()
         
 def setup(bot):
