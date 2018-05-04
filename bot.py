@@ -95,7 +95,7 @@ async def on_message(message):
     if message.content == 'pika prefix':
         em = discord.Embed(color=utils.random_color())
         em.title = "Server Prefix"
-        em.description = f'The current server prefix is {get_pre}'
+        em.description = f'The current server prefix is `{get_pre()}`'
         await ch.send(embed=em)
     await bot.process_commands(message)
 

@@ -28,8 +28,6 @@ class Fun:
             pic = data['data'][0]['images']['fixed_height']['url']
             em = discord.Embed(color=utils.random_color())
             em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-            em.description = 'here is your Gif '
-            em.add_field(name='Link:', value=pic)
             em.set_image(url=pic)
             await ctx.send(embed=em)
         except Exception as e:
