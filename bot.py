@@ -97,6 +97,7 @@ async def on_message(message):
         em.title = "Server Prefix"
         em.description = f'The current server prefix is {get_pre}'
         await ch.send(embed=em)
+    await bot.process_commands(message)
 
 @bot.event
 async def on_ready():
