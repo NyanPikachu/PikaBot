@@ -21,7 +21,7 @@ class Utility:
         
     @commands.command(aliases=['ui'])
     @commands.guild_only()
-	async def userinfo(self, ctx, user: discord.Member=None):
+    async def userinfo(self, ctx, user: discord.Member=None):
         """user info"""
         if not user:
             user = ctx.author
