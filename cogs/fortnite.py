@@ -43,7 +43,7 @@ class Fortnite:
         except Exception as e:
             hasLifetime = False
             
-        pages = []
+        embeds = []
 
         if hasLifetime:
             embed = discord.Embed(color=discord.Color.blue())
@@ -98,7 +98,7 @@ class Fortnite:
             embed.add_field(name='Matches Played', value=squads.matches.value)
             embeds.append(embed)
 
-        p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=pages)
+        p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=embeds)
         await p_session.run()
         
 def setup(bot):

@@ -78,7 +78,7 @@ class Clash_Royale:
         except Exception as e:
             hasClan = False
 
-        pages = []
+        embeds = []
 
         em = discord.Embed(color=discord.Color.gold())
         em.title = profile.name
@@ -109,7 +109,7 @@ class Clash_Royale:
             em.add_field(name='Members', value=clan.memberCount)
             embeds.append(em)
 
-        p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=pages)
+        p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=embeds)
         await p_session.run()
 
 def setup(bot):
