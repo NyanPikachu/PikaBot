@@ -43,7 +43,7 @@ class Fortnite:
         except Exception as e:
             hasLifetime = False
             
-        embeds = []
+        pages = []
 
         if hasLifetime:
             embed = discord.Embed(color=discord.Color.blue())

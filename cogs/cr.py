@@ -78,7 +78,7 @@ class Clash_Royale:
         except Exception as e:
             hasClan = False
 
-        embeds = []
+        pages = []
 
         em = discord.Embed(color=discord.Color.gold())
         em.title = profile.name
