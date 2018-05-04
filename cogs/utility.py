@@ -59,11 +59,11 @@ class Utility:
             em.title = f'Usage: {ctx.prefix}id <member>/<channel>'
             em.description ='Get the ID of a Member/TextChannel!'
             return await ctx.send(embed=em)
-		try:
-			await ctx.send(f'id: `{identity.id}`')
-		except Exception
-			identity = discord.TextChannel
-			await ctx.send(f'id: `{identity.id}`')
+        try:
+            await ctx.send(f'id: `{identity.id}`')
+        except Exception:
+            identity = discord.TextChannel
+            await ctx.send(f'id: `{identity.id}`')
 
 def setup(bot):
     bot.add_cog(Utility(bot))
