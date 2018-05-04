@@ -92,10 +92,19 @@ async def _eval(ctx, *, body: str):
 @bot.event
 async def on_message(message):
     ch = message.channel
+    if message.author.bot:
+        return
+    
     if message.content == 'pika prefix':
+        result = await db.settings.find_one({'_id': str(message.guild.id)})
+        if not result or not result.get('prefix'):
+            pre = ["P.", "p.", f"{bot.user.mention} "]
+            prefix = ", ".join(pre)
+        else:
+            prefix = result.get('prefix')
         em = discord.Embed(color=utils.random_color())
         em.title = "Server Prefix"
-        em.description = f'The current server prefix is `{get_pre()}`'
+        em.description = f'The current server prefix is `{prefix}`'
         await ch.send(embed=em)
     await bot.process_commands(message)
 
