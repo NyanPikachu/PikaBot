@@ -4,21 +4,21 @@ import os
 from ext import utils
 
 class Utility:
-	'''Utility commands!'''
-	def __init__(self, bot):
-		self.bot = bot
+    '''Utility commands!'''
+    def __init__(self, bot):
+	self.bot = bot
 
-	@commands.command()
-	@commands.guild_only()
-	async def avatar(self, ctx, user: discord.Member=None):
-		"""shows avatar of a certain user"""
-		if not user:
-			user = ctx.author
-		av = user.avatar_url
-		em = discord.Embed(color=utils.random_color())
-		em.set_athor(name=f'{ctx.author.name}\'s avatar!')
-		em.set_image(url=av)
-		await ctx.send(embed=em)
+    @commands.command()
+    @commands.guild_only()
+    async def avatar(self, ctx, user: discord.Member=None):
+        """shows avatar of a certain user"""
+	if not user:
+		user = ctx.author
+	av = user.avatar_url
+	em = discord.Embed(color=utils.random_color())
+	em.set_athor(name=f'{ctx.author.name}\'s avatar!')
+	em.set_image(url=av)
+	await ctx.send(embed=em)
 
 	@commands.command(aliases=['ui'])
 	@commands.guild_only()
@@ -50,8 +50,7 @@ class Utility:
 		embed.add_field(name="Created at", value=(ctx.message.guild.created_at))
 		embed.set_thumbnail(url=ctx.message.guild.icon_url)
 		await ctx.send(embed=embed)
-
-	@commands.command()
+    @commands.command()
 	async def id(self, ctx, identity: discord.Member=None):
 		"""Get the ID of a Member/TextChannel"""
 		if not identity:
