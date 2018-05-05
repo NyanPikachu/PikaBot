@@ -13,6 +13,54 @@ class Fun:
         self.bot = bot
         self.pokedex = pokedex.Pokedex()
         self.gif_api_key = os.environ.get('GIFTOKEN')
+        self.meme_api_key = os.environ.get('MEMETOKEN')
+
+    def meme_data(self, code):
+        r = requests.get(f'http://version1.api.memegenerator.net//Generators_Search?q=insanity&pageIndex=0&pageSize=12&apiKey={self.meme_api_key}')
+        data = r.json(code)
+
+    #memes
+    @commands.group(invoke_without_command=True)
+    async def meme(self, ctx):
+        '''Provides you with a great collection of the dankest memes on the Internet'''
+        em = discord.Embed(color=utils.random_color())
+        em.title = f'Usage: {ctx.prefix}memes <search>/<popular>/<new>'
+        em.description ='Browse the Giphy website for Gifs'
+        await ctx.send(embed=em)
+
+    @meme.command()
+    async def search(self, ctx, *, search):
+        '''Search for a Meme from the internet!'''
+        if not search:
+            em = discord.Embed(color=utils.random_color())
+            em.title = f'Usage: {ctx.prefix}memes <search>/<popular>/<new>'
+            em.description ='Browse the Giphy website for Gifs'
+            await ctx.send(embed=em)
+        displayName = meme_data(['result'][0]['displayName'])
+        imageUrl = meme_data(['result'][0]['imageUrl'])
+        try:
+            em = discord.Embed(color=utils.random_color())
+            em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            em.description = f"Name: {meme_data(['result'][0]['displayName'])}"
+            em.set_image(url=imageUrl)
+            em.set_footer(test=f'Meme Ranking: {meme_data(['result'][0]['ranking'])} | powered by memegenerator.net')
+            await ctx.send(embed=em)
+
+    @meme.command()
+    async def popular(self, ctx):
+        r = requests.get(f'http://api.giphy.com/v1/gifs/search?q={search}&api_key={self.gif_api_key}')
+        data = r.json()
+        try:
+            embeds = []
+            for resp in data:
+                em = discord.Embed(color=utils.random_color())
+                em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+                em.description = f'Name:{resp['displayName']}\nMeme Ranking: {resp['ranking']}'
+                em.set_image(url=resp['imageUrl'])
+                em.set_footer(test=f' | powered by memegenerator.net')
+                embeds.append(em)
+            p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=embeds)
+            await p_session.run()
 
     @commands.command()
     async def gif(self, ctx, *,search=None):
@@ -22,10 +70,10 @@ class Fun:
             em.title = f'Usage: {ctx.prefix}gif <search tag>'
             em.description ='Browse the Giphy website for Gifs'
             return await ctx.send(embed=em)
+        r = requests.get(f'http://api.giphy.com/v1/gifs/search?q={search}&api_key={self.gif_api_key}')
+        data = r.json()
+        pic = data['data'][0]['images']['fixed_height']['url']
         try:
-            r = requests.get(f'http://api.giphy.com/v1/gifs/search?q={search}&api_key={self.gif_api_key}')
-            data = r.json()
-            pic = data['data'][0]['images']['fixed_height']['url']
             em = discord.Embed(color=utils.random_color())
             em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             em.set_image(url=pic)
