@@ -41,7 +41,7 @@ class Fun:
             em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             em.description = f"Name: {data['result'][0]['displayName']}"
             em.set_image(url=imageUrl)
-            em.set_footer(test=f'Meme Ranking: {data['result'][0]['ranking']} | powered by memegenerator.net')
+            em.set_footer(test=f'Powered by memegenerator.net')
             await ctx.send(embed=em)
 
     @meme.command()
@@ -53,7 +53,7 @@ class Fun:
             for resp in data:
                 em = discord.Embed(color=utils.random_color())
                 em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-                em.description = f'Name:{resp['displayName']}\nMeme Ranking: {resp['ranking']}'
+                em.description = f'Name: ' + resp['displayName'] + '\nMeme Ranking: ' + resp['ranking']
                 em.set_image(url=resp['imageUrl'])
                 em.set_footer(test=f' | powered by memegenerator.net')
                 embeds.append(em)
@@ -157,8 +157,8 @@ class Fun:
 
         em = discord.Embed(color=utils.random_color())
         em.title = "8Ball"
-        em.add_field(name="Question:", value=magic)
-        em.add_field(name='Respone:', value=random.choice(responses))
+        em.add_field(name="Question:", value=magic, inline=False)
+        em.add_field(name='Respone:', value=random.choice(responses), inline=False)
         await ctx.send(embed=em)
     
 def setup(bot):
