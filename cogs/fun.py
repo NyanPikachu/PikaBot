@@ -32,7 +32,7 @@ class Fun:
             em.title = f'Usage: {ctx.prefix}memes <search>/<popular>/<new>'
             em.description ='Browse the Giphy website for Gifs'
             await ctx.send(embed=em)
-        r = requests.get(f'http://version1.api.memegenerator.net//Generators_Search?q=insanity&pageIndex=0&pageSize=12&apiKey={self.meme_api_key}')
+        r = requests.get(f'http://version1.api.memegenerator.net//Generators_Search?q={search}&pageIndex=0&pageSize=12&apiKey={self.meme_api_key}')
         data = r.json()
         displayName = data['result'][0]['displayName']
         imageUrl = data['result'][0]['imageUrl']
@@ -48,7 +48,7 @@ class Fun:
 
     @meme.command()
     async def popular(self, ctx):
-        r = requests.get(f'http://api.giphy.com/v1/gifs/search?q={search}&api_key={self.gif_api_key}')
+        r = requests.get(f'http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=12&days=&apiKey{self.meme_api_key}')
         data = r.json()
         try:
             embeds = []
