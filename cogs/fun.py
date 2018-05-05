@@ -51,19 +51,16 @@ class Fun:
         r = requests.get(f'http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=12&days=&apiKey{self.meme_api_key}')
         data = r.json()
         response = data['result']
-        try:
-            embeds = []
-            for resp in response:
-                em = discord.Embed(color=utils.random_color())
-                em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-                em.description = f'Name: ' + resp['displayName'] + '\nMeme Ranking: ' + resp['ranking']
-                em.set_image(url=resp['imageUrl'])
-                em.set_footer(test=f' | powered by memegenerator.net')
-                embeds.append(em)
-            p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=embeds)
-            await p_session.run()
-        except Exception as e:
-            await ctx.send('Oops, looks like a nasty bug\nCode: ```' + str(e) + '```')
+        embeds = []
+        for resp in response:
+            em = discord.Embed(color=utils.random_color())
+            em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            em.description = f'Name: {resp['displayName']}'
+            em.set_image(url=resp['imageUrl'])
+            em.set_footer(test=f' | powered by memegenerator.net')
+            embeds.append(em)
+        p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=embeds)
+        await p_session.run()
 
     @commands.command()
     async def gif(self, ctx, *,search=None):
