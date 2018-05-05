@@ -50,9 +50,10 @@ class Fun:
     async def popular(self, ctx):
         r = requests.get(f'http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=12&days=&apiKey{self.meme_api_key}')
         data = r.json()
+        response = data['results']
         try:
             embeds = []
-            for resp in data:
+            for resp in response:
                 em = discord.Embed(color=utils.random_color())
                 em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
                 em.description = f'Name: ' + resp['displayName'] + '\nMeme Ranking: ' + resp['ranking']
