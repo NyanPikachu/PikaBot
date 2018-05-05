@@ -43,6 +43,8 @@ class Fun:
             em.set_image(url=imageUrl)
             em.set_footer(test=f'Powered by memegenerator.net')
             await ctx.send(embed=em)
+        except Exception as e:
+            await ctx.send('Oops, looks like a nasty bug\nCode:' + str(e))
 
     @meme.command()
     async def popular(self, ctx):
@@ -59,6 +61,8 @@ class Fun:
                 embeds.append(em)
             p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=embeds)
             await p_session.run()
+        except Exception as e:
+            await ctx.send('Oops, looks like a nasty bug\nCode:' + str(e))
 
     @commands.command()
     async def gif(self, ctx, *,search=None):
