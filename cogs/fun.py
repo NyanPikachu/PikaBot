@@ -15,10 +15,6 @@ class Fun:
         self.gif_api_key = os.environ.get('GIFTOKEN')
         self.meme_api_key = os.environ.get('MEMETOKEN')
 
-    def meme_data(self, code):
-        r = requests.get(f'http://version1.api.memegenerator.net//Generators_Search?q=insanity&pageIndex=0&pageSize=12&apiKey={self.meme_api_key}')
-        data = r.json(code)
-
     #memes
     @commands.group(invoke_without_command=True)
     async def meme(self, ctx):
@@ -36,14 +32,16 @@ class Fun:
             em.title = f'Usage: {ctx.prefix}memes <search>/<popular>/<new>'
             em.description ='Browse the Giphy website for Gifs'
             await ctx.send(embed=em)
-        displayName = meme_data(['result'][0]['displayName'])
-        imageUrl = meme_data(['result'][0]['imageUrl'])
+        r = requests.get(f'http://version1.api.memegenerator.net//Generators_Search?q=insanity&pageIndex=0&pageSize=12&apiKey={self.meme_api_key}')
+        data = r.json()
+        displayName = data['result'][0]['displayName']
+        imageUrl = data['result'][0]['imageUrl']
         try:
             em = discord.Embed(color=utils.random_color())
             em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-            em.description = f"Name: {meme_data(['result'][0]['displayName'])}"
+            em.description = f"Name: {data['result'][0]['displayName']}"
             em.set_image(url=imageUrl)
-            em.set_footer(test=f'Meme Ranking: {meme_data(['result'][0]['ranking'])} | powered by memegenerator.net')
+            em.set_footer(test=f'Meme Ranking: {data['result'][0]['ranking']} | powered by memegenerator.net')
             await ctx.send(embed=em)
 
     @meme.command()
