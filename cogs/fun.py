@@ -50,7 +50,7 @@ class Fun:
     async def popular(self, ctx):
         r = requests.get(f'http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=12&days=&apiKey{self.meme_api_key}')
         data = r.json()
-        response = data['results']
+        response = data['result']
         try:
             embeds = []
             for resp in response:
