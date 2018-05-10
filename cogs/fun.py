@@ -59,7 +59,7 @@ class Fun:
             em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             em.description = f'Name: {name}'
             em.set_image(url=image)
-            em.set_footer(test=f' | powered by memegenerator.net')
+            em.set_footer(text=f' | powered by memegenerator.net')
             embeds.append(em)
         p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148', pages=embeds)
         await p_session.run()
