@@ -6,6 +6,7 @@ from pokedex import pokedex
 import requests
 from ext import utils
 import os
+from ext.paginator import Paginator
 
 class Fun:
     '''Miscellaneous commands that are fun!'''
