@@ -39,7 +39,7 @@ class Fun:
         try:
             em = discord.Embed(color=utils.random_color())
             em.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-            em.description = f"Name: {data['result'][0]['displayName']}"
+            em.description = f"Name: {displayName}"
             em.set_image(url=imageUrl)
             em.set_footer(text=f'Powered by memegenerator.net')
             await ctx.send(embed=em)
