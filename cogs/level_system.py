@@ -24,7 +24,7 @@ class xp:
     		return "Not Found"
     	return result['userID']
 
-    async def on_message(message):
+    async def on_message(self, message):
     	ch = message.channel
     	guild = message.guild.id
     	user = message.author.id
