@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from motor import motor_asyncio
 from ext import utils
+import os
 
 class xp:
     '''XP commands for leveling System within the bot'''
