@@ -9,7 +9,6 @@ class xp:
         self.bot = bot
         self.dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://PikaBot:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
         self.db = self.dbclient.pikabot
-    client = self.bot
 
     async def update_xp(self, xp: int, guildID, userID):
         await self.db.xp.update_one({'_id': guildID}, {'$set': {'_id': guildID, userID: xp}}, upsert=True)
@@ -24,7 +23,6 @@ class xp:
     		return "Not Found"
     	return result['userID']
 
-    @client.event
     async def on_message(message):
     	ch = message.channel
     	guild = message.guild.id
