@@ -32,7 +32,7 @@ class xp:
     	if message.author.bot:
     		return
     	try:
-    		update_xp(15, guild, user)
+    		self.update_xp(15, guild, user)
     	except Exception as e:
     		await ch.send(e)
 
