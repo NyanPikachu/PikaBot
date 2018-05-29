@@ -36,7 +36,7 @@ class xp:
     	except Exception as e:
     		await ch.send(e)
 
-    	await bot.process_commands(message)
+    	await self.bot.process_commands(message)
 
 def setup(bot):
     bot.add_cog(xp(bot))
