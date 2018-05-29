@@ -16,8 +16,8 @@ class xp:
 
     async def on_message(self, message):
     	ch = message.channel
-    	guild = message.guild.id
-    	user = message.author.id
+    	guild = str(message.guild.id)
+    	user = str(message.author.id)
 
     	if message.author.bot:
     		return
