@@ -14,16 +14,6 @@ class xp:
     async def update_xp(self, xp: int, guildID, userID):
         await self.db.xp.update_one({'_id': guildID}, {'$set': {'_id': guildID, userID: xp}}, upsert=True)
 
-    async def get_xp(self, guildID, userID):
-    	try:
-    		result = await db.settings.find_one({'_id': userID})
-    	except Exception as e:
-    		er = f'error : `{e}`'
-    		return er
-    	if not result or not result.get('prefix'):
-    		return "Not Found"
-    	return result['userID']
-
     async def on_message(self, message):
     	ch = message.channel
     	guild = message.guild.id
@@ -32,7 +22,7 @@ class xp:
     	if message.author.bot:
     		return
     	try:
-    		self.update_xp(15, guild, user)
+    		await self.update_xp(15, guild, user)
     	except Exception as e:
     		await ch.send(e)
 
