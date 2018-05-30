@@ -11,21 +11,22 @@ class xp:
         self.dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://PikaBot:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
         self.db = self.dbclient.pikabot
 
-    async def update_xp(self, xp: int, guildID, userID):
+    async def update_xp(self, guildID, userID, xp: int):
         await self.db.xp.update_one({'_id': guildID}, {'$set': {'_id': guildID, userID: {"xp_amount": xp}}}, upsert=True)
 
     async def get_xp(self, guildID, userID):   
-        result = await self.db.xp.find_one({'_id': guildID})
-        return result['userID']['xp_amount']
-        if not result or not result.get('userID')('xpamount'):
+        try:
+            result = await self.db.xp.find_one({'_id': str(guildID)})
+            return result['userID']['xp_amount']
+        except Exception:
             return 0
 
     async def on_message(self, message):
         ch = message.channel
-        guild = str(message.guild.id)
+        guildID = str(message.guild.id)
         user = str(message.author.id)
         try:
-            old_xp = await self.get_xp(guild, user)
+            old_xp = await self.get_xp(guildID, userID)
         except Exception:
             old_xp = 0
         new_xp =  int(old_xp) + 15
@@ -33,7 +34,7 @@ class xp:
         if message.author.bot:
             return
         try:
-            await self.update_xp(new_xp, guild, user)
+            await self.update_xp(guildID, userID, new_xp)
         except Exception as e:
             await ch.send(e)
 
