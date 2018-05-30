@@ -17,7 +17,7 @@ class xp:
     async def get_xp(self, guildID, userID):   
         try:
             result = await self.db.xp.find_one({'_id': str(guildID)})
-            return result['userID']['xp_amount']
+            return result[userID]['xp_amount']
         except Exception:
             return 0
 
