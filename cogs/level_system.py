@@ -28,8 +28,8 @@ class xp:
         ch = message.channel
         guild = str(message.guild.id)
         user = str(message.author.id)
-        old_xp = self.get_xp(guild, user)
-        new_xp =  int(self.get_xp(guild, user)) + 15
+        old_xp = await self.get_xp(guild, user)
+        new_xp =  int(old_xp) + 15
 
         if message.author.bot:
             return
