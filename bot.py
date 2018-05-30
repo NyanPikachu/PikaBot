@@ -111,7 +111,7 @@ async def on_message(message):
 @bot.event
 async def on_ready():
     print("Bot is online!")
-    await bot.change_presence(activity=discord.Activity(name=f'{len(bot.guilds)} servers! | p.help', type=discord.ActivityType.streaming))
+    await bot.change_presence(activity=discord.Activity(name=f'over {len(bot.guilds)} servers! | p.help', type=discord.ActivityType.watching))
     x = bot.get_channel(424677910314745856)
     now = datetime.datetime.utcnow()
     em = discord.Embed(color=discord.Color.gold())
