@@ -14,10 +14,9 @@ class xp:
     async def update_xp(self, xp: int, guildID, userID):
         await self.db.xp.update_one({'_id': guildID}, {'$set': {'_id': guildID, userID: {"xp_amount": xp}}}, upsert=True)
 
-    async def get_xp(self, guildID, userID):
-        try:
-            result = await self.db.xp.find_one({'_id': guildID})
-            return result['userID']['xp_amount']
+    async def get_xp(self, guildID, userID):   
+        result = await self.db.xp.find_one({'_id': guildID})
+        return result['userID']['xp_amount']
         if not result or not result.get('userID')('xpamount'):
             return 0
 
