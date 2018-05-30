@@ -32,7 +32,7 @@ class xp:
             old_xp = await self.get_xp(guild, user)
         except Exception:
             old_xp = 0
-        new_xp =  old_xp + 15
+        new_xp =  int(old_xp) + 15
 
         if message.author.bot:
             return
