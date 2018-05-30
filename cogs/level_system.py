@@ -28,7 +28,7 @@ class xp:
         try:
             result = await self.db.profiles.find_one({'_id': str(userID)})
             description = result[userID]['description']
-            if description =! "I'm a very average person":
+            if description != "I'm a very average person":
                 pass
             elif not result or description:
                 await self.db.profiles.update_one({'_id': userID}, {'$set': userID: {'description': "I'm a very average person"}})
