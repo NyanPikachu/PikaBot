@@ -24,7 +24,7 @@ class xp:
     async def on_message(self, message):
         ch = message.channel
         guildID = str(message.guild.id)
-        user = str(message.author.id)
+        userID = str(message.author.id)
         try:
             old_xp = await self.get_xp(guildID, userID)
         except Exception:
