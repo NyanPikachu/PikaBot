@@ -18,9 +18,6 @@ class xp:
         try:
             result = await self.db.xp.find_one({'_id': guildID})
             return result['userID']['xp_amount']
-        except Exception as e:
-            er = f'error : `{e}`'
-            return er
         if not result or not result.get('userID')('xpamount'):
             return 0
 
