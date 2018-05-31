@@ -26,7 +26,7 @@ class xp:
         try:
             result = await self.db.profiles.find_one({'_id': str(userID)})
             description = result[userID]['description']
-            if description is None:
+            if description == 'None':
                 await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
                 result = await self.db.profiles.find_one({'_id': str(userID)})
                 description = result[userID]['description']
