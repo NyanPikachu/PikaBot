@@ -67,11 +67,12 @@ class xp:
         guildID = str(ctx.guild.id)
         
         total_xp = await self.get_xp(guildID, userID)
+        description = await self.get_desc(userID)
 
         embed = discord.Embed(color=utils.random_color())
         embed.add_field(name="Name", value=user.name, inline=True)
         embed.add_field(name="ID", value=user.id, inline=True)
-        embed.add_field(name='Description', value=await self.get_desc)
+        embed.add_field(name='Description', value=description)
         embed.add_field(name='Total_XP', value=total_xp)
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
