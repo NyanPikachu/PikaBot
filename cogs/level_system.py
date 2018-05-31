@@ -26,6 +26,7 @@ class xp:
         try:
             result = await self.db.profiles.find_one({'_id': str(userID)})
             description = result[userID]['description']
+            return description
         except Exception:
             await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
 
@@ -70,7 +71,7 @@ class xp:
         embed = discord.Embed(color=utils.random_color())
         embed.add_field(name="Name", value=user.name, inline=True)
         embed.add_field(name="ID", value=user.id, inline=True)
-        embed.add_field(name='Description', value=self.get_desc)
+        embed.add_field(name='Description', value=await self.get_desc)
         embed.add_field(name='Total_XP', value=total_xp)
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
