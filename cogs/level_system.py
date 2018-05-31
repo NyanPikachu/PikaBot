@@ -61,7 +61,7 @@ class xp:
         result = await self.db.profiles.find_one({'_id': str(userID)})
         try:
             description = result[userID]['description']
-        except AttributeError:
+        except Exception:
             await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
 
         total_xp = await self.get_xp(guildID, userID)
