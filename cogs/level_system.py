@@ -73,6 +73,7 @@ class xp:
         embed.add_field(name='Description', value=self.get_desc)
         embed.add_field(name='Total_XP', value=total_xp)
         embed.set_thumbnail(url=user.avatar_url)
+        await ctx.send(embed=embed)
 
     @commands.command()
     async def description(self, ctx, body):
