@@ -52,8 +52,6 @@ class xp:
         except Exception as e:
             await ch.send(e)
 
-        await self.bot.process_commands(message)
-
     @commands.command()
     async def profile(self, ctx, user: discord.Member=None):
         if not user:
