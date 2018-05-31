@@ -37,15 +37,13 @@ class xp:
     #events
     async def on_member_join(self, member):
         userID = str(member.id)
-        try:
-            result = await self.db.profiles.find_one({'_id': str(userID)})
-            description = result[userID]['description']
-            if description != "I'm a very average person":
-                pass
-            elif not result or description:
-                await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
-        except Exception as e:
-            err = f"Error: `{e}`"
+        result = await self.db.profiles.find_one({'_id': str(userID)})
+        description = result[userID]['description']
+        if description != "I'm a very average person":
+            pass
+        elif not result or description:
+            await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
+
 
     async def on_message(self, message):
         if message.author.bot:
