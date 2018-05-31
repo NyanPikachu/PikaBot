@@ -59,7 +59,7 @@ class xp:
         if not user:
             user = ctx.author
         userID = user.id
-        guild.id = ctx.guild.id
+        guildID = ctx.guild.id
         result = await self.db.profiles.find_one({'_id': str(userID)})
         description = result[userID]['description']
         total_xp = await self.get_xp(guildID, userID)
