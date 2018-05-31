@@ -58,8 +58,8 @@ class xp:
     async def profile(self, ctx, user: discord.Member=None):
         if not user:
             user = ctx.author
-        userID = user.id
-        guildID = ctx.guild.id
+        userID = str(user.id)
+        guildID = str(ctx.guild.id)
         result = await self.db.profiles.find_one({'_id': str(userID)})
         try:
             description = result[userID]['description']
@@ -77,11 +77,12 @@ class xp:
 
     @commands.command()
     async def description(self, ctx, body):
-        userID = ctx.author.id
+        userID = str(ctx.author.id)
         if len(body) >= 256:
             await ctx.send('Desciption must not be longer than 256 characters')
         else:
             await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': body}}})
+            await ctx.send('Description updated :white_check_mark:')
 
 def setup(bot):
     bot.add_cog(xp(bot))
