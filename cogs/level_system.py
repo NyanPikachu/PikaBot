@@ -30,7 +30,7 @@ class xp:
             await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
 
     #events
-    async def on_member_join(member):
+    async def on_member_join(self, member):
         userID = str(member.id)
         try:
             result = await self.db.profiles.find_one({'_id': str(userID)})
@@ -43,6 +43,8 @@ class xp:
             err = f"Error: `{e}`"
 
     async def on_message(self, message):
+        if message.author.bot:
+            return
         ch = message.channel
         guildID = str(message.guild.id)
         userID = str(message.author.id)
@@ -51,9 +53,6 @@ class xp:
         except Exception:
             old_xp = 0
         new_xp =  int(old_xp) + 8
-
-        if message.author.bot:
-            return
         try:
             await self.update_xp(guildID, userID, new_xp)
         except Exception as e:
