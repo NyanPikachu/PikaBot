@@ -61,7 +61,11 @@ class xp:
         userID = user.id
         guildID = ctx.guild.id
         result = await self.db.profiles.find_one({'_id': str(userID)})
-        description = result[userID]['description']
+        try:
+            description = result[userID]['description']
+        except AttributeError:
+            await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
+
         total_xp = await self.get_xp(guildID, userID)
 
         embed = discord.Embed(color=utils.random_color())
@@ -77,7 +81,7 @@ class xp:
         if len(body) >= 256:
             await ctx.send('Desciption must not be longer than 256 characters')
         else:
-            await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': description}}})
+            await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': body}}})
 
 def setup(bot):
     bot.add_cog(xp(bot))
