@@ -31,7 +31,7 @@ class xp:
             if description != "I'm a very average person":
                 pass
             elif not result or description:
-                await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID}, userID: {'description': "I'm a very average person"}})
+                await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
         except Exception as e:
             err = f"Error: `{e}`"
 
@@ -77,7 +77,7 @@ class xp:
         if len(body) >= 256:
             await ctx.send('Desciption must not be longer than 256 characters')
         else:
-            await self.db.profiles.update_one({'_id': userID}, {'$set': userID: {'description': description}})
+            await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': description}}})
 
 def setup(bot):
     bot.add_cog(xp(bot))
