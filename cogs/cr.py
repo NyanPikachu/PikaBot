@@ -69,7 +69,6 @@ class Clash_Royale:
             tag = await self.get_tag(authorID)
         profile = await self.client.get_player(tag)
 
-        chests = self.get_chests(ctx, tag)[0]
         special = self.get_chests(ctx, profile)[1]
 
         hasClan = True
