@@ -39,8 +39,7 @@ class Clash_Royale:
         return self.bot.get_emoji(e)
 
     #next lines of codes are provided by RemixBot, we give full credits to them
-    async def get_chests(self, ctx, tag):
-        cycle = await self.client.get_player_chests(tag)
+    def get_chests(self, ctx, cycle):
         chests = f'| {self.emoji("chest" + cycle.upcoming[0].lower())} | '
         chests += ''.join([f'{self.emoji("chest" + cycle.upcoming[x].lower())}' for x in range(1, 8)])
         special = f'{self.emoji("chestsupermagical")}{cycle.super_magical} {self.emoji("chestmagical")}{cycle.magical} {self.emoji("chestlegendary")}{cycle.legendary} {self.emoji("chestepic")}{cycle.epic} {self.emoji("chestgiant")}{cycle.giant}'
@@ -68,8 +67,10 @@ class Clash_Royale:
                 await ctx.send(f'Please provide a tag or save your tag using `{ctx.prefix}crsave <tag>`')
             tag = await self.get_tag(authorID)
         profile = await self.client.get_player(tag)
+        cycle = await self.client.get_player_chests(tag)
 
-        special = self.get_chests(ctx, profile)[1]
+        chests = self.get_chests(ctx, cycle)[0]
+        special = self.get_chests(ctx, cycle)[1]
 
         hasClan = True
         try:
