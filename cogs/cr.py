@@ -111,7 +111,7 @@ class Clash_Royale:
         else:
             clans = self.client.get_top_clans()
             em = discord.Embed(color=utils.random_color())
-            em.title profile.name
+            em.title = profile.name
             em.description = 'huh, looks like you are not in a clan yet! Joining a clan gives you extra fancy features ya know? like Clan Wars and cards donation(yup those donation that you saw on the previous screen, if you ever notice that). These are some of the top clans right now!'
             em.add_field(name'Top Clans:', value=f'{clans[0]['name']}\n{clans[1]['name']}\n{clans[2]['name']}\n{clans[3]['name']}')
 
