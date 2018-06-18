@@ -22,12 +22,6 @@ class Clash_Royale:
                 return False
         return True
 
-    def removeChars(self, string):
-        characters = ["{", "}"]
-        for char in characters:
-            string = string.replace(char, "")
-        return string
-
     async def save_tag(self, tag, authorID):
         await self.db.clashroyale.update_one({'_id': authorID}, {'$set': {'_id': authorID, 'tag': tag}}, upsert=True)
 
@@ -159,7 +153,7 @@ class Clash_Royale:
                 await ctx.send('Looks like there was an error! Please check your clan tag, if you are :100: sure this is not a typo contact me')
 
         em = discord.Embed(color=utils.random_color())
-        em.title = profile.name
+        em.title = 'Clan Info!'
         em.add_field(name='Name', value=clan.name)
         em.add_field(name='Tag', value=clan.tag)
         em.add_field(name='Type', value=clan.type)
