@@ -22,6 +22,12 @@ class Clash_Royale:
                 return False
         return True
 
+    def removeChars(self, string):
+        characters = ["{", "}"]
+        for char in characters:
+            string = string.replace(char, "")
+        return string
+
     async def save_tag(self, tag, authorID):
         await self.db.clashroyale.update_one({'_id': authorID}, {'$set': {'_id': authorID, 'tag': tag}}, upsert=True)
 
@@ -125,10 +131,10 @@ class Clash_Royale:
             em = discord.Embed(color=utils.random_color())
             em.title = profile.name
             em.description = 'huh, looks like you are not in a clan yet! Joining a clan gives you extra fancy features ya know? like Clan Wars and cards donation(yup those donation that you saw on the previous screen, if you ever notice that). These are some of the top clans right now!'
-            em.add_field(name='Top Clans #1:', value={clans[0]['name']})
-            em.add_field(name='Top Clans #2:', value={clans[1]['name']})
-            em.add_field(name='Top Clans #3:', value={clans[2]['name']})
-            em.add_field(name='Top Clans #4:', value={clans[3]['name']})
+            em.add_field(name='Top Clans #1:', value=self.removeChars(clans[0]['name']))
+            em.add_field(name='Top Clans #2:', value=clans[1]['name'])
+            em.add_field(name='Top Clans #3:', value=clans[2]['name'])
+            em.add_field(name='Top Clans #4:', value=clans[3]['name'])
             embeds.append(em)
 
         p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148 (does anybody read these?)', pages=embeds)
