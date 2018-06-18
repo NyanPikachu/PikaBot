@@ -99,16 +99,6 @@ class Clash_Royale:
         em.add_field(name='Chests Until:', value=special, inline=False)
         embeds.append(em)
 
-        em = discord.Embed(color=utils.random_color())
-        em.title = profile.name
-        em.description = f'Latest battle info'
-        em.add_field(name='Type', value=p_battles[0]['type'])
-        em.add_field(name='Mode', value=p_battles[0]['mode']['name'])
-        em.add_field(name='Crowns', value=p_battles[0]['teamCrowns'])
-        em.add_field(name='opponent', value=p_battles[0]['opponent'][0]['name'])
-        em.add_field(name='opponent\'s tag', value=p_battles[0]['opponent'][0]['tag'])
-        embeds.append(em)
-
         if hasClan:
             em = discord.Embed(color=utils.random_color())
             em.title = profile.name
@@ -125,7 +115,7 @@ class Clash_Royale:
             em = discord.Embed(color=utils.random_color())
             em.title = profile.name
             em.description = 'huh, looks like you are not in a clan yet! Joining a clan gives you extra fancy features ya know? like Clan Wars and cards donation(yup those donation that you saw on the previous screen, if you ever notice that). These are some of the top clans right now!'
-            em.add_field(name='Top Clans #1:', value=self.removeChars(clans[0]['name']))
+            em.add_field(name='Top Clans #1:', value=clans[0]['name'])
             em.add_field(name='Top Clans #2:', value=clans[1]['name'])
             em.add_field(name='Top Clans #3:', value=clans[2]['name'])
             em.add_field(name='Top Clans #4:', value=clans[3]['name'])
@@ -160,6 +150,7 @@ class Clash_Royale:
         em.add_field(name='Role', value=clan.role or 'Member')
         em.add_field(name='Donations', value=clan.donations)
         em.add_field(name='Members', value=clan.memberCount)
+        em.set_footer(text='PikaBot | Created by Nyan Pikachu#4148 (Notice me Senpai!)')
         await ctx.send(embed=em)
 
 def setup(bot):
