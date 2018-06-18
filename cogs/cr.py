@@ -68,6 +68,7 @@ class Clash_Royale:
                 await ctx.send(f'Please provide a tag or save your tag using `{ctx.prefix}crsave <tag>`')
             tag = await self.get_tag(authorID)
         profile = await self.client.get_player(tag)
+        p_battles = await self.client.get_player_battles(tag)
         cycle = await self.client.get_player_chests(tag)
         chests = self.get_chests(ctx, cycle)[0]
         special = self.get_chests(ctx, cycle)[1]
@@ -98,9 +99,20 @@ class Clash_Royale:
         em.add_field(name='Chests Until:', value=special, inline=False)
         embeds.append(em)
 
+        em = discord.Embed(color=utils.random_color())
+        em.title = profile.name
+        em.description = f'Latest battle info'
+        em.add_field(name='Type', value=p_battles[0]['type'])
+        em.add_field(name='Mode', value=p_battles[0]['mode']['name'])
+        em.add_field(name='Crowns', value=p_battles[0]['teamCrowns'])
+        em.add_field(name='opponent', value=p_battles[0]['opponent'][0]['name'])
+        em.add_field(name='opponent\'s tag', value=p_battles[0]['opponent'][0]['tag'])
+        embeds.append(em)
+
         if hasClan:
             em = discord.Embed(color=utils.random_color())
             em.title = profile.name
+            em.description = 'You can use the clan command for more information on this clan!'
             em.add_field(name='Name', value=clan.name)
             em.add_field(name='Tag', value=clan.tag)
             em.add_field(name='Type', value=clan.type)
@@ -109,7 +121,7 @@ class Clash_Royale:
             em.add_field(name='Members', value=clan.memberCount)
             embeds.append(em)
         else:
-            clans = self.client.get_top_clans()
+            clans = await self.client.get_top_clans()
             em = discord.Embed(color=utils.random_color())
             em.title = profile.name
             em.description = 'huh, looks like you are not in a clan yet! Joining a clan gives you extra fancy features ya know? like Clan Wars and cards donation(yup those donation that you saw on the previous screen, if you ever notice that). These are some of the top clans right now!'
@@ -121,6 +133,34 @@ class Clash_Royale:
 
         p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148 (does anybody read these?)', pages=embeds)
         await p_session.run()
+
+    @commands.command()
+    async def crclan(self, ctx, tag: str=None):
+        authorID = str(ctx.author.id)
+        if not tag:
+            if await self.get_tag(authorID) == 'None':
+                await ctx.send(f'Please provide a tag or save your tag using `{ctx.prefix}crsave <tag>`')
+            tag = await self.get_tag(authorID)
+            profile = await self.client.get_player(tag)
+            try:
+                clan = await profile.get_clan()
+            except Exception:
+                await ctx.send('Welp! if you ran this command without a tag then you are not in a clan right now!')
+        else:
+            try:
+                clan = await self.client.get_clan(tag)
+            except Exception:
+                await ctx.send('Looks like there was an error! Please check your clan tag, if you are :100: sure this is not a typo contact me')
+
+        em = discord.Embed(color=utils.random_color())
+        em.title = profile.name
+        em.add_field(name='Name', value=clan.name)
+        em.add_field(name='Tag', value=clan.tag)
+        em.add_field(name='Type', value=clan.type)
+        em.add_field(name='Role', value=clan.role or 'Member')
+        em.add_field(name='Donations', value=clan.donations)
+        em.add_field(name='Members', value=clan.memberCount)
+        await ctx.send(embed=em)
 
 def setup(bot):
     bot.add_cog(Clash_Royale(bot))
