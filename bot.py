@@ -32,6 +32,7 @@ bot.load_extension("cogs.cr")
 bot.load_extension("cogs.fun")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.utility")
+bot.load_extension("cogs.fortnite")
 #bot.load_extension("cogs.level_system")
 
 #eval!!!
