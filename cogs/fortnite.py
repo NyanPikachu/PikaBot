@@ -15,10 +15,10 @@ class Fortnite:
         self.db = self.dbclient.pikabot
 
     async def save_info(self, platform, username, authorID):
-        await self.db.fortnite.update_one({'_id': guildID}, {'$set': {'_id': guildID, userID: {"username": username, "platform": platform}}}, upsert=True)
+        await self.db.fortnite.update_one({'_id': authorID}, {'$set': {'_id': authorID, authorID: {"username": username, "platform": platform}}}, upsert=True)
 
     async def get_info(self, authorID):
-    	result = await self.db.fortnite.find_one({'_id': str(guildID)})
+    	result = await self.db.fortnite.find_one({'_id': str(authorID)})
         if not result:
             return 'None'
         return (result[userID]['platform'], result[userID]['username'])
