@@ -91,7 +91,6 @@ class Clash_Royale:
         em.add_field(name=f'Rank', value=profile.rank or 'Unranked')
         em.add_field(name=f'games played', value=profile.games.total)
         em.add_field(name=f'Wins', value=profile.games.wins)
-        em.add_field(name=f'Wins', value=profile.games.wins)
         em.add_field(name=f'Losses', value=profile.games.losses)
         em.add_field(name=f'Draws', value=profile.games.draws)
         em.add_field(name=f'Cards Found', value=profile.stats.cardsFound)
@@ -103,14 +102,14 @@ class Clash_Royale:
         em = discord.Embed(color=utils.random_color())
         em.title = profile.name
         em.description = f'{tag}\'s Deck'
-        em.add_field(name=profile.current_deck[0].name, value=f'**Rarity:** {profile.current_deck[0].rarity}\n**Elixir:** {profile.current_deck[0].elixir}\n**Level:** {profile.current_deck[0].level}\n**Description:** {profile.current_deck[0].description}')
-        em.add_field(name=profile.current_deck[1].name, value=f'**Rarity:** {profile.current_deck[1].rarity}\n**Elixir:** {profile.current_deck[1].elixir}\n**Level:** {profile.current_deck[1].level}\n**Description:** {profile.current_deck[1].description}')
-        em.add_field(name=profile.current_deck[2].name, value=f'**Rarity:** {profile.current_deck[2].rarity}\n**Elixir:** {profile.current_deck[2].elixir}\n**Level:** {profile.current_deck[2].level}\n**Description:** {profile.current_deck[2].description}')
-        em.add_field(name=profile.current_deck[3].name, value=f'**Rarity:** {profile.current_deck[3].rarity}\n**Elixir:** {profile.current_deck[3].elixir}\n**Level:** {profile.current_deck[3].level}\n**Description:** {profile.current_deck[3].description}')
-        em.add_field(name=profile.current_deck[4].name, value=f'**Rarity:** {profile.current_deck[4].rarity}\n**Elixir:** {profile.current_deck[4].elixir}\n**Level:** {profile.current_deck[4].level}\n**Description:** {profile.current_deck[4].description}')
-        em.add_field(name=profile.current_deck[5].name, value=f'**Rarity:** {profile.current_deck[5].rarity}\n**Elixir:** {profile.current_deck[5].elixir}\n**Level:** {profile.current_deck[5].level}\n**Description:** {profile.current_deck[5].description}')
-        em.add_field(name=profile.current_deck[6].name, value=f'**Rarity:** {profile.current_deck[6].rarity}\n**Elixir:** {profile.current_deck[6].elixir}\n**Level:** {profile.current_deck[6].level}\n**Description:** {profile.current_deck[6].description}')
-        em.add_field(name=profile.current_deck[7].name, value=f'**Rarity:** {profile.current_deck[7].rarity}\n**Elixir:** {profile.current_deck[7].elixir}\n**Level:** {profile.current_deck[7].level}\n**Description:** {profile.current_deck[7].description}')
+        em.add_field(name=f'-----{profile.current_deck[0].name}-----', value=f'**Rarity:** {profile.current_deck[0].rarity}\n**Elixir:** {profile.current_deck[0].elixir}\n**Level:** {profile.current_deck[0].level}\n**Description:** {profile.current_deck[0].description}')
+        em.add_field(name=f'-----{profile.current_deck[1].name}-----', value=f'**Rarity:** {profile.current_deck[1].rarity}\n**Elixir:** {profile.current_deck[1].elixir}\n**Level:** {profile.current_deck[1].level}\n**Description:** {profile.current_deck[1].description}')
+        em.add_field(name=f'-----{profile.current_deck[2].name}-----', value=f'**Rarity:** {profile.current_deck[2].rarity}\n**Elixir:** {profile.current_deck[2].elixir}\n**Level:** {profile.current_deck[2].level}\n**Description:** {profile.current_deck[2].description}')
+        em.add_field(name=f'-----{profile.current_deck[3].name}-----', value=f'**Rarity:** {profile.current_deck[3].rarity}\n**Elixir:** {profile.current_deck[3].elixir}\n**Level:** {profile.current_deck[3].level}\n**Description:** {profile.current_deck[3].description}')
+        em.add_field(name=f'-----{profile.current_deck[4].name}-----', value=f'**Rarity:** {profile.current_deck[4].rarity}\n**Elixir:** {profile.current_deck[4].elixir}\n**Level:** {profile.current_deck[4].level}\n**Description:** {profile.current_deck[4].description}')
+        em.add_field(name=f'-----{profile.current_deck[5].name}-----', value=f'**Rarity:** {profile.current_deck[5].rarity}\n**Elixir:** {profile.current_deck[5].elixir}\n**Level:** {profile.current_deck[5].level}\n**Description:** {profile.current_deck[5].description}')
+        em.add_field(name=f'-----{profile.current_deck[6].name}-----',' value=f'**Rarity:** {profile.current_deck[6].rarity}\n**Elixir:** {profile.current_deck[6].elixir}\n**Level:** {profile.current_deck[6].level}\n**Description:** {profile.current_deck[6].description}')
+        em.add_field(name=f'-----{profile.current_deck[7].name}-----', value=f'**Rarity:** {profile.current_deck[7].rarity}\n**Elixir:** {profile.current_deck[7].elixir}\n**Level:** {profile.current_deck[7].level}\n**Description:** {profile.current_deck[7].description}')
         embeds.append(em)
 
         if hasClan:
