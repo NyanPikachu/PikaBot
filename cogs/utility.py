@@ -15,7 +15,7 @@ class Utility:
             user = ctx.author
         av = user.avatar_url
         em = discord.Embed(color=utils.random_color())
-        em.set_athor(name=f'{ctx.author.name}\'s avatar!')
+        em.set_author(name=f'{ctx.author.name}\'s avatar!')
         em.set_image(url=av)
         await ctx.send(embed=em)
         

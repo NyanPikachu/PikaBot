@@ -84,25 +84,40 @@ class Clash_Royale:
         em = discord.Embed(color=utils.random_color())
         em.title = profile.name
         em.description = f'{tag}\'s info'
-        em.add_field(name='Trophies', value=profile.trophies)
-        em.add_field(name='Max Trophies', value=profile.stats.maxTrophies)
-        em.add_field(name='Arena', value=profile.arena.name)
-        em.add_field(name='League', value=profile.arena.arena)
-        em.add_field(name='Rank', value=profile.rank)
-        em.add_field(name='Wins', value=profile.games.wins)
-        em.add_field(name='Wins', value=profile.games.wins)
-        em.add_field(name='Losses', value=profile.games.losses)
-        em.add_field(name='Draws', value=profile.games.draws)
-        em.add_field(name='Cards Found', value=profile.stats.cardsFound)
-        em.add_field(name='Favourite card:', value=profile.stats.favorite_card.name)
-        em.add_field(name='Upcoming Chests:', value=chests, inline=False)
-        em.add_field(name='Chests Until:', value=special, inline=False)
+        em.add_field(name=f'Trophies {self.emoji('trophy')}', value=profile.trophies)
+        em.add_field(name=f'Max Trophies {self.emoji('trophy')}', value=profile.stats.maxTrophies)
+        em.add_field(name=f'Arena', value=profile.arena.name)
+        em.add_field(name=f'League', value=profile.arena.arena)
+        em.add_field(name=f'Rank', value=profile.rank)
+        em.add_field(name=f'games played', value=profile.games.total)
+        em.add_field(name=f'Wins', value=profile.games.wins)
+        em.add_field(name=f'Wins', value=profile.games.wins)
+        em.add_field(name=f'Losses', value=profile.games.losses)
+        em.add_field(name=f'Draws', value=profile.games.draws)
+        em.add_field(name=f'Cards Found', value=profile.stats.cardsFound)
+        em.add_field(name=f'Favourite card:', value=profile.stats.favorite_card.name)
+        em.add_field(name=f'Upcoming Chests:', value=chests, inline=False)
+        em.add_field(name=f'Chests Until:', value=special, inline=False)
+        embeds.append(em)
+
+        em = discord.Embed(color=utils.random_color())
+        em.title = profile.name
+        em.description = f'{tag}\'s Deck'
+        em.add_field(name=profile.current_deck[0].name, value=f'**Rarity:** {profile.current_deck[0].rarity}\n**Elixir:** {profile.current_deck[0].elixir}\n**Level:** {profile.current_deck[0].level}\n**Description:** {profile.current_deck[0].description}')
+        em.add_field(name=profile.current_deck[1].name, value=f'**Rarity:** {profile.current_deck[1].rarity}\n**Elixir:** {profile.current_deck[1].elixir}\n**Level:** {profile.current_deck[1].level}\n**Description:** {profile.current_deck[1].description}')
+        em.add_field(name=profile.current_deck[2].name, value=f'**Rarity:** {profile.current_deck[2].rarity}\n**Elixir:** {profile.current_deck[2].elixir}\n**Level:** {profile.current_deck[2].level}\n**Description:** {profile.current_deck[2].description}')
+        em.add_field(name=profile.current_deck[3].name, value=f'**Rarity:** {profile.current_deck[3].rarity}\n**Elixir:** {profile.current_deck[3].elixir}\n**Level:** {profile.current_deck[3].level}\n**Description:** {profile.current_deck[3].description}')
+        em.add_field(name=profile.current_deck[4].name, value=f'**Rarity:** {profile.current_deck[4].rarity}\n**Elixir:** {profile.current_deck[4].elixir}\n**Level:** {profile.current_deck[4].level}\n**Description:** {profile.current_deck[4].description}')
+        em.add_field(name=profile.current_deck[5].name, value=f'**Rarity:** {profile.current_deck[5].rarity}\n**Elixir:** {profile.current_deck[5].elixir}\n**Level:** {profile.current_deck[5].level}\n**Description:** {profile.current_deck[5].description}')
+        em.add_field(name=profile.current_deck[6].name, value=f'**Rarity:** {profile.current_deck[6].rarity}\n**Elixir:** {profile.current_deck[6].elixir}\n**Level:** {profile.current_deck[6].level}\n**Description:** {profile.current_deck[6].description}')
+        em.add_field(name=profile.current_deck[7].name, value=f'**Rarity:** {profile.current_deck[7].rarity}\n**Elixir:** {profile.current_deck[7].elixir}\n**Level:** {profile.current_deck[7].level}\n**Description:** {profile.current_deck[7].description}')
         embeds.append(em)
 
         if hasClan:
             em = discord.Embed(color=utils.random_color())
             em.title = profile.name
             em.description = 'You can use the clan command for more information on this clan!'
+            em.set_image(url=clan.badge.image)
             em.add_field(name='Name', value=clan.name)
             em.add_field(name='Tag', value=clan.tag)
             em.add_field(name='Type', value=clan.type)
