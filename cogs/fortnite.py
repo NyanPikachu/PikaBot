@@ -24,7 +24,7 @@ class Fortnite:
         return (result[authorID]['platform'], result[authorID]['username'])
 
     def req(self, platform, username):
-        headers: {
+        headers = {
             "TRN-Api-Key": os.environ.get('FNTOKEN')
         }
         r = requests.get(f'https://api.fortnitetracker.com/v1/profile/{platform}/{username}', headers=headers)
