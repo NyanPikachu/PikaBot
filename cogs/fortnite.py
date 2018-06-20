@@ -65,7 +65,7 @@ class Fortnite:
             username = await self.get_info(authorID)[1]
 
         embeds = []
-        data = self.req()
+        data = self.req(platform, username)
 
         em = discord.Embed(color=utils.random_color())
         em.title = data['epicUserHandle']
