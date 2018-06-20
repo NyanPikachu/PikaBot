@@ -18,15 +18,15 @@ class Fortnite:
         await self.db.fortnite.update_one({'_id': authorID}, {'$set': {'_id': authorID, authorID: {"username": username, "platform": platform}}}, upsert=True)
 
     async def get_info(self, authorID):
-    	result = await self.db.fortnite.find_one({'_id': str(authorID)})
+        result = await self.db.fortnite.find_one({'_id': str(authorID)})
         if not result:
             return 'None'
         return (result[userID]['platform'], result[userID]['username'])
 
     def req(self, platform, username):
-    	headers: {
+        headers: {
             "TRN-Api-Key": os.environ.get('FNTOKEN')
-    	}
+        }
         r = requests.get(f'https://api.fortnitetracker.com/v1/profile/{platform}/{user}', headers=headers)
         return r.json()
 
@@ -40,13 +40,13 @@ class Fortnite:
 
     @commands.command()
     async def fnsave(self, ctx, platform=None, username=None):
-    	'''Save your Fortnite stats here'''
-    	authorID = str(ctx.author.id)
+        '''Save your Fortnite stats here'''
+        authorID = str(ctx.author.id)
         if not tag or not:
             return await ctx.send(f'Please provide a a platform as well as a username `Usage: fnsave platform username`')
         try:
-        	await self.save_info(platform, username, authorID)
-        	await ctx.send(f'Your Platform `{platform}` and Username `{username}` have been successfully saved')
+            await self.save_info(platform, username, authorID)
+            await ctx.send(f'Your Platform `{platform}` and Username `{username}` have been successfully saved')
 
     @commands.command()
     async def fnprofile(self, ctx, platform=None, username=None):
