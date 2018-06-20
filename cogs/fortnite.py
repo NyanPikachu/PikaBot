@@ -61,8 +61,9 @@ class Fortnite:
         if not platform or not username:
             if await self.get_info(authorID) == 'None':
                 await ctx.send(f'Please provide a tag or save your tag using `{ctx.prefix}fnsave platform username`')
-            platform = await self.get_info(authorID)[0]
-            username = await self.get_info(authorID)[1]
+            data = await self.get_info(authorID)
+            platform = data[0]
+            username = data[1]
 
         embeds = []
         data = self.req(platform, username)
