@@ -21,7 +21,7 @@ class Fortnite:
         result = await self.db.fortnite.find_one({'_id': str(authorID)})
         if not result:
             return 'None'
-        return (result[userID]['platform'], result[userID]['username'])
+        return (result[authorID]['platform'], result[authorID]['username'])
 
     def req(self, platform, username):
         headers: {
