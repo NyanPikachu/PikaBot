@@ -84,8 +84,8 @@ class Clash_Royale:
         em = discord.Embed(color=utils.random_color())
         em.title = profile.name
         em.description = f'{tag}\'s info'
-        em.add_field(name=f'Trophies {self.emoji('trophy')}', value=profile.trophies)
-        em.add_field(name=f'Max Trophies {self.emoji('trophy')}', value=profile.stats.maxTrophies)
+        em.add_field(name=f'Trophies', value=profile.trophies)
+        em.add_field(name=f'Max Trophies', value=profile.stats.maxTrophies)
         em.add_field(name=f'Arena', value=profile.arena.name)
         em.add_field(name=f'League', value=profile.arena.arena)
         em.add_field(name=f'Rank', value=profile.rank)
