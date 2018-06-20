@@ -42,7 +42,7 @@ class Fortnite:
     async def fnsave(self, ctx, platform=None, username=None):
         '''Save your Fortnite stats here'''
         authorID = str(ctx.author.id)
-        if not tag or not:
+        if not platform or not username:
             return await ctx.send(f'Please provide a a platform as well as a username `Usage: fnsave platform username`')
         try:
             await self.save_info(platform, username, authorID)
