@@ -47,6 +47,12 @@ class Fortnite:
         try:
             await self.save_info(platform, username, authorID)
             await ctx.send(f'Your Platform `{platform}` and Username `{username}` have been successfully saved')
+        except Exception as e:
+            em = discord.Embed(color=utils.random_color())
+            em.title = 'Error'
+            em.description = str(e)
+            await ctx.send(embed=em)
+
 
     @commands.command()
     async def fnprofile(self, ctx, platform=None, username=None):
