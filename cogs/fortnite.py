@@ -27,7 +27,7 @@ class Fortnite:
         headers: {
             "TRN-Api-Key": os.environ.get('FNTOKEN')
         }
-        r = requests.get(f'https://api.fortnitetracker.com/v1/profile/{platform}/{user}', headers=headers)
+        r = requests.get(f'https://api.fortnitetracker.com/v1/profile/{platform}/{username}', headers=headers)
         return r.json()
 
     def emoji(self, emoji):
