@@ -14,8 +14,12 @@ class Fortnite:
         self.dbclient = motor_asyncio.AsyncIOMotorClient('mongodb://PikaBot:' + os.environ.get('DBPASS') + '@ds163711.mlab.com:63711/pikabot')
         self.db = self.dbclient.pikabot
 
-    async def save_info(self, platform, username, authorID):
-        await self.db.fortnite.update_one({'_id': authorID}, {'$set': {'_id': authorID, authorID: {"username": username, "platform": platform}}}, upsert=True)
+    def req(self, platform, username):
+        headers = {
+            "TRN-Api-Key": os.environ.get('FNTOKEN')
+        }
+        r = requests.get(f'https://api.fortnitetracker.com/v1/profile/{platform}/{username}', headers=headers)
+        return r.json()
 
     async def get_info(self, authorID):
         result = await self.db.fortnite.find_one({'_id': str(authorID)})
@@ -23,12 +27,8 @@ class Fortnite:
             return 'None'
         return (result[authorID]['platform'], result[authorID]['username'])
 
-    def req(self, platform, username):
-        headers = {
-            "TRN-Api-Key": os.environ.get('FNTOKEN')
-        }
-        r = requests.get(f'https://api.fortnitetracker.com/v1/profile/{platform}/{username}', headers=headers)
-        return r.json()
+    async def save_info(self, platform, username, authorID):
+        await self.db.fortnite.update_one({'_id': authorID}, {'$set': {'_id': authorID, authorID: {"username": username, "platform": platform}}}, upsert=True)
 
     def emoji(self, emoji):
         if emoji == 'chestmagic':
@@ -45,8 +45,17 @@ class Fortnite:
         if not platform or not username:
             return await ctx.send(f'Please provide a a platform as well as a username `Usage: fnsave platform username`')
         try:
-            await self.save_info(platform, username, authorID)
-            await ctx.send(f'Your Platform `{platform}` and Username `{username}` have been successfully saved')
+            validInfo = True
+            data = self.req(platform, username)
+            try:
+                data['epicUserHandle']
+            except Exception:
+                validInfo = False
+            if validInfo:
+                await self.save_info(platform, username, authorID)
+                await ctx.send(f'Your Platform `{platform}` and Username `{username}` have been successfully saved! re-run this command to update them')
+            else:
+                await ctx.send('Invalid Info please make sure that platform is pc/xbl/psn')
         except Exception as e:
             em = discord.Embed(color=utils.random_color())
             em.title = 'Error'
@@ -61,17 +70,36 @@ class Fortnite:
         if not platform or not username:
             if await self.get_info(authorID) == 'None':
                 await ctx.send(f'Please provide a tag or save your tag using `{ctx.prefix}fnsave platform username`')
-            data = await self.get_info(authorID)
-            platform = data[0]
-            username = data[1]
+            information = await self.get_info(authorID)
+            platform = information[0]
+            username = information[1]
 
         embeds = []
         data = self.req(platform, username)
+
+        hasSolos = True
+        hasDuos = True
+        hasSquads = True
 
         try:
             data['epicUserHandle']
         except Exception:
             await ctx.send('Looks like that Player/Platform combination is wrong! Make sure your info is correct then try again')
+
+        try:
+            data['stats']['p2']
+        except Exception:
+            hasSolos = False
+
+        try:
+            data['stats']['p10']
+        except Exception:
+            hasDuos = False
+
+        try:
+            data['stats']['p9']
+        except Exception:
+            hasSquads = False
 
         em = discord.Embed(color=utils.random_color())
         em.title = data['epicUserHandle']
@@ -85,44 +113,47 @@ class Fortnite:
         em.add_field(name=data['lifeTimeStats'][1]['key'], value=data['lifeTimeStats'][1]['value'])
         embeds.append(em)
 
-        em = discord.Embed(color=utils.random_color())
-        em.title = data['epicUserHandle']
-        em.description = f'Solo Statistics'
-        em.add_field(name='Matches played', value=data['stats']['p2']['matches']['value'])
-        em.add_field(name='Wins', value=data['stats']['p2']['top1']['value'])
-        em.add_field(name='Win %', value=data['stats']['p2']['winRatio']['value'])
-        em.add_field(name='Score', value=data['stats']['p2']['score']['value'])
-        em.add_field(name='Kill/Deatch ratio', value=data['stats']['p2']['kd']['value'])
-        em.add_field(name='kills', value=data['stats']['p2']['kills']['value'])
-        em.add_field(name='Top 10', value=data['stats']['p2']['top10']['value'])
-        em.add_field(name='Top 5', value=data['stats']['p2']['top5']['value'])
-        embeds.append(em)
+        if hasSolos:
+            em = discord.Embed(color=utils.random_color())
+            em.title = data['epicUserHandle']
+            em.description = f'Solo Statistics'
+            em.add_field(name='Matches played', value=data['stats']['p2']['matches']['value'])
+            em.add_field(name='Wins', value=data['stats']['p2']['top1']['value'])
+            em.add_field(name='Win %', value=data['stats']['p2']['winRatio']['value'])
+            em.add_field(name='Score', value=data['stats']['p2']['score']['value'])
+            em.add_field(name='Kill/Deatch ratio', value=data['stats']['p2']['kd']['value'])
+            em.add_field(name='kills', value=data['stats']['p2']['kills']['value'])
+            em.add_field(name='Top 10', value=data['stats']['p2']['top10']['value'])
+            em.add_field(name='Top 5', value=data['stats']['p2']['top5']['value'])
+            embeds.append(em)
 
-        em = discord.Embed(color=utils.random_color())
-        em.title = data['epicUserHandle']
-        em.description = f'Duo Statistics'
-        em.add_field(name='Matches played', value=data['stats']['p10']['matches']['value'])
-        em.add_field(name='Wins', value=data['stats']['p10']['top1']['value'])
-        em.add_field(name='Win %', value=data['stats']['p10']['winRatio']['value'])
-        em.add_field(name='Score', value=data['stats']['p10']['score']['value'])
-        em.add_field(name='Kill/Deatch ratio', value=data['stats']['p10']['kd']['value'])
-        em.add_field(name='kills', value=data['stats']['p10']['kills']['value'])
-        em.add_field(name='Top 10', value=data['stats']['p10']['top10']['value'])
-        em.add_field(name='Top 5', value=data['stats']['p10']['top5']['value'])
-        embeds.append(em)
+        if hasDuos:
+            em = discord.Embed(color=utils.random_color())
+            em.title = data['epicUserHandle']
+            em.description = f'Duo Statistics'
+            em.add_field(name='Matches played', value=data['stats']['p10']['matches']['value'])
+            em.add_field(name='Wins', value=data['stats']['p10']['top1']['value'])
+            em.add_field(name='Win %', value=data['stats']['p10']['winRatio']['value'])
+            em.add_field(name='Score', value=data['stats']['p10']['score']['value'])
+            em.add_field(name='Kill/Deatch ratio', value=data['stats']['p10']['kd']['value'])
+            em.add_field(name='kills', value=data['stats']['p10']['kills']['value'])
+            em.add_field(name='Top 10', value=data['stats']['p10']['top10']['value'])
+            em.add_field(name='Top 5', value=data['stats']['p10']['top5']['value'])
+            embeds.append(em)
         
-        em = discord.Embed(color=utils.random_color())
-        em.title = data['epicUserHandle']
-        em.description = f'Squad Statistics'
-        em.add_field(name='Matches played', value=data['stats']['p9']['matches']['value'])
-        em.add_field(name='Wins', value=data['stats']['p9']['top1']['value'])
-        em.add_field(name='Win %', value=data['stats']['p9']['winRatio']['value'])
-        em.add_field(name='Score', value=data['stats']['p9']['score']['value'])
-        em.add_field(name='Kill/Deatch ratio', value=data['stats']['p9']['kd']['value'])
-        em.add_field(name='kills', value=data['stats']['p9']['kills']['value'])
-        em.add_field(name='Top 10', value=data['stats']['p9']['top10']['value'])
-        em.add_field(name='Top 5', value=data['stats']['p9']['top5']['value'])
-        embeds.append(em)
+        if hasSquads:
+            em = discord.Embed(color=utils.random_color())
+            em.title = data['epicUserHandle']
+            em.description = f'Squad Statistics'
+            em.add_field(name='Matches played', value=data['stats']['p9']['matches']['value'])
+            em.add_field(name='Wins', value=data['stats']['p9']['top1']['value'])
+            em.add_field(name='Win %', value=data['stats']['p9']['winRatio']['value'])
+            em.add_field(name='Score', value=data['stats']['p9']['score']['value'])
+            em.add_field(name='Kill/Deatch ratio', value=data['stats']['p9']['kd']['value'])
+            em.add_field(name='kills', value=data['stats']['p9']['kills']['value'])
+            em.add_field(name='Top 10', value=data['stats']['p9']['top10']['value'])
+            em.add_field(name='Top 5', value=data['stats']['p9']['top5']['value'])
+            embeds.append(em)
 
         p_session = Paginator(ctx, footer=f'PikaBot | info provided by TrackerNetwork (Kiling bugs one by one)', pages=embeds)
         await p_session.run()
