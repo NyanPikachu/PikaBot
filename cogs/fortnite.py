@@ -68,6 +68,11 @@ class Fortnite:
         embeds = []
         data = self.req(platform, username)
 
+        try:
+            data['epicUserHandle']
+        except Exception:
+            await ctx.send('Looks like that Player/Platform combination is wrong! Make sure your info is correct then try again')
+
         em = discord.Embed(color=utils.random_color())
         em.title = data['epicUserHandle']
         em.description = f'Overall Statistics'
