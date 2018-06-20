@@ -88,7 +88,7 @@ class Clash_Royale:
         em.add_field(name=f'Max Trophies', value=profile.stats.maxTrophies)
         em.add_field(name=f'Arena', value=profile.arena.name)
         em.add_field(name=f'League', value=profile.arena.arena)
-        em.add_field(name=f'Rank', value=profile.rank)
+        em.add_field(name=f'Rank', value=profile.rank or 'Unranked')
         em.add_field(name=f'games played', value=profile.games.total)
         em.add_field(name=f'Wins', value=profile.games.wins)
         em.add_field(name=f'Wins', value=profile.games.wins)
