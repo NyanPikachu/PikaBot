@@ -37,7 +37,8 @@ bot.load_extension("cogs.fun")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.utility")
 bot.load_extension("cogs.fortnite")
-#bot.load_extension("cogs.level_system")
+bot.load_extension("cogs.level_system")
+
 bot.remove_command('help')
 
 #eval!!!
@@ -47,20 +48,6 @@ def cleanup_code(content):
     if content.startswith('```') and content.endswith('```'):
         return '\n'.join(content.split('\n')[1:-1])
     return content.strip('` \n')
-#main commands
-@bot.command(name='help')
-async def _help(ctx):
-    embeds = []
-    for cog in bot.cogs:
-        em = discord.Embed(color=utils.random_color())
-        em.title = cog
-        em.description = f"{cog}'s commands"
-        commands =  bot.get_cog_commands(cog)
-        for command in commands:
-            em.add_field(name=command.name, value=command.help)
-        embeds.append(em)
-        p_session = Paginator(ctx, footer=f'PikaBot | Created by Nyan Pikachu#4148 (does anybody read these?)',pages=embeds)
-        await p_session.run()
 
 @bot.command(name='eval')
 @utils.developer()

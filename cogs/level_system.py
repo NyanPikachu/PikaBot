@@ -12,12 +12,12 @@ class xp:
         self.db = self.dbclient.pikabot
 
     #functions
-    async def update_xp(self, guildID, userID, xp: int):
-        await self.db.xp.update_one({'_id': guildID}, {'$set': {'_id': guildID, userID: {"xp_amount": xp}}}, upsert=True)
+    async def update_xp(self, userID, xp: int):
+        await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': guildID, userID: {"xp_amount": xp}}}, upsert=True)
 
-    async def get_xp(self, guildID, userID):   
+    async def get_xp(self, userID):   
         try:
-            result = await self.db.xp.find_one({'_id': str(guildID)})
+            result = await self.db.profiles.find_one({'_id': str(userID)})
             return result[userID]['xp_amount']
         except Exception:
             return 0
@@ -26,7 +26,7 @@ class xp:
         try:
             result = await self.db.profiles.find_one({'_id': str(userID)})
             description = result[userID]['description']
-            if description == 'None':
+            if description == None:
                 await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
                 result = await self.db.profiles.find_one({'_id': str(userID)})
                 description = result[userID]['description']
@@ -52,12 +52,12 @@ class xp:
         guildID = str(message.guild.id)
         userID = str(message.author.id)
         try:
-            old_xp = await self.get_xp(guildID, userID)
+            old_xp = await self.get_xp(userID)
         except Exception:
             old_xp = 0
         new_xp =  int(old_xp) + 8
         try:
-            await self.update_xp(guildID, userID, new_xp)
+            await self.update_xp(userID, new_xp)
         except Exception as e:
             await ch.send(e)
 
@@ -68,7 +68,7 @@ class xp:
         userID = str(user.id)
         guildID = str(ctx.guild.id)
         
-        total_xp = await self.get_xp(guildID, userID)
+        total_xp = await self.get_xp(userID)
         description = await self.get_desc(userID)
 
         embed = discord.Embed(color=utils.random_color())
