@@ -17,6 +17,7 @@ class xp:
 
     async def update_desc(self, userID, description):
         await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {"description": description}}}, upsert=True)
+
     async def get_xp(self, userID):   
         try:
             result = await self.db.profiles.find_one({'_id': str(userID)})
@@ -85,8 +86,13 @@ class xp:
         if len(body) >= 256:
             await ctx.send('Desciption must not be longer than 256 characters')
         else:
-            await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': body}}})
-            await ctx.send('Description updated :white_check_mark:')
+            try:
+                self.update_desc(body)
+                await ctx.send('Description updated :white_check_mark:')
+            except Exception as e:
+                em = discord.Embed(color=utils.random_color())
+                em.description = str(e)
+                await ctx.send(embed=em)
 
 def setup(bot):
     bot.add_cog(xp(bot))
