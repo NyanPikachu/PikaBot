@@ -13,7 +13,7 @@ class xp:
 
     #functions
     async def update_xp(self, userID, xp: int):
-        await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': guildID, userID: {"xp_amount": xp}}}, upsert=True)
+        await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {"xp_amount": xp}}}, upsert=True)
 
     async def get_xp(self, userID):   
         try:
