@@ -40,10 +40,11 @@ class xp:
         userID = str(member.id)
         result = await self.db.profiles.find_one({'_id': str(userID)})
         description = result['description']
-        if description != "I'm a very average person":
+        default = "I'm a very average person"
+        if description != default:
             pass
-        elif not result or description:
-            await self.update_desc(userID, description)
+        elif not result or not description:
+            await self.update_desc(userID, default)
 
 
     async def on_message(self, message):
