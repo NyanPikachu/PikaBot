@@ -29,23 +29,12 @@ class xp:
         try:
             result = await self.db.profiles.find_one({'_id': str(userID)})
             description = result['description']
+            default = "I'm a very average person"
             if description == None:
-                await self.db.profiles.update_one({'_id': userID}, {'$set': {'description': "I'm a very average person"}})
+                await self.update_desc(userID, default)
             return description
         except Exception as e:
             print(str(e))
-
-    #events
-    async def on_member_join(self, member):
-        userID = str(member.id)
-        result = await self.db.profiles.find_one({'_id': str(userID)})
-        description = result['description']
-        default = "I'm a very average person"
-        if description != default:
-            pass
-        elif not result or not description:
-            await self.update_desc(userID, default)
-
 
     async def on_message(self, message):
         if message.author.bot:
@@ -74,9 +63,9 @@ class xp:
         description = await self.get_desc(userID)
 
         embed = discord.Embed(color=utils.random_color())
-        embed.add_field(name="Name", value=user.name, inline=True)
-        embed.add_field(name="ID", value=user.id, inline=True)
-        embed.add_field(name='Total_XP', value=total_xp, inline=True)
+        embed.add_field(name="Name", value=user.name, inline=False)
+        embed.add_field(name="ID", value=user.id, inline=False)
+        embed.add_field(name='Total_XP', value=total_xp, inline=False)
         embed.add_field(name='Description', value=description, inline=False)
         embed.set_thumbnail(url=user.avatar_url)
         await ctx.send(embed=embed)
