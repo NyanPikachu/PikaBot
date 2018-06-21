@@ -31,7 +31,7 @@ class xp:
             description = result['description']
             if description == None:
                 await self.db.profiles.update_one({'_id': userID}, {'$set': {'description': "I'm a very average person"}})
-                return description
+            return description
         except Exception as e:
             print(str(e))
 
