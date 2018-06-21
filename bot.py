@@ -39,8 +39,6 @@ bot.load_extension("cogs.utility")
 bot.load_extension("cogs.fortnite")
 bot.load_extension("cogs.level_system")
 
-bot.remove_command('help')
-
 #eval!!!
 def cleanup_code(content):
     """Automatically removes code blocks from the code."""
