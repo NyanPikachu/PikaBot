@@ -87,7 +87,7 @@ class xp:
             await ctx.send('Desciption must not be longer than 256 characters')
         else:
             try:
-                self.update_desc(body)
+                self.update_desc(userID, body)
                 await ctx.send('Description updated :white_check_mark:')
             except Exception as e:
                 em = discord.Embed(color=utils.random_color())
