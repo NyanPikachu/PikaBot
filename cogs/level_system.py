@@ -39,11 +39,11 @@ class xp:
     async def on_member_join(self, member):
         userID = str(member.id)
         result = await self.db.profiles.find_one({'_id': str(userID)})
-        description = result[userID]['description']
+        description = result['description']
         if description != "I'm a very average person":
             pass
         elif not result or description:
-            self.update_desc(userID, description)
+            await self.update_desc(userID, description)
 
 
     async def on_message(self, message):
@@ -87,7 +87,7 @@ class xp:
             await ctx.send('Desciption must not be longer than 256 characters')
         else:
             try:
-                self.update_desc(userID, body)
+                await self.update_desc(userID, body)
                 await ctx.send('Description updated :white_check_mark:')
             except Exception as e:
                 em = discord.Embed(color=utils.random_color())
