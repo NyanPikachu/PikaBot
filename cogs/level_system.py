@@ -13,25 +13,24 @@ class xp:
 
     #functions
     async def update_xp(self, userID, xp: int):
-        await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {"xp_amount": xp}}}, upsert=True)
+        await self.db.profiles.update_one({'_id': userID}, {'$set': {"xp_amount": xp}}, upsert=True)
 
     async def update_desc(self, userID, description):
-        await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {"description": description}}}, upsert=True)
+        await self.db.profiles.update_one({'_id': userID}, {'$set': {"description": description}}, upsert=True)
 
     async def get_xp(self, userID):   
         try:
             result = await self.db.profiles.find_one({'_id': str(userID)})
-            return result[userID]['xp_amount']
+            return result['xp_amount']
         except Exception:
             return 0
 
     async def get_desc(self, userID):
         try:
             result = await self.db.profiles.find_one({'_id': str(userID)})
-            description = result[userID]['description']
+            description = result['description']
             if description == None:
-                await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
-            return description
+                await self.db.profiles.update_one({'_id': userID}, {'$set': userID: {'description': "I'm a very average person"}})            return description
         except Exception as e:
             print(str(e))
 
@@ -43,7 +42,7 @@ class xp:
         if description != "I'm a very average person":
             pass
         elif not result or description:
-            await self.db.profiles.update_one({'_id': userID}, {'$set': {'_id': userID, userID: {'description': "I'm a very average person"}}})
+            self.update_desc(userID, description)
 
 
     async def on_message(self, message):
