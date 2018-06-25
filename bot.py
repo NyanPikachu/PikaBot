@@ -23,9 +23,9 @@ async def get_pre(bot, message):
     try:
         result = await db.settings.find_one({'_id': str(message.guild.id)})
     except AttributeError:
-        return ["P.", "p.", f"{bot.user.mention} "]
+        return ["G.", "g.", f"{bot.user.mention} "]
     if not result or not result.get('prefix'):
-        return ["P.", "p.", f"{bot.user.mention} "]
+        return ["G.", "g.", f"{bot.user.mention} "]
     return result['prefix']
 
 bot = commands.Bot(command_prefix=get_pre, description="A simple bot created in discord.py library by Nyan Pikachu#4148 for moderation and misc commands!", owner_id=279974491071709194)
