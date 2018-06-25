@@ -51,7 +51,7 @@ class Bot:
     @commands.command()
     async def invite(self, ctx):
         """Get an invite link of the bot"""
-        await ctx.send(f'Invite me to your server using this link: \nhttps://discordapp.com/api/oauth2/authorize?client_id={bot.use.id}&permissions=0&scope=bot')
+        await ctx.send(f'Invite me to your server using this link: \nhttps://discordapp.com/api/oauth2/authorize?client_id={bot.ws.user.id}&permissions=0&scope=bot')
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)

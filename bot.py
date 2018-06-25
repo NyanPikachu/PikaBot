@@ -33,11 +33,7 @@ bot = commands.Bot(command_prefix=get_pre, description="A simple bot created in 
 #calling cogs from the cogs folder
 bot.load_extension("cogs.bot_")
 bot.load_extension("cogs.cr")
-bot.load_extension("cogs.fun")
-bot.load_extension("cogs.mod")
-bot.load_extension("cogs.utility")
 bot.load_extension("cogs.fortnite")
-bot.load_extension("cogs.level_system")
 
 #eval!!!
 def cleanup_code(content):
